@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 public class LoginController extends AppCompatActivity
 {
+    DatabaseHelper databaseHelper = new DatabaseHelper(LoginController.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -31,20 +34,27 @@ public class LoginController extends AppCompatActivity
 
         Intent intent = new Intent(LoginController.this, HomePageActivity.class);
 
-        loginBtn.setOnClickListener(new View.OnClickListener()
-        {
+    //SEGMENT - Log In Controller -------------------------------------------------------------------------------------------
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!username.getText().toString().isEmpty() && !password.getText().toString().isEmpty())
+                boolean isExist = databaseHelper.checkUserExist(username.getText().toString(), password.getText().toString());
+                if(isExist)
                 {
-                    Toast.makeText(LoginController.this, "Login Successful!",Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(LoginController.this, HomePageActivity.class));
-                    String name = username.getText().toString();
-                    intent.putExtra("name",name);
-                    startActivity(intent);
-                } else Toast.makeText(LoginController.this, "Login Failed!",Toast.LENGTH_SHORT).show();
+                    if(!username.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
+                        Toast.makeText(LoginController.this, "Login Successful!",Toast.LENGTH_SHORT).show();
+                        String name = username.getText().toString();
+                        intent.putExtra("name",name);
+                        startActivity(intent);
+                    } else Toast.makeText(LoginController.this, "Login Failed!",Toast.LENGTH_SHORT).show();
+                } else {
+                    password.setText(null);
+                    Toast.makeText(LoginController.this, "Invalid credentials!",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
+    //END SEGMENT - Log In Controller ---------------------------------------------------------------------------------------
 
         TextView signupView =(TextView) findViewById(R.id.txtNewMember);
         String signupText = "New member? Sign up now!";
@@ -55,7 +65,6 @@ public class LoginController extends AppCompatActivity
             @Override
             public void onClick(View widget)
             {
-                Toast.makeText(LoginController.this,"Member Signed Up!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginController.this, SignupActivity.class));
             }
             @Override
@@ -70,4 +79,5 @@ public class LoginController extends AppCompatActivity
         signupView.setText(ss);
         signupView.setMovementMethod(LinkMovementMethod.getInstance());
     }
+
 }

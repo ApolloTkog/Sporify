@@ -5,11 +5,13 @@
       <map>
         <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/drawable/background_gradient.xml" value="0.240625" />
         <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/drawable/ic_facebook.png_foreground.xml" value="0.240625" />
-        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/activity_home_page.xml" value="0.5" />
+        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/activity_home_page.xml" value="0.2" />
         <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/activity_settings.xml" value="0.25" />
-        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/activity_signup.xml" value="0.3516819571865443" />
-        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/login.xml" value="0.33" />
+        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/activity_signup.xml" value="0.3231240428790199" />
+        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/login.xml" value="0.22" />
+        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/maildialog.xml" value="0.25" />
+        <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/passdialog.xml" value="0.25" />
       </map>
     </option>
   </component>

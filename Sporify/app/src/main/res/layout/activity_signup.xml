@@ -7,32 +7,22 @@
     tools:context=".SignupActivity">
 
     <ImageView
-        android:id="@+id/registerBanner"
-        android:layout_width="414dp"
-        android:layout_height="311dp"
+        android:id="@+id/registerBackground"
+        android:layout_width="622dp"
+        android:layout_height="754dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_registerbanner" />
-
-    <ImageView
-        android:id="@+id/registerBackground"
-        android:layout_width="484dp"
-        android:layout_height="498dp"
-        app:layout_constraintBottom_toTopOf="@+id/registerBanner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.521"
         app:srcCompat="@drawable/ic_sporifylog_background" />
 
     <EditText
         android:id="@+id/registerFN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginBottom="5dp"
         android:backgroundTint="@color/purple_500"
         android:ems="10"
         android:hint="First Name"
@@ -42,20 +32,78 @@
         android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/registerLN"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/registerRibbon" />
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/registerRibbon"
-        android:layout_width="444dp"
-        android:layout_height="83dp"
-        android:layout_marginBottom="284dp"
-        app:layout_constraintBottom_toTopOf="@+id/registerBanner"
+    <EditText
+        android:id="@+id/registerLN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="1dp"
+        android:backgroundTint="@color/purple_500"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/registerUsername"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/registerUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="150dp"
+        android:backgroundTint="@color/purple_500"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/registerMail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtMatchingPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="5dp"
+        android:enabled="false"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Passwords must match!"
+        android:textAllCaps="true"
+        android:textColor="#932020"
+        android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_registerribbon" />
+        app:layout_constraintStart_toEndOf="@+id/registerPass"
+        app:layout_constraintTop_toBottomOf="@+id/registerRibbon" />
+
+    <EditText
+        android:id="@+id/registerPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="150dp"
+        android:backgroundTint="@color/purple_500"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/registerConPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/registerMail"
@@ -72,33 +120,15 @@
         android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/registerPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerLN" />
-
-    <EditText
-        android:id="@+id/registerPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="150dp"
-        android:backgroundTint="@color/purple_500"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/registerConPass"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerMail" />
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/registerConPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="150dp"
+        android:layout_marginBottom="9dp"
         android:backgroundTint="@color/purple_500"
         android:ems="10"
         android:hint="Confirm Password"
@@ -108,80 +138,70 @@
         android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/txtTerms"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPass" />
-
-    <TextView
-        android:id="@+id/txtTerms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="4dp"
-        android:text="I agree to the Terms and Conditions"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/registerBanner"
+        app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
         android:id="@+id/checkTerms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="58dp"
         android:layout_marginEnd="120dp"
         android:buttonTint="#673AB7"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txtTerms"
-        app:layout_constraintTop_toBottomOf="@+id/registerRibbon" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMatchingPass" />
 
-    <EditText
-        android:id="@+id/registerLN"
+    <TextView
+        android:id="@+id/txtTerms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="150dp"
-        android:backgroundTint="@color/purple_500"
-        android:ems="10"
-        android:hint="Last Name"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="9dp"
+        android:text="I agree to the Terms and Conditions"
         android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/registerMail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerFN" />
+        app:layout_constraintTop_toBottomOf="@+id/registerConPass" />
+
+    <ImageView
+        android:id="@+id/registerRibbon"
+        android:layout_width="444dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerFN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_registerribbon" />
 
     <Button
         android:id="@+id/signupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="230dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="220dp"
         android:fontFamily="@font/roboto"
         android:text="Sign Up"
         app:cornerRadius="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/registerBanner"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkTerms"
-        app:layout_constraintTop_toBottomOf="@+id/registerRibbon" />
+        app:layout_constraintHorizontal_bias="0.239"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTerms"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/txtMatchingPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="10dp"
-        android:enabled="false"
-        android:fontFamily="@font/roboto"
-        android:text="Passwords must match!"
-        android:textColor="#B0FF0000"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="412dp"
+        android:layout_height="309dp"
+        android:layout_marginTop="84dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/registerBanner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/registerPass"
-        app:layout_constraintTop_toBottomOf="@+id/registerRibbon" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerConPass"
+        app:srcCompat="@drawable/ic_registerbanner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

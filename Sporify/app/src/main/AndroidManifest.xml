@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sporify">
+        android:requestLegacyExternalStorage="true"
         <activity
             android:name=".SettingsActivity"
             android:exported="false" />
