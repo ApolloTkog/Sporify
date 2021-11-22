@@ -8,8 +8,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+<<<<<<< Updated upstream
 import Users.UserModel;
 
+=======
+>>>>>>> Stashed changes
 public class HomePageActivity extends AppCompatActivity {
 
 

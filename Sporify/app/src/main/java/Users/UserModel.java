@@ -13,7 +13,11 @@ public class UserModel
         this.password = password;
     }
 
+<<<<<<< Updated upstream
     public UserModel() {
+=======
+    public UserModel(int i, String s) {
+>>>>>>> Stashed changes
 
     }
 

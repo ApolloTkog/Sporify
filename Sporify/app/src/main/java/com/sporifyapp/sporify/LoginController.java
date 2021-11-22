@@ -1,8 +1,6 @@
 package com.sporifyapp.sporify;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class LoginController extends AppCompatActivity
 {
     DatabaseHelper databaseHelper = new DatabaseHelper(LoginController.this);
@@ -29,6 +29,7 @@ public class LoginController extends AppCompatActivity
 
         TextView username = findViewById(R.id.usrnLoginField);
         TextView password = findViewById(R.id.pswdLoginField);
+        TextView forpass = findViewById(R.id.txtForgotPass);
 
         Button loginBtn = (Button) findViewById(R.id.loginBtn);
 
@@ -52,6 +53,17 @@ public class LoginController extends AppCompatActivity
                     Toast.makeText(LoginController.this, "Invalid credentials!",Toast.LENGTH_SHORT).show();
                 }
 
+<<<<<<< Updated upstream
+=======
+            }
+        });
+    //END SEGMENT - Log In Controller ---------------------------------------------------------------------------------------
+
+        forpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginController.this, ResetPassword.class));
+>>>>>>> Stashed changes
             }
         });
     //END SEGMENT - Log In Controller ---------------------------------------------------------------------------------------

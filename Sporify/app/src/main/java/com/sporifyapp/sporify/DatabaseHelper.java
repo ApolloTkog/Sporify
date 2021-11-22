@@ -107,4 +107,48 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return emailResult;
     }
 
+<<<<<<< Updated upstream
+=======
+    public boolean checkEmailExists(String email) {
+        String[] columns = {"email"};
+        database = openDatabase();
+
+        String selection = "email = ?";
+        String[] selectionArgs = {email};
+
+        Cursor cursor = database.query(USER_TABLE, columns, selection, selectionArgs, null, null, null);
+        int count = cursor.getCount();
+
+        cursor.close();
+        close();
+
+        if(count > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkPasswordExist(String password)
+    {
+        String[] columns = {"password"};
+        database = openDatabase();
+
+        String selection = "password = ?";
+        String[] selectionArgs = {password};
+
+        Cursor cursor = database.query(USER_TABLE, columns, selection, selectionArgs, null, null, null);
+        int count = cursor.getCount();
+
+        cursor.close();
+        close();
+
+        if(count > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+>>>>>>> Stashed changes
 }

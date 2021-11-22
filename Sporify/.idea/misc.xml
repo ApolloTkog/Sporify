@@ -12,12 +12,16 @@
         <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/login.xml" value="0.22" />
         <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/maildialog.xml" value="0.25" />
         <entry key="..\:/Users/AceTsak/AndroidStudioProjects/Sporify/app/src/main/res/layout/passdialog.xml" value="0.25" />
-        <entry key="..\:/Users/User/Downloads/test123/Sporify-main/Sporify-main/Sporify/app/src/main/res/layout/activity_genres.xml" value="0.1598731884057971" />
-        <entry key="..\:/Users/User/Downloads/test123/Sporify-main/Sporify-main/Sporify/app/src/main/res/layout/activity_settings.xml" value="0.1598731884057971" />
+<<<<<<< Updated upstream
+=======
+        <entry key="..\:/Users/Alexander Mnxs/Desktop/Sporify/app/src/main/res/layout/login.xml" value="0.19739583333333333" />
+        <entry key="..\:/Users/Alexander Mnxs/Desktop/Sporify/app/src/main/res/layout/recover_password.xml" value="0.19739583333333333" />
+        <entry key="..\:/Users/Alexander Mnxs/Desktop/Sporify/app/src/main/res/layout/reset_password.xml" value="0.1" />
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
