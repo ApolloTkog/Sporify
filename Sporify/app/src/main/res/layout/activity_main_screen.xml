@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainScreen">
+
+
+    <ListView
+        android:id="@+id/searchListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyTextView"
+        android:text="No results."
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:layout_centerInParent="true" />
+
+
+    <ScrollView
+        android:layout_width="332dp"
+        android:layout_height="53dp"
+        android:scrollbarStyle="insideOverlay"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/allsongs"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:text="All Songs" />
+
+            <Button
+                android:id="@+id/favourites"
+                android:layout_width="wrap_content"
+                android:layout_height="62dp"
+                android:text="Favourites" />
+
+            <Button
+                android:id="@+id/mood"
+                android:layout_width="wrap_content"
+                android:layout_height="62dp"
+                android:text="Moods" />
+
+            <Button
+                android:id="@+id/youtube"
+                android:layout_width="104dp"
+                android:layout_height="62dp"
+                android:text="Youtube" />
+
+            <Button
+                android:id="@+id/charts"
+                android:layout_width="84dp"
+                android:layout_height="61dp"
+                android:text="Charts" />
+
+            <Button
+                android:id="@+id/options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Options" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
