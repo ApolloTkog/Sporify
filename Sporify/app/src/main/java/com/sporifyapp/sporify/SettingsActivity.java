@@ -38,6 +38,7 @@ public class SettingsActivity extends AppCompatActivity
     SQLiteDatabase database;
 
     private Object HomePageActivity;
+    private Object GenreController;
     private static final int GALLERY_REQUEST_CODE = 123;
 
     @Override
@@ -50,6 +51,7 @@ public class SettingsActivity extends AppCompatActivity
         Button editEmailBtn = findViewById(R.id.editEmailBtn);
         Button editPassBtn = findViewById(R.id.editPassBtn);
         Button logoutBtn = findViewById(R.id.logoutBtn);
+        Button genreBtn = findViewById(R.id.genreBtn);
 
         ImageView profileImage = findViewById(R.id.imgProfile);
         Button editPhoto = findViewById(R.id.editPhotoBtn);
@@ -181,5 +183,19 @@ public class SettingsActivity extends AppCompatActivity
             }
         });
     //END SEGMENT - Profile Photo ------------------------------------------------------------------------------------------------------
+
+        //SEGMENT - Genre ----------------------------------------------------------------------------------------------------------
+        genreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsActivity.this, GenresActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+
+            }
+
+        });
     }
+
 }

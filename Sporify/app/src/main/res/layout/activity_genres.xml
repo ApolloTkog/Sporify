@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GenresActivity"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/chooseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="CHOOSE YOUR FAVORITE GENRE"
+        android:textColor="#5A0697"/>
+
+    <CheckBox
+        android:id="@+id/pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="Pop" />
+
+    <CheckBox
+        android:id="@+id/rock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pop"
+        android:minHeight="48dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="Rock" />
+
+    <CheckBox
+        android:id="@+id/metal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rock"
+        android:minHeight="48dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="Metal" />
+
+    <CheckBox
+        android:id="@+id/rap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/metal"
+        android:minHeight="48dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="Rap" />
+
+    <CheckBox
+        android:id="@+id/hiphop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rap"
+        android:minHeight="48dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="Hip Hop" />
+
+    <CheckBox
+        android:id="@+id/electronic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hiphop"
+        android:minHeight="48dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="Electronic" />
+
+    <CheckBox
+        android:id="@+id/country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/electronic"
+        android:minHeight="48dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="Country" />
+
+    <CheckBox
+        android:id="@+id/jazz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/country"
+        android:minHeight="48dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="Jazz" />
+
+    <TextView
+        android:id="@+id/selectGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/ChooseBtn"
+        android:text="Selected"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/ChooseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Choose" />
+
+
+</RelativeLayout>

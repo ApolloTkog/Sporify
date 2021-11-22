@@ -14,6 +14,9 @@
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
+            android:name=".GenresActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomePageActivity"
             android:exported="false" />
         <activity
