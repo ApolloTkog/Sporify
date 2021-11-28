@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import Users.UserModel;
+import Models.UserModel;
 
 public class DatabaseHelper extends SQLiteOpenHelper
 {
@@ -107,8 +107,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return emailResult;
     }
 
-<<<<<<< Updated upstream
-=======
     public boolean checkEmailExists(String email) {
         String[] columns = {"email"};
         database = openDatabase();
@@ -150,5 +148,4 @@ public class DatabaseHelper extends SQLiteOpenHelper
         }
     }
 
->>>>>>> Stashed changes
 }

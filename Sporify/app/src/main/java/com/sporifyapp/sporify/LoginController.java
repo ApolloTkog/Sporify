@@ -4,7 +4,6 @@ package com.sporifyapp.sporify;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -53,8 +52,7 @@ public class LoginController extends AppCompatActivity
                     Toast.makeText(LoginController.this, "Invalid credentials!",Toast.LENGTH_SHORT).show();
                 }
 
-<<<<<<< Updated upstream
-=======
+
             }
         });
     //END SEGMENT - Log In Controller ---------------------------------------------------------------------------------------
@@ -63,7 +61,6 @@ public class LoginController extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginController.this, ResetPassword.class));
->>>>>>> Stashed changes
             }
         });
     //END SEGMENT - Log In Controller ---------------------------------------------------------------------------------------

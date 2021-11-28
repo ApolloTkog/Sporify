@@ -29,12 +29,6 @@
             android:name=".ResetPassword"
             android:exported="false" />
         <activity
-            android:name=".MainScreen"
-            android:exported="false" />
-        <activity
-            android:name=".AllSongs"
-            android:exported="false" />
-        <activity
             android:name=".LoginController"
             android:exported="true">
             <intent-filter>

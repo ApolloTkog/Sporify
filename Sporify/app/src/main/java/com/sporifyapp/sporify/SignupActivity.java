@@ -7,16 +7,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-<<<<<<< Updated upstream
-import org.w3c.dom.Text;
-=======
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import Users.UserModel;
->>>>>>> Stashed changes
+import Models.UserModel;
 
-import Users.UserModel;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -32,22 +27,13 @@ public class SignupActivity extends AppCompatActivity {
         EditText et_Username = findViewById(R.id.registerUsername);
         TextView et_Email = findViewById(R.id.registerMail);
         TextView pw_Password = findViewById(R.id.registerPass);
-<<<<<<< Updated upstream
+
         EditText pw_ConPass = findViewById(R.id.registerConPass);
 
 
         TextView txtMatchingPass = findViewById(R.id.txtMatchingPass);
 
 
-
-=======
-
-
-        TextView txtMatchingPass = findViewById(R.id.txtMatchingPass);
-
-
-
->>>>>>> Stashed changes
         Button signupBtn = findViewById(R.id.signupBtn);
 
         signupBtn.setOnClickListener(new View.OnClickListener()
@@ -71,11 +57,10 @@ public class SignupActivity extends AppCompatActivity {
                 boolean success = databaseHelper.addOne(userModel);
                 Toast.makeText(SignupActivity.this, "Success = " + success, Toast.LENGTH_SHORT).show();
 
-<<<<<<< Updated upstream
+
                 if(pw_Password.getText().toString().equals(pw_ConPass.getText().toString()) && termsBox.isChecked())
-=======
-              /*  if(password.getText().toString().equals(confirmPass.getText().toString()) && termsBox.isChecked())
->>>>>>> Stashed changes
+                {
+                if(pw_Password.getText().toString().equals(pw_ConPass.getText().toString()) && termsBox.isChecked())
                 {
                     Toast.makeText(SignupActivity.this, "Signup Successful!",Toast.LENGTH_SHORT).show();
                     finish();
@@ -86,15 +71,13 @@ public class SignupActivity extends AppCompatActivity {
                     txtMatchingPass.setVisibility(View.VISIBLE);
                     Toast.makeText(SignupActivity.this, "You must agree to the Terms and Conditions.", Toast.LENGTH_SHORT).show();
                 }
-<<<<<<< Updated upstream
-            }
-
-=======
-                */
 
             }
 
->>>>>>> Stashed changes
+
+
+            }
+
         });
 
     }
