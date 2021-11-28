@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import Models.UserModel;
+import Users.UserModel;
 
 public class DatabaseHelper extends SQLiteOpenHelper
 {

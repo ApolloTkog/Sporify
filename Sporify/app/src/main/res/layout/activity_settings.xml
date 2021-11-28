@@ -220,40 +220,6 @@
             app:layout_constraintTop_toBottomOf="@+id/editPhotoBtn"
             app:layout_constraintVertical_bias="1.0" />
 
-        <Button
-            android:id="@+id/genreBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="243dp"
-            android:layout_marginBottom="25dp"
-            android:fontFamily="@font/roboto"
-            android:text=" GENRE "
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:typeface="normal"
-            app:cornerRadius="25dp"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toStartOf="@+id/txtGenre"
-            app:layout_constraintHorizontal_bias="0.275"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editPhotoBtn"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/txtGenre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="115dp"
-            android:text="Your favorite genres"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/logoutBtn"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.769" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 

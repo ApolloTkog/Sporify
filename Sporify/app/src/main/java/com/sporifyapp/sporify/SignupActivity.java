@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import Models.UserModel;
-
+import Users.UserModel;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -34,10 +33,13 @@ public class SignupActivity extends AppCompatActivity {
         TextView txtMatchingPass = findViewById(R.id.txtMatchingPass);
 
 
+
+        // TextView txtMatchingPass = findViewById(R.id.txtMatchingPass);
+
+
         Button signupBtn = findViewById(R.id.signupBtn);
 
-        signupBtn.setOnClickListener(new View.OnClickListener()
-        {
+        signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -46,8 +48,7 @@ public class SignupActivity extends AppCompatActivity {
                 try {
                     userModel = new UserModel(-1, et_FirstName.getText().toString(), et_LastName.getText().toString(), et_Username.getText().toString(), et_Email.getText().toString(), pw_Password.getText().toString());
                     Toast.makeText(SignupActivity.this, userModel.toString(), Toast.LENGTH_SHORT).show();
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     Toast.makeText(SignupActivity.this, "Sign up failed!", Toast.LENGTH_SHORT).show();
                     userModel = new UserModel(-1, "ERROR", "ERROR", "ERROR", "", "");
                 }
@@ -58,25 +59,21 @@ public class SignupActivity extends AppCompatActivity {
                 Toast.makeText(SignupActivity.this, "Success = " + success, Toast.LENGTH_SHORT).show();
 
 
-                if(pw_Password.getText().toString().equals(pw_ConPass.getText().toString()) && termsBox.isChecked())
+                if (pw_Password.getText().toString().equals(pw_ConPass.getText().toString()) && termsBox.isChecked())
                 {
-                if(pw_Password.getText().toString().equals(pw_ConPass.getText().toString()) && termsBox.isChecked())
-                {
-                    Toast.makeText(SignupActivity.this, "Signup Successful!",Toast.LENGTH_SHORT).show();
+                if (pw_Password.getText().toString().equals(pw_ConPass.getText().toString()) && termsBox.isChecked()) {
+                    Toast.makeText(SignupActivity.this, "Signup Successful!", Toast.LENGTH_SHORT).show();
                     finish();
-                } else if(!pw_Password.getText().toString().equals(pw_ConPass.getText().toString())) txtMatchingPass.setVisibility(View.VISIBLE);
-                else if(!termsBox.isChecked()) Toast.makeText(SignupActivity.this,"You must agree to the Terms and Conditions.", Toast.LENGTH_SHORT).show();
-                else
-                    {
+                } else if (!pw_Password.getText().toString().equals(pw_ConPass.getText().toString()))
+                    txtMatchingPass.setVisibility(View.VISIBLE);
+                else if (!termsBox.isChecked())
+                    Toast.makeText(SignupActivity.this, "You must agree to the Terms and Conditions.", Toast.LENGTH_SHORT).show();
+                else {
                     txtMatchingPass.setVisibility(View.VISIBLE);
                     Toast.makeText(SignupActivity.this, "You must agree to the Terms and Conditions.", Toast.LENGTH_SHORT).show();
                 }
-
             }
-
-
-
-            }
+        }
 
         });
 

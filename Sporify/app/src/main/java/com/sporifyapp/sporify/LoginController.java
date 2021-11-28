@@ -52,8 +52,7 @@ public class LoginController extends AppCompatActivity
                     Toast.makeText(LoginController.this, "Invalid credentials!",Toast.LENGTH_SHORT).show();
                 }
 
-
-            }
+         }
         });
     //END SEGMENT - Log In Controller ---------------------------------------------------------------------------------------
 
@@ -61,6 +60,7 @@ public class LoginController extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginController.this, ResetPassword.class));
+
             }
         });
     //END SEGMENT - Log In Controller ---------------------------------------------------------------------------------------
