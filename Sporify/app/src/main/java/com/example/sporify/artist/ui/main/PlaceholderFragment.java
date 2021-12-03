@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.sporify.artist.R;
-import com.example.sporify.artist.databinding.FragmentArtistDisplayBinding;
+import com.example.sporify.R;
+import com.example.sporify.databinding.FragmentArtistDisplayBinding;
 
 /**
  * A placeholder fragment containing a simple view.

@@ -18,7 +18,9 @@ import java.util.logging.Logger;
 
 public class AudioDbToJsonParser {
 
-    private String getJSONfromURL(String url, int timeout) {
+
+
+    public String getJSONFromURL(String url, int timeout) {
 
         HttpURLConnection connection = null;
 

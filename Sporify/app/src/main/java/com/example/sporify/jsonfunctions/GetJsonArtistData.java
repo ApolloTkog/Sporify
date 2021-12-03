@@ -1,19 +1,18 @@
 package com.example.sporify.jsonfunctions;
 
 import com.example.sporify.artist.Artist;
-import com.example.sporify.tracks.Tracks;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class JsonToDataFactory {
+public class GetJsonArtistData {
 
-    //WIll have to make exclusive objects for each class instead of calling them with their corresponding class.
+    //Class for future use.
 
-    public Artist getJsonData(JSONObject object, Artist currentArtist) throws JSONException {
+    public Artist getJsonData(JSONObject object) throws JSONException {
 
-
+        Artist currentArtist = null;
 
         final JSONArray artists = object.getJSONArray("artists");
         final int n = artists.length();
@@ -30,14 +29,6 @@ public class JsonToDataFactory {
 
         return currentArtist;
 
-    }
-
-    public Tracks getJsonData(JSONObject object, Tracks tracks){
-
-
-
-
-        return null;
     }
 
 
