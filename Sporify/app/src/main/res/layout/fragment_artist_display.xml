@@ -25,19 +25,19 @@
         android:layout_width="351dp"
         android:layout_height="483dp"
         android:text="No result."
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="232dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="232dp" />
 
     <Button
         android:id="@+id/search_artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search"
         android:onClick="artistDataDisplay"
-        tools:layout_editor_absoluteX="316dp"
-        tools:layout_editor_absoluteY="131dp"
-        tools:ignore="MissingConstraints" />
+        android:text="Search"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="317dp"
+        tools:layout_editor_absoluteY="141dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/artistInput"

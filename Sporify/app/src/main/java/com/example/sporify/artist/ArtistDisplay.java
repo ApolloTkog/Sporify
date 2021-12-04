@@ -79,7 +79,7 @@ public class ArtistDisplay extends AppCompatActivity {
        tempJson = jsonsaver.stringToJson(tempString);
        currentArtist = data.getJsonData(tempJson,currentArtist);
 
-       tempDisplay.setText("Artist name: " + currentArtist.getName() + " Genre: " + currentArtist.getGenre());
+       tempDisplay.setText("Artist name: " + currentArtist.getName() + " Genre: " + currentArtist.getGenre() + "\nBio: " + currentArtist.getBio());
 
 
 
