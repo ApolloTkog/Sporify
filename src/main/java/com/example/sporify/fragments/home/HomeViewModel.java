@@ -29,14 +29,10 @@ import java.util.List;
 
 
 public class HomeViewModel extends AndroidViewModel implements ApiService {
-
-    public MutableLiveData<List<Artist>> artists;
+    
     private MutableLiveData<List<Album>> albums;
-    private MutableLiveData<List<Track>> tracks;
-
-    private List<Artist> artistList;
+    
     private List<Album> albumList;
-    private List<Track> trackList;
 
     private RequestQueue requestQueue;
 
