@@ -27,7 +27,6 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistHo
     private Context context;
     private List<Artist> artists;
 
-
     public ArtistsAdapter(Context context, List<Artist> artists){
         this.context = context;
         this.artists = artists;
