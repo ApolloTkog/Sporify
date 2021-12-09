@@ -22,6 +22,7 @@ import java.util.List;
 /**
  * Albums adapter for showing albums in recyclerview in HomeFragment
  */
+
 public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistHolder> {
 
     private Context context;
