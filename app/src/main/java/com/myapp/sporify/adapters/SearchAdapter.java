@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.sporify.R;
 import com.example.sporify.activities.album.AlbumDetails;
-import com.example.sporify.activities.artist.ArtistDetails;
+import com.myapp.sporify.activities.artist.ArtistDetails;
 import com.example.sporify.activities.track.TrackDetails;
 import com.example.sporify.models.Searchable;
 import com.example.sporify.utils.Type;

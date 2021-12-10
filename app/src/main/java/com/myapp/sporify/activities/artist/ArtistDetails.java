@@ -1,19 +1,16 @@
-package com.example.sporify.activities.artist;
+package com.myapp.sporify.activities.artist;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.sporify.R;
@@ -25,7 +22,6 @@ import com.example.sporify.models.Album;
 import com.example.sporify.models.Artist;
 import com.example.sporify.models.Searchable;
 import com.example.sporify.models.Track;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
