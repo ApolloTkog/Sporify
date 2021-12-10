@@ -1,4 +1,4 @@
-package com.example.sporify.activities.artist;
+package com.myapp.sporify.activities.artist;
 
 import android.app.Application;
 import android.util.Log;
