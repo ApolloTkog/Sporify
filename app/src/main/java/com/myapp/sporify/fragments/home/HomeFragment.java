@@ -11,15 +11,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.sporify.adapters.AlbumsAdapter;
-import com.example.sporify.adapters.ArtistsAdapter;
-import com.example.sporify.adapters.TopTracksAdapter;
 import com.example.sporify.databinding.FragmentHomeBinding;
-import com.example.sporify.models.Album;
-import com.example.sporify.models.Artist;
-import com.example.sporify.models.Track;
-import com.facebook.shimmer.ShimmerFrameLayout;
+import com.myapp.sporify.models.Album;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +30,24 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+
+
+
+        final RecyclerView albumsList = binding.albumsList;
+        albumsList.setHasFixedSize(true);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(requireContext());
+        layoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        albumsList.setLayoutManager(layoutManager2);
+        albumsList.setAdapter(new AlbumsAdapter(requireContext(), new ArrayList<>()));
+
+
+        homeViewModel.getTopAlbums().observe(getViewLifecycleOwner(), new Observer<List<Album>>() {
+            @Override
+            public void onChanged(List<Album> albums) {
+//                Toast.makeText(requireContext(), "Hi!", Toast.LENGTH_SHORT).show();
+                albumsList.setAdapter(new AlbumsAdapter(requireContext(), albums));
+            }
 
 
         return root;
