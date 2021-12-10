@@ -36,6 +36,8 @@ public class HomeViewModel extends AndroidViewModel implements ApiService {
     public HomeViewModel(Application application ) {
         super(application);
         trackList = new ArrayList<>();
+        albumList = new ArrayList<>();
+
         requestQueue = VolleySingleton.getmInstance(getApplication()).getRequestQueue();
     }
 
