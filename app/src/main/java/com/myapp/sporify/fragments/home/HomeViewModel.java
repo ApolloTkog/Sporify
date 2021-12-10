@@ -26,8 +26,11 @@ import java.util.List;
 
 public class HomeViewModel extends AndroidViewModel implements ApiService {
 
+    public MutableLiveData<List<Artist>> artists;
     private MutableLiveData<List<Album>> albums;
     private MutableLiveData<List<Track>> tracks;
+
+    private List<Artist> artistList;
     private List<Album> albumList;
     private List<Track> trackList;
 
@@ -35,12 +38,96 @@ public class HomeViewModel extends AndroidViewModel implements ApiService {
 
     public HomeViewModel(Application application ) {
         super(application);
+        artistList = new ArrayList<>();
         trackList = new ArrayList<>();
         albumList = new ArrayList<>();
 
         requestQueue = VolleySingleton.getmInstance(getApplication()).getRequestQueue();
     }
 
+    @Override
+    public LiveData<List<Artist>> getTopArtists() {
+        if (artists == null) {
+            artists = new MutableLiveData<>();
+            fetchTopArtistsImage();
+        }
+        return artists;
+    }
+
+    private void fetchTopArtistsInfo(final VolleyCallBack callBack) {
+
+        String url = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&limit=20&api_key=8fc89f699e4ff45a21b968623a93ed52&format=json";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                JSONObject artists_json = response.getJSONObject("artists");
+                JSONArray jsonArray = artists_json.getJSONArray("artist");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    if(jsonObject.getString("mbid").isEmpty())
+                        continue;
+
+                    String mbid = jsonObject.getString("mbid");
+                    String name = jsonObject.getString("name");
+                    long playcount = jsonObject.getLong("playcount");
+                    long listeners = jsonObject.getLong("listeners");
+
+                    Artist artist = new Artist(mbid, name, "", playcount, listeners);
+                    artistList.add(artist);
+                }
+
+                callBack.onSuccess();
+
+            } catch (JSONException e) {
+                Log.d("Parsing error: ", e.getMessage());
+                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }, error -> {
+            Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d("Request error: ", error.getMessage());
+        });
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private void fetchArtistImage() {
+
+        for(int i = 0; i <= artistList.size() - 1; i++){
+            String url =
+                    "http://webservice.fanart.tv/v3/music/"+ artistList.get(i).getMbid() +"?api_key=1e325be5bfa7db0c79aa464a0a924a46";
+
+            int finalI = i;
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+                try {
+                    JSONArray artistThumbs = response.getJSONArray("artistthumb");
+                    String imageURL = artistThumbs.getJSONObject(0).getString("url");
+
+                    artistList.get(finalI).setImageURL(imageURL);
+
+                    if(finalI >= artistList.size() - 1){
+                        //artists.postValue(artistList);
+                        artists.setValue(artistList);
+                    }
+
+
+                } catch (JSONException e) {
+                    Log.d("Parsing error: ", e.getMessage());
+                    Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }, error -> {
+//                Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Request error: ", "Error getting artist's image");
+            });
+
+            requestQueue.add(jsonObjectRequest);
+
+        }
+
+    }
+
+    private void fetchTopArtistsImage(){
+        fetchTopArtistsInfo(this::fetchArtistImage);
+    }
 
     @Override
     public LiveData<List<Album>> getTopAlbums(){

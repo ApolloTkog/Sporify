@@ -25,14 +25,14 @@ import java.util.List;
 public class SearchViewModel extends ViewModel {
 
     private LiveData<List<Searchable>> albumsLiveData;
-    private List<Searchable> albumList;
+    private List<Searchable> albumList, artistList;
 
     private RequestQueue requestQueue;
 
     public SearchViewModel(Application application) {
         super(application);
         albumList = new ArrayList<>();
-       // artistList = new ArrayList<>();
+        artistList = new ArrayList<>();
        // trackList = new ArrayList<>();
 
         requestQueue = VolleySingleton.getmInstance(getApplication()).getRequestQueue();
@@ -40,7 +40,7 @@ public class SearchViewModel extends ViewModel {
 
     public void init(String title, Type type) {
         albumList.clear();
-      //  artistList.clear();
+        artistList.clear();
       //  trackList.clear();
 
         switch (type){
@@ -101,6 +101,58 @@ public class SearchViewModel extends ViewModel {
         });
 
         requestQueue.add(jsonObjectRequest).addMarker("a");
+
+        return searchData;
+    }
+
+    public LiveData<List<Searchable>> searchInArtists(String query){
+        final MutableLiveData<List<Searchable>> searchData = new MutableLiveData<>();
+
+        String url =
+                "https://www.theaudiodb.com/api/v1/json/2/search.php?s=" + query;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                JSONArray jsonArray = response.getJSONArray("artists");
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+//                    if(jsonObject.getString("mbid").isEmpty())
+//                        continue;
+
+                    String mbid = jsonObject.getString("strMusicBrainzID");
+                    String id = jsonObject.getString("idArtist");
+                    String name = jsonObject.getString("strArtist");
+                    String image = jsonObject.getString("strArtistThumb").equals("null") ? "" : jsonObject.getString("strArtistThumb");
+
+                    Searchable searchable = new Searchable(id, name, "Artist", image, "artist");
+                    artistList.add(searchable);
+                }
+
+
+//                searchData.postValue(artistList);
+//                searchData.setValue(artistList);
+
+                Toast.makeText(getApplication(), "Searching artists!", Toast.LENGTH_SHORT).show();
+
+
+            } catch (JSONException e) {
+                Log.d("Parsing error: ", e.getMessage());
+//                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+            finally {
+                searchData.postValue(artistList);
+                searchData.setValue(artistList);
+            }
+
+        }, error -> {
+            Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d("Request error: ", error.getMessage());
+        });
+
+        requestQueue.add(jsonObjectRequest);
 
         return searchData;
     }
