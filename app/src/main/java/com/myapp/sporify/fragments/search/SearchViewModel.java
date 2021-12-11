@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -22,10 +23,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchViewModel extends ViewModel {
+public class SearchViewModel extends AndroidViewModel {
 
     private LiveData<List<Searchable>> albumsLiveData;
-    private List<Searchable> albumList, artistList;
+    private List<Searchable> albumList, artistList, trackList;
 
     private RequestQueue requestQueue;
 
@@ -33,7 +34,7 @@ public class SearchViewModel extends ViewModel {
         super(application);
         albumList = new ArrayList<>();
         artistList = new ArrayList<>();
-       // trackList = new ArrayList<>();
+        trackList = new ArrayList<>();
 
         requestQueue = VolleySingleton.getmInstance(getApplication()).getRequestQueue();
     }
@@ -156,5 +157,55 @@ public class SearchViewModel extends ViewModel {
 
         return searchData;
     }
+    //REQUEST FROM WHICH THE APP USES THE PROVIDED URL TO GET A LIST OF THE MATCHING TRACKS WITH THE USER'S SEARCH QUERY.
 
+    public  LiveData<List<Searchable>> searchInTracks(String query){
+        final MutableLiveData<List<Searchable>> searchData = new MutableLiveData<>();
+
+        String url = "http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + query + "&api_key=8fc89f699e4ff45a21b968623a93ed52&format=json";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                JSONObject results = response.getJSONObject("results").getJSONObject("trackmatches");
+                JSONArray jsonArray = results.getJSONArray("track");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    if(jsonObject.getString("mbid").isEmpty())
+                        continue;
+
+                    String mbid = jsonObject.getString("mbid");
+                    String name = jsonObject.getString("name");
+                    String image = jsonObject.getJSONArray("image").getJSONObject(3).getString("#text");
+                    String artistName = jsonObject.getString("artist");
+
+                    Searchable searchable = new Searchable(mbid, name, artistName, image, "track");
+                    trackList.add(searchable);
+                }
+
+                Toast.makeText(getApplication(), "Searching tracks!", Toast.LENGTH_SHORT).show();
+
+                searchData.postValue(trackList);    //Posts a task to a main thread to set the given value. The code will be executed in the main thread.
+                searchData.setValue(trackList);     //Sets the value. If there are active observers, the value will be dispatched to them.
+
+            } catch (JSONException e) {
+                Log.d("Parsing error: ", e.getMessage());
+                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        }, error -> {
+            Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d("Request error: ", error.getMessage());
+        });
+
+        requestQueue.add(jsonObjectRequest).addMarker("a");
+
+        return searchData;
+    }
+
+    private void clearResults(){
+        albumList.clear();
+        artistList.clear();
+        trackList.clear();
+    }
 }
