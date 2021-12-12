@@ -2,6 +2,8 @@ package com.myapp.sporify.utils;
 
 import android.content.Context;
 
+import com.android.volley.RequestQueue;
+
 public class VolleySingleton {
 
     private RequestQueue requestQueue;

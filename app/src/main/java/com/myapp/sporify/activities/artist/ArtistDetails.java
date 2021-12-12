@@ -13,15 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.sporify.R;
-import com.example.sporify.activities.album.AlbumDetails;
-import com.example.sporify.activities.album.AlbumDetailsViewModel;
-import com.example.sporify.adapters.ArtistTracksAdapter;
-import com.example.sporify.adapters.TracksAdapter;
-import com.example.sporify.models.Album;
-import com.example.sporify.models.Artist;
-import com.example.sporify.models.Searchable;
-import com.example.sporify.models.Track;
+import com.myapp.sporify.R;
+import com.myapp.sporify.activities.album.AlbumDetails;
+import com.myapp.sporify.activities.album.AlbumDetailsViewModel;
+import com.myapp.sporify.adapters.ArtistTracksAdapter;
+import com.myapp.sporify.adapters.TracksAdapter;
+import com.myapp.sporify.models.Album;
+import com.myapp.sporify.models.Artist;
+import com.myapp.sporify.models.Searchable;
+import com.myapp.sporify.models.Track;
 
 import java.util.ArrayList;
 import java.util.List;
