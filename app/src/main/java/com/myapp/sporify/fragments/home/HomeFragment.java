@@ -13,8 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myapp.sporify.adapters.AlbumsAdapter;
+import com.myapp.sporify.adapters.ArtistsAdapter;
+import com.myapp.sporify.adapters.TopTracksAdapter;
 import com.myapp.sporify.databinding.FragmentHomeBinding;
 import com.myapp.sporify.models.Album;
+import com.myapp.sporify.models.Artist;
+import com.myapp.sporify.models.Track;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +38,23 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
 
+        final RecyclerView artistsList = binding.artistList;
+        artistsList.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        artistsList.setLayoutManager(layoutManager);
+        artistsList.setAdapter(new ArtistsAdapter(requireContext(), new ArrayList<>()));
 
+
+        homeViewModel.getTopArtists().observe(getViewLifecycleOwner(), new Observer<List<Artist>>() {
+            @Override
+            public void onChanged(List<Artist> artists) {
+                if (artists.size() > 0){
+                    artistsList.setVisibility(View.VISIBLE);
+                    artistsList.setAdapter(new ArtistsAdapter(requireContext(), artists));
+                }
+            }
+        });
 
         final RecyclerView albumsList = binding.albumsList;
         albumsList.setHasFixedSize(true);
@@ -50,6 +70,22 @@ public class HomeFragment extends Fragment {
 //                Toast.makeText(requireContext(), "Hi!", Toast.LENGTH_SHORT).show();
                 albumsList.setAdapter(new AlbumsAdapter(requireContext(), albums));
             }
+        });
+
+
+        final RecyclerView tracksList = binding.tracksList;
+        tracksList.setHasFixedSize(true);
+        tracksList.setLayoutManager(new LinearLayoutManager(requireContext()));
+        tracksList.setAdapter(new TopTracksAdapter(requireContext(), new ArrayList<>()));
+
+
+        homeViewModel.getTopTracks().observe(getViewLifecycleOwner(), new Observer<List<Track>>() {
+            @Override
+            public void onChanged(List<Track> tracks) {
+//                Toast.makeText(requireContext(), "Hi!", Toast.LENGTH_SHORT).show();
+                tracksList.setAdapter(new TopTracksAdapter(requireContext(), tracks));
+            }
+        });
 
 
         return root;
@@ -61,5 +97,4 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    }
 }

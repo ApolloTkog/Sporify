@@ -3,6 +3,7 @@ package com.myapp.sporify.utils;
 import android.content.Context;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 
 public class VolleySingleton {
 

@@ -12,11 +12,11 @@ import androidx.lifecycle.MutableLiveData;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.sporify.models.Album;
-import com.example.sporify.models.Artist;
-import com.example.sporify.models.Searchable;
-import com.example.sporify.models.Track;
-import com.example.sporify.utils.VolleySingleton;
+import com.myapp.sporify.models.Album;
+import com.myapp.sporify.models.Artist;
+import com.myapp.sporify.models.Searchable;
+import com.myapp.sporify.models.Track;
+import com.myapp.sporify.utils.VolleySingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;

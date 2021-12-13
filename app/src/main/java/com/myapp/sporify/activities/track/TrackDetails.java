@@ -8,17 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
-import com.myapp.sporify.activities.album.AlbumDetailsViewModel;
-import com.myapp.sporify.adapters.TracksAdapter;
-import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.models.Track;
-
-import java.util.ArrayList;
 
 public class TrackDetails extends AppCompatActivity {
 
@@ -45,7 +39,7 @@ public class TrackDetails extends AppCompatActivity {
         trackSummary = findViewById(R.id.track_summary);
 
         Intent intent = getIntent();
-        Searchable searchable = new Searchable();
+        Searchable searchable = new Searchable(mbid, name, artistName, image, "album");
 
         if(intent.getSerializableExtra("item") != null){
             searchable = (Searchable) intent.getSerializableExtra("item");

@@ -18,9 +18,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sporify.adapters.AlbumsAdapter;
-import com.example.sporify.adapters.FavoriteAdapter;
-import com.example.sporify.databinding.FragmentLibraryBinding;
+import com.myapp.sporify.adapters.AlbumsAdapter;
+import com.myapp.sporify.adapters.FavouriteAdapter;
+import com.myapp.sporify.databinding.FragmentLibraryBinding;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,7 +47,7 @@ public class LibraryFragment extends Fragment {
         final RecyclerView albumFavorites = binding.albumFavorites;
         albumFavorites.setLayoutManager(new LinearLayoutManager(requireContext()));
         albumFavorites.setHasFixedSize(true);
-        albumFavorites.setAdapter(new FavoriteAdapter(requireContext(), new ArrayList<>(fetch)));
+        albumFavorites.setAdapter(new FavouriteAdapter(requireContext(), new ArrayList<>(fetch)));
 
         return root;
     }

@@ -18,12 +18,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
-import com.example.sporify.R;
-import com.example.sporify.adapters.SearchAdapter;
-import com.example.sporify.databinding.FragmentSearchBinding;
-import com.example.sporify.models.Searchable;
-import com.example.sporify.utils.Type;
-import com.example.sporify.utils.VolleySingleton;
+import com.myapp.sporify.R;
+import com.myapp.sporify.adapters.SearchAdapter;
+import com.myapp.sporify.databinding.FragmentSearchBinding;
+import com.myapp.sporify.models.Searchable;
+import com.myapp.sporify.utils.Type;
+import com.myapp.sporify.utils.VolleySingleton;
 
 import java.util.ArrayList;
 import java.util.List;

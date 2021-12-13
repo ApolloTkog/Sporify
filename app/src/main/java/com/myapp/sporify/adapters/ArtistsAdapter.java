@@ -14,8 +14,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.sporify.R;
-import com.example.sporify.models.Artist;
+import com.myapp.sporify.R;
+import com.myapp.sporify.models.Artist;
 
 import java.util.List;
 

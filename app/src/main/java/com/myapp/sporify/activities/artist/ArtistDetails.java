@@ -14,11 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
-import com.myapp.sporify.activities.album.AlbumDetails;
-import com.myapp.sporify.activities.album.AlbumDetailsViewModel;
 import com.myapp.sporify.adapters.ArtistTracksAdapter;
-import com.myapp.sporify.adapters.TracksAdapter;
-import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Artist;
 import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.models.Track;
@@ -55,7 +51,7 @@ public class ArtistDetails extends AppCompatActivity {
         artistTracks = findViewById(R.id.artist_tracks);
 
         Intent intent = getIntent();
-        Searchable searchable = new Searchable();
+        Searchable searchable = new Searchable(mbid, name, artistName, image, "album");
 
         if(intent.getSerializableExtra("item") != null){
             searchable = (Searchable) intent.getSerializableExtra("item");

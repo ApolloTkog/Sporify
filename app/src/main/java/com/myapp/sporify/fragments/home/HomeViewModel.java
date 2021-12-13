@@ -13,7 +13,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.myapp.sporify.interfaces.ApiService;
+import com.myapp.sporify.interfaces.VolleyCallBack;
 import com.myapp.sporify.models.Album;
+import com.myapp.sporify.models.Artist;
 import com.myapp.sporify.models.Track;
 import com.myapp.sporify.utils.VolleySingleton;
 

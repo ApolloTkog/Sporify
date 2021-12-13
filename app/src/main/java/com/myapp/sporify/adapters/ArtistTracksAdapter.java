@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.sporify.R;
-import com.example.sporify.models.Track;
+import com.myapp.sporify.R;
+import com.myapp.sporify.models.Track;
 
 import java.util.List;
 

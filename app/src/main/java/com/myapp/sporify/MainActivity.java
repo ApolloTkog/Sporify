@@ -3,9 +3,9 @@ package com.myapp.sporify;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.sporify.fragments.home.HomeFragment;
-import com.example.sporify.fragments.library.LibraryFragment;
-import com.example.sporify.fragments.search.SearchFragment;
+import com.myapp.sporify.fragments.home.HomeFragment;
+import com.myapp.sporify.fragments.library.LibraryFragment;
+import com.myapp.sporify.fragments.search.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +19,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.sporify.databinding.ActivityMainBinding;
+import com.myapp.sporify.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
 

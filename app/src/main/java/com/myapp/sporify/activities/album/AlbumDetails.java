@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
-import com.myapp.sporify.adapters.TopTracksAdapter;
 import com.myapp.sporify.adapters.TracksAdapter;
 import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Searchable;
@@ -72,7 +71,7 @@ public class AlbumDetails extends AppCompatActivity {
 
         // getting the album that user clicks on
         Intent intent = getIntent();
-        Searchable searchable = new Searchable();
+        Searchable searchable = new Searchable(mbid, name, artistName, image, "album");
         if(intent.getSerializableExtra("item") != null){
             searchable = (Searchable) intent.getSerializableExtra("item");
         }

@@ -13,12 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.sporify.R;
-import com.example.sporify.activities.album.AlbumDetails;
-import com.example.sporify.activities.artist.ArtistDetails;
-import com.example.sporify.activities.track.TrackDetails;
-import com.example.sporify.models.Searchable;
-import com.example.sporify.utils.Type;
+import com.myapp.sporify.R;
+import com.myapp.sporify.activities.album.AlbumDetails;
+import com.myapp.sporify.activities.artist.ArtistDetails;
+import com.myapp.sporify.activities.track.TrackDetails;
+import com.myapp.sporify.models.Searchable;
+import com.myapp.sporify.utils.Type;
 
 import java.util.List;
 

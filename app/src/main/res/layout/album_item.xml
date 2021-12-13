@@ -44,18 +44,4 @@
         android:textColor="@android:color/darker_gray"/>
 
 
-    <TextView
-        android:id="@+id/imageURL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
-
-    <TextView
-        android:id="@+id/mbid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
-
 </LinearLayout>
