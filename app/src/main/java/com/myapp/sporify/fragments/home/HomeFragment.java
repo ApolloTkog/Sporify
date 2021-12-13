@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.sporify.databinding.FragmentHomeBinding;
+import com.myapp.sporify.databinding.FragmentHomeBinding;
 import com.myapp.sporify.models.Album;
 
 import java.util.ArrayList;
