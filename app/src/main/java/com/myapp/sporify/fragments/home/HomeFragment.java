@@ -11,6 +11,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.myapp.sporify.adapters.AlbumsAdapter;
 import com.myapp.sporify.databinding.FragmentHomeBinding;
 import com.myapp.sporify.models.Album;
 
