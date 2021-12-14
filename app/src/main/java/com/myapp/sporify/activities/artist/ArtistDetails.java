@@ -51,7 +51,7 @@ public class ArtistDetails extends AppCompatActivity {
         artistTracks = findViewById(R.id.artist_tracks);
 
         Intent intent = getIntent();
-        Searchable searchable = new Searchable(mbid, name, artistName, image, "album");
+        Searchable searchable = new Searchable();
 
         if(intent.getSerializableExtra("item") != null){
             searchable = (Searchable) intent.getSerializableExtra("item");

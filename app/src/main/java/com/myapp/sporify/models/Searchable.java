@@ -17,7 +17,7 @@ public class Searchable implements Serializable {
     private String imageURL;
     private Type kind;
 
-    public Searchable(String mbid, String name, String artistName, String image, String album){}
+    public Searchable(){}
 
     public Searchable(String mbid, String name, String artistName, String imageURL, Type kind) {
         this.mbid = mbid;

@@ -71,7 +71,7 @@ public class AlbumDetails extends AppCompatActivity {
 
         // getting the album that user clicks on
         Intent intent = getIntent();
-        Searchable searchable = new Searchable(mbid, name, artistName, image, "album");
+        Searchable searchable = new Searchable();
         if(intent.getSerializableExtra("item") != null){
             searchable = (Searchable) intent.getSerializableExtra("item");
         }
