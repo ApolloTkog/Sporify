@@ -41,7 +41,8 @@ public class TrackMapper {
 //                    if(jsonObject.getString("mbid").isEmpty())
 //                        continue;
 
-//                    String mbid = jsonObject.getString("mbid");
+//                    String mbid = jsonObject.getString("mbid")
+// test
             String name = jsonObject.getString("name");
             String image = jsonObject.getJSONArray("image").getJSONObject(3).getString("#text");
             String artistName = jsonObject.getJSONObject("artist").getString("name");
