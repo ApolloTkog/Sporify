@@ -8,13 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.myapp.sporify.interfaces.VolleyCallBackAlt;
+import com.myapp.sporify.mappers.AlbumMapper;
 import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Track;
+import com.myapp.sporify.utils.MyApplication;
 import com.myapp.sporify.utils.VolleySingleton;
 
 import org.json.JSONArray;
@@ -24,17 +27,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlbumDetailsViewModel extends AndroidViewModel {
+public class AlbumDetailsViewModel extends ViewModel {
 
     private MutableLiveData<Album> albumLiveData;
     private Album album;
 
     private RequestQueue requestQueue;
 
-    public AlbumDetailsViewModel(@NonNull Application application) {
-        super(application);
+    public AlbumDetailsViewModel() {
         album = new Album();
-        requestQueue = VolleySingleton.getmInstance(getApplication()).getRequestQueue();
+        requestQueue = VolleySingleton.getmInstance(MyApplication.getAppContext()).getRequestQueue();
     }
 
     public LiveData<Album> getAlbum() {
@@ -48,7 +50,7 @@ public class AlbumDetailsViewModel extends AndroidViewModel {
      * @param mbid Album's MusicBrainz ID
      * @return LiveData with album's info
      */
-    public LiveData<Album> getAlbums(String mbid){
+    public LiveData<Album> getAlbum(String mbid){
         album = new Album();
 
         if (albumLiveData == null) {
@@ -83,68 +85,33 @@ public class AlbumDetailsViewModel extends AndroidViewModel {
                 "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&mbid=" + mbid+ "&api_key=8fc89f699e4ff45a21b968623a93ed52&format=json";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
-            JSONObject jsonObject;
+//            JSONObject jsonObject;
 
             try {
                 // from the json response get the album object
-                jsonObject = response.getJSONObject("album");
-
-                // from the album object get name, image, artist
-                String name = jsonObject.getString("name");
-                String image = jsonObject.getJSONArray("image").getJSONObject(3).getString("#text");
-                String artistName = jsonObject.getString("artist");
-
-                String artistMbid = "";
-
-                List<Track> tracksList = new ArrayList<>();
-
-                // from the object tracks get the json array called track
-                JSONArray tracks = jsonObject.getJSONObject("tracks").getJSONArray("track");
-
-                // parse the json array of tracks
-                for (int i = 0; i < tracks.length(); i++) {
-                    JSONObject trackObject = tracks.getJSONObject(i);
-
-                    // get track's name
-                    String trackName = trackObject.getString("name");
-                    // get track's duration
-                    int trackDuration = trackObject.getInt("duration");
-                    //get artist's mbid
-                    artistMbid = trackObject.getJSONObject("artist").getString("mbid");
-
-                    // create track object
-                    Track track = new Track(trackName, artistName, trackDuration);
-
-                    // add it to list
-                    tracksList.add(track);
-                }
-
-                // create album object
-                album = new Album(mbid, name, artistName, image, tracksList);
-                album.setArtistMbid(artistMbid);
+                album = AlbumMapper.getAlbumFromJson(response);
 
                 // call the callback function to know when we have fetched all the data that we want
-                callBack.onSuccess(artistMbid);
+                callBack.onSuccess(album.getArtistMbid());
 
-
+                albumLiveData.setValue(album);
+                albumLiveData.postValue(album);
 
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
-                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
             finally {
                 // post && set the album's values
-                albumLiveData.setValue(album);
-                albumLiveData.postValue(album);
+                albumLiveData.setValue(null);
+                albumLiveData.postValue(null);
             }
 
         }, error -> {
 //            Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
 //            Log.d("Request error: ", error.getMessage());
             // on request error post the empty album object to show default values
-            albumLiveData.setValue(album);
-            albumLiveData.postValue(album);
+            albumLiveData.setValue(null);
+            albumLiveData.postValue(null);
         });
 
         // add request to queue to called
@@ -183,10 +150,8 @@ public class AlbumDetailsViewModel extends AndroidViewModel {
 
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
-                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }, error -> {
-//                Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d("Request error: ", "Error getting artist's image");
         });
 
