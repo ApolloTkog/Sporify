@@ -1,5 +1,8 @@
 package com.myapp.sporify_backend.security.services;
 
+
+import com.myapp.sporify_backend.models.User;
+import com.myapp.sporify_backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- * Είναι απαραίτητος για το security της spring boot
+ * Είναι απαραίτητης για το security της spring boot
  * Έχει μια μέθοδο που βρίσκει τον χρήστη απο το username
  * που περνάμε ως όρισμα. Αν δεν τον βρεί πετάει UsernameNotFoundException.
  */

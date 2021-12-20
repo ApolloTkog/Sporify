@@ -1,6 +1,7 @@
 package com.myapp.sporify_backend.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.myapp.sporify_backend.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

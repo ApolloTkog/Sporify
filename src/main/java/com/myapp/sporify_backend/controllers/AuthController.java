@@ -1,6 +1,8 @@
 package com.myapp.sporify_backend.controllers;
 
 
+import com.myapp.sporify_backend.models.User;
+import com.myapp.sporify_backend.repositories.UserRepository;
 import com.myapp.sporify_backend.security.jwt.JwtUtils;
 import com.myapp.sporify_backend.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
