@@ -3,6 +3,7 @@ package com.myapp.sporify_backend.controllers;
 
 import com.myapp.sporify_backend.models.Artist;
 import com.myapp.sporify_backend.models.User;
+import com.myapp.sporify_backend.payload.response.MessageResponse;
 import com.myapp.sporify_backend.repositories.ArtistRepository;
 import com.myapp.sporify_backend.repositories.UserRepository;
 import com.myapp.sporify_backend.security.services.UserDetailsImpl;

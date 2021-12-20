@@ -2,7 +2,10 @@ package com.myapp.sporify_backend.controllers;
 
 
 import com.myapp.sporify_backend.models.User;
-import com.myapp.sporify_backend.payload.SignUpRequest;
+import com.myapp.sporify_backend.payload.request.LoginRequest;
+import com.myapp.sporify_backend.payload.request.SignUpRequest;
+import com.myapp.sporify_backend.payload.response.LoginResponse;
+import com.myapp.sporify_backend.payload.response.MessageResponse;
 import com.myapp.sporify_backend.repositories.UserRepository;
 import com.myapp.sporify_backend.security.jwt.JwtUtils;
 import com.myapp.sporify_backend.security.services.UserDetailsImpl;

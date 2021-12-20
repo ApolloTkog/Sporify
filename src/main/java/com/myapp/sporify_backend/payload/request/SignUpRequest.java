@@ -1,4 +1,4 @@
-package com.myapp.sporify_backend.payload;
+package com.myapp.sporify_backend.payload.request;
 
 import javax.validation.constraints.*;
 
