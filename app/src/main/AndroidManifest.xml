@@ -2,13 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.myapp.sporify">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+        android:name=".utils.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Sporify">
+        android:theme="@style/Theme.Sporify"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activities.track.TrackDetails"
+            android:exported="false" />
+        <activity
+            android:name=".activities.artist.ArtistDetails"
+            android:exported="false" />
+        <activity
+            android:name=".activities.album.AlbumDetails"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

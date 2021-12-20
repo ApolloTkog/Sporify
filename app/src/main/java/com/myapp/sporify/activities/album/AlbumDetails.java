@@ -114,7 +114,7 @@ public class AlbumDetails extends AppCompatActivity {
         };
 
         // getting the data for the specific album given the album's id -> searchable.getMbid()
-        albumDetailsViewModel.getAlbums(searchable.getMbid()).observe(this, observer);
+        albumDetailsViewModel.getAlbum(searchable.getMbid()).observe(this, observer);
 
         // listener when add favorite is tapped
         addFavorite.setOnClickListener(new View.OnClickListener() {

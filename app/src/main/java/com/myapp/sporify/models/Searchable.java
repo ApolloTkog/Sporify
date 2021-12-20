@@ -16,6 +16,7 @@ public class Searchable implements Serializable {
     private String artistName;
     private String imageURL;
     private Type kind;
+    private String extraId = "";
 
     public Searchable(){}
 
@@ -49,5 +50,13 @@ public class Searchable implements Serializable {
 
     public Type getKind() {
         return kind;
+    }
+
+    public String getExtraId() {
+        return extraId;
+    }
+
+    public void setExtraId(String extraId) {
+        this.extraId = extraId;
     }
 }

@@ -63,8 +63,8 @@ public class ArtistDetails extends AppCompatActivity {
         artistTracks = findViewById(R.id.artist_tracks);
 
         // tab bar views
-        tabLayout = findViewById(R.id.tab_layout);
-        pager2 = findViewById(R.id.view_pager2);
+        //tabLayout = findViewById(R.id.tab_layout);
+        //pager2 = findViewById(R.id.view_pager2);
 
         Intent intent = getIntent();
         Searchable searchable = new Searchable();

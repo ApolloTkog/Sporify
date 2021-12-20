@@ -8,14 +8,17 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.myapp.sporify.mappers.ArtistMapper;
 import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Artist;
 import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.models.Track;
+import com.myapp.sporify.utils.MyApplication;
 import com.myapp.sporify.utils.VolleySingleton;
 
 import org.json.JSONArray;
