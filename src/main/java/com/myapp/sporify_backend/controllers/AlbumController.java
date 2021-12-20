@@ -1,5 +1,8 @@
 package com.myapp.sporify_backend.controllers;
 
+import com.myapp.sporify_backend.models.Album;
+import com.myapp.sporify_backend.repositories.AlbumRepository;
+import com.myapp.sporify_backend.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
