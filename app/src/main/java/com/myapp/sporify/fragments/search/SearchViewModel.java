@@ -1,10 +1,7 @@
 package com.myapp.sporify.fragments.search;
 
-import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,8 +9,8 @@ import androidx.lifecycle.ViewModel;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.utils.MyApplication;
+import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.utils.Type;
 import com.myapp.sporify.utils.VolleySingleton;
 
@@ -58,8 +55,6 @@ public class SearchViewModel extends ViewModel {
     public LiveData<List<Searchable>> getDataSearch() {
         return searchLiveData;
     }
-
-    // proposed to be reworked like the mappers to declutter it. Will happen in next patch probs, or we'll drop the issue all together...
 
     public  LiveData<List<Searchable>> searchInAlbums(String query){
         final MutableLiveData<List<Searchable>> searchData = new MutableLiveData<>();
@@ -128,6 +123,7 @@ public class SearchViewModel extends ViewModel {
                     String image = jsonObject.getString("strArtistThumb").equals("null") ? "" : jsonObject.getString("strArtistThumb");
 
                     Searchable searchable = new Searchable(id, name, "Artist", image, Type.ARTIST);
+                    searchable.setExtraId(mbid);
                     artistList.add(searchable);
                 }
 

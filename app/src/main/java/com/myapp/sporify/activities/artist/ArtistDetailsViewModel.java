@@ -25,35 +25,49 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistDetailsViewModel extends AndroidViewModel {
+public class ArtistDetailsViewModel extends ViewModel {
 
     private LiveData<Artist> artistLiveData;
     private LiveData<List<Track>> tracksLiveData;
+    private LiveData<List<Album>> albumsLiveData;
+
 
     private Artist artist;
     private List<Track> tracks;
+    private List<Album> albums;
+
 
     private RequestQueue requestQueue;
 
 
-    public ArtistDetailsViewModel(@NonNull Application application) {
-        super(application);
-
+    public ArtistDetailsViewModel() {
         artist = new Artist();
+        albums= new ArrayList<>();
         tracks= new ArrayList<>();
-        requestQueue = VolleySingleton.getmInstance(getApplication()).getRequestQueue();
+        requestQueue = VolleySingleton.getmInstance(MyApplication.getAppContext()).getRequestQueue();
 
     }
 
     public void init(String id){
         tracks.clear();
+        albums.clear();
 
         artistLiveData = getArtistInfo(id);
         tracksLiveData = getTracks(id);
+        albumsLiveData = getAlbums(id);
+
     }
 
     public LiveData<Artist> getArtist() {
         return artistLiveData;
+    }
+
+    public LiveData<List<Track>> getArtistTracks(){
+        return tracksLiveData;
+    }
+
+    public LiveData<List<Album>> getArtistAlbums(){
+        return albumsLiveData;
     }
 
     private LiveData<Artist> getArtistInfo(String id){
@@ -64,27 +78,8 @@ public class ArtistDetailsViewModel extends AndroidViewModel {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
             try {
-                JSONArray jsonArray = response.getJSONArray("artists");
 
-                Artist artist = new Artist();
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-//                    if(jsonObject.getString("mbid").isEmpty())
-//                        continue;
-
-                    String mbid = jsonObject.getString("strMusicBrainzID");
-                    String name = jsonObject.getString("strArtist");
-                    String image = jsonObject.getString("strArtistFanart2").equals("null") ? "" : jsonObject.getString("strArtistFanart2");
-                    String biography = jsonObject.getString("strBiographyEN");
-                    String genre = jsonObject.getString("strGenre");
-
-
-                    artist = new Artist(mbid, name, image, genre, biography);
-
-                }
-
+                artist = ArtistMapper.getArtistFromJson(response);
 
                 artistData.postValue(artist);
                 artistData.setValue(artist);
@@ -101,17 +96,12 @@ public class ArtistDetailsViewModel extends AndroidViewModel {
             }
 
         }, error -> {
-            Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d("Request error: ", error.getMessage());
         });
 
         requestQueue.add(jsonObjectRequest);
 
         return artistData;
-    }
-
-    public LiveData<List<Track>> getArtistTracks(){
-        return tracksLiveData;
     }
 
     private LiveData<List<Track>> getTracks(String id){
@@ -122,23 +112,8 @@ public class ArtistDetailsViewModel extends AndroidViewModel {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
             try {
-                JSONArray jsonArray = response.getJSONArray("mvids");
 
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-//                    if(jsonObject.getString("mbid").isEmpty())
-//                        continue;
-
-                    String name = jsonObject.getString("strTrack");
-                    String image = jsonObject.getString("strTrackThumb").equals("null") ? "" : jsonObject.getString("strTrackThumb");
-                    String youtubeURL = jsonObject.getString("strMusicVid");
-
-                    Track track = new Track(i + 1, name,image, youtubeURL, "");
-
-                    tracks.add(track);
-
-                }
+                tracks = ArtistMapper.getArtistTracksFromJson(response);
 
                 artistTracks.postValue(tracks);
                 artistTracks.setValue(tracks);
@@ -147,11 +122,9 @@ public class ArtistDetailsViewModel extends AndroidViewModel {
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
 //                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
 
         }, error -> {
-            Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d("Request error: ", error.getMessage());
         });
 
@@ -159,6 +132,35 @@ public class ArtistDetailsViewModel extends AndroidViewModel {
 
         return artistTracks;
     }
+
+
+    private LiveData<List<Album>> getAlbums(String id){
+        final MutableLiveData<List<Album>> albumsData = new MutableLiveData<>();
+
+        System.out.println("ID IS" + id);
+
+        String url =
+                "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=" + id + "&api_key=8fc89f699e4ff45a21b968623a93ed52&format=json";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+
+                albums = ArtistMapper.getArtistAlbumsFromJson(response);
+
+                albumsData.postValue(albums);
+
+            } catch (JSONException e) {
+                Log.d("Parsing error: ", e.getMessage());
+                // Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }, error -> {
+            // Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d("Request error: ", error.getMessage());
+        });
+
+        requestQueue.add(jsonObjectRequest);
+
+        return albumsData;
+    }
+
 }
-
-
