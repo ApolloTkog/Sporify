@@ -6,13 +6,22 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
+import com.myapp.sporify.activities.album.AlbumDetailsViewModel;
+import com.myapp.sporify.adapters.TracksAdapter;
+import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.models.Track;
+
+import java.util.ArrayList;
 
 public class TrackDetails extends AppCompatActivity {
 
@@ -45,6 +54,7 @@ public class TrackDetails extends AppCompatActivity {
 
         if(intent.getSerializableExtra("item") != null){
             searchable = (Searchable) intent.getSerializableExtra("item");
+            Log.d("SEARCHABLE", searchable.getMbid());
         }
 
         trackInfo = new Track();
@@ -54,8 +64,13 @@ public class TrackDetails extends AppCompatActivity {
                 trackInfo = track;
                 trackName.setText(track.getName());
                 artistName.setText(track.getArtistName());
-                trackContent.setText(track.getContent());
-                trackSummary.setText(track.getSummary());
+
+                trackSummary.setMovementMethod(LinkMovementMethod.getInstance());
+                trackSummary.setText(Html.fromHtml(track.getSummary()));
+                trackContent.setMovementMethod(LinkMovementMethod.getInstance());
+                trackContent.setText(Html.fromHtml(track.getContent()));
+                // trackContent.setText(track.getContent());
+
 
                 Glide.with(getApplicationContext())
                         .load(track.getImageURL().isEmpty() ? R.drawable.artist_placeholder : track.getImageURL())
