@@ -59,6 +59,8 @@ public class SearchViewModel extends ViewModel {
         return searchLiveData;
     }
 
+    // proposed to be reworked like the mappers to declutter it. Will happen in next patch probs, or we'll drop the issue all together...
+
     public  LiveData<List<Searchable>> searchInAlbums(String query){
         final MutableLiveData<List<Searchable>> searchData = new MutableLiveData<>();
 

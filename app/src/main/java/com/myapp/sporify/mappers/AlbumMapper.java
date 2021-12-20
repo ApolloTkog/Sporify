@@ -61,4 +61,37 @@ public class AlbumMapper {
         return album;
 
     }
+
+    public static List<Album> getTopAlbumsFromJson(JSONObject response) throws JSONException{
+        List<Album> albumList = new ArrayList<>();
+
+        JSONObject artists_json = response.getJSONObject("albums");
+        JSONArray jsonArray = artists_json.getJSONArray("album");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+//                    if(jsonObject.getString("mbid").isEmpty())
+//                        continue;
+
+
+            String mbid = "";
+            try{
+                mbid = jsonObject.getString("mbid");
+            }
+            catch (JSONException e){
+                System.err.println("MBID cannot be parsed!");
+            }
+
+//                    String mbid = jsonObject.getString("mbid");
+            String name = jsonObject.getString("name");
+            String image = jsonObject.getJSONArray("image").getJSONObject(3).getString("#text");
+            String artistName = jsonObject.getJSONObject("artist").getString("name");
+
+            Album album = new Album(mbid, name, artistName, image);
+            albumList.add(album);
+        }
+
+        return albumList;
+    }
+
 }
