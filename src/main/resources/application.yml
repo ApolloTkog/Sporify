@@ -1,0 +1,17 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: never
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: sporifydb
+
+jwt:
+  jwtSecret: secretKey123secretKey123secretKey123secretKey123secretKey123secretKey123secretKey123secretKey123secretKey123secretKey123
+  jwtExpirationMs: 86400000
