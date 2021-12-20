@@ -20,7 +20,6 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class SignUpTest {
 
-
     private SignUpViewModel signUpViewModel;
 
     private String signUpResponse;
