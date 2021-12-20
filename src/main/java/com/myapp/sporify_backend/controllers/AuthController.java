@@ -2,6 +2,7 @@ package com.myapp.sporify_backend.controllers;
 
 
 import com.myapp.sporify_backend.models.User;
+import com.myapp.sporify_backend.payload.SignUpRequest;
 import com.myapp.sporify_backend.repositories.UserRepository;
 import com.myapp.sporify_backend.security.jwt.JwtUtils;
 import com.myapp.sporify_backend.security.services.UserDetailsImpl;
@@ -93,7 +94,7 @@ public class AuthController {
      * είναι εντάξει και ο χρήστης δημιουργείται επιτυχώς.
      */
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 
         String valid = validateRegister(signUpRequest);
         if(!valid.equals("success")) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse(valid));
@@ -124,7 +125,7 @@ public class AuthController {
                 new MessageResponse("User registered successfully!"));
     }
 
-    private String validateRegister(SignupRequest request){
+    private String validateRegister(SignUpRequest request){
         String message = "success";
 
         if(request == null)
