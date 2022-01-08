@@ -140,6 +140,17 @@ public class SearchAlbums {
         // wait 1s for results to be fetched
         Thread.sleep(1000);
 
+
+                // we can place assert here if we want to avoid null exception
+                // Assert.assertEquals(albumIWantToSearch, searchable.getName());
+
+
+            }
+        });
+
+        // wait 1s for results to be fetched
+        Thread.sleep(1000);
+
         Assert.assertNotEquals(albumIWantToSearch, searchable.getName());
 
     }
