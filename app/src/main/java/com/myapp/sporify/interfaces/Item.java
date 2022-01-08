@@ -1,7 +1,9 @@
 package com.myapp.sporify.interfaces;
 
 public interface Item {
-    String getName();
+
+    String getTitle();
     String getImageURL();
-    String getArtistName();
+    String getDescription();
 }
+
