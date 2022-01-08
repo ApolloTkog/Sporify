@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.myapp.sporify.LiveDataTestUtil;
 import com.myapp.sporify.activities.auth.login.LoginViewModel;
 import com.myapp.sporify.activities.auth.signup.SignUpViewModel;
 
@@ -31,17 +30,16 @@ public class LoginTest {
 
     @Test
     public void should_not_login() throws InterruptedException {
+
         loginViewModel.init("","");
-//        loginViewModel.getLoginResponse().observeForever(new Observer<String>() {
-//            @Override
-//            public void onChanged(String response) {
-//                loginResponse = response;
-//            }
-//        });
+        loginViewModel.getLoginResponse().observeForever(new Observer<String>() {
+            @Override
+            public void onChanged(String response) {
+                loginResponse = response;
+            }
+        });
 
-        loginResponse = LiveDataTestUtil.getOrAwaitValue(loginViewModel.getLoginResponse());
-
-//        Thread.sleep(2000);
+        Thread.sleep(2000);
 
         Assert.assertEquals("Bad credentials!", loginResponse);
     }
@@ -50,18 +48,30 @@ public class LoginTest {
     public void should_not_login_random_credentials() throws InterruptedException {
 
         loginViewModel.init("user","12345");
+        loginViewModel.getLoginResponse().observeForever(new Observer<String>() {
+            @Override
+            public void onChanged(String response) {
+                loginResponse = response;
+            }
+        });
 
-        loginResponse = LiveDataTestUtil.getOrAwaitValue(loginViewModel.getLoginResponse());
-
+        Thread.sleep(2000);
 
         Assert.assertEquals("Bad credentials!", loginResponse);
     }
 
     @Test
     public void should_login() throws InterruptedException {
-        loginViewModel.init("username","12345678");
 
-        loginResponse = LiveDataTestUtil.getOrAwaitValue(loginViewModel.getLoginResponse());
+        loginViewModel.init("username","12345678");
+        loginViewModel.getLoginResponse().observeForever(new Observer<String>() {
+            @Override
+            public void onChanged(String response) {
+                loginResponse = response;
+            }
+        });
+
+        Thread.sleep(2000);
 
         Assert.assertNotEquals("Bad credentials!", loginResponse);
     }

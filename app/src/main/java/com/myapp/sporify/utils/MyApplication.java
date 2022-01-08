@@ -12,6 +12,10 @@ public class MyApplication extends Application {
         mInstance = this;
     }
 
+    public static synchronized MyApplication getInstance() {
+        return mInstance;
+    }
+
     public static Context getAppContext() {
         return mInstance.getApplicationContext();
     }

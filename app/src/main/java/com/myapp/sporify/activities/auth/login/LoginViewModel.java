@@ -59,7 +59,7 @@ public class LoginViewModel  extends ViewModel {
     public LiveData<String> attemptLogin(String username, String password){
         final MutableLiveData<String> loginData = new MutableLiveData<>();
 
-        String postUrl = "http://192.168.2.5:8081/api/auth/signin";
+        String postUrl = "http://192.168.1.2:8081/api/auth/signin";
         JSONObject postData = new JSONObject();
         try {
             postData.put("username", username);
@@ -87,11 +87,8 @@ public class LoginViewModel  extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                String message = "Timeout error";
-                if(error.networkResponse != null){
-                    message = parseVolleyError(error);
-                }
-//                Log.d("Login: ", error.getMessage());
+                System.out.println(error.getMessage());
+                String message = parseVolleyError(error);
                 loginData.postValue(message);
                 loginData.setValue(message);
             }
@@ -105,10 +102,10 @@ public class LoginViewModel  extends ViewModel {
 
     public String parseVolleyError(VolleyError error) {
         try {
-            String responseBody = new String(error.networkResponse.data, StandardCharsets.UTF_8);
+            String responseBody = new String(error.networkResponse.data, "utf-8");
             JSONObject data = new JSONObject(responseBody);
             return data.getString("message");
-        } catch (JSONException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;
         }

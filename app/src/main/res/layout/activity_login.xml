@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+
     android:orientation="vertical"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
-                android:text="@string/text_signin_message"
+
                 android:textColor="#696969"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/colorTextInputBackground"
+
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
@@ -67,7 +67,7 @@
                         android:drawableStart="@drawable/ic_person"
                         android:drawableLeft="@drawable/ic_person"
                         android:drawablePadding="12dp"
-                        android:hint="@string/hint_username"
+
                         android:imeOptions="actionNext"
                         android:minWidth="320dp"
                         android:minHeight="50dp"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/colorTextInputBackground"
+
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
@@ -103,7 +103,7 @@
                         android:drawableStart="@drawable/ic_lock"
                         android:drawableLeft="@drawable/ic_lock"
                         android:drawablePadding="12dp"
-                        android:hint="@string/hint_password"
+
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:minWidth="320dp"
@@ -119,7 +119,7 @@
                 android:layout_gravity="right"
                 android:layout_marginEnd="24dp"
                 android:padding="10dp"
-                android:text="@string/text_forgot_password"
+
                 android:textColor="@color/light_gray" />
 
             <Button
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:text="@string/button_sign_in" />
+                />
 
             <LinearLayout
                 android:id="@+id/social_layout"
@@ -143,8 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="@string/text_signin_social_media"
-                    android:textColor="@color/md_black_1000"
+
                     android:textSize="12sp" />
 
                 <LinearLayout
@@ -172,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingHorizontal="20dp"
-                android:text="@string/text_signin_signup"
+
                 android:textColor="@color/darker_gray" />
         </LinearLayout>
 

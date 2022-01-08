@@ -13,8 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myapp.sporify.adapters.albums.AlbumsAdapter;
+import com.myapp.sporify.adapters.ArtistsAdapter;
+import com.myapp.sporify.adapters.TopTracksAdapter;
 import com.myapp.sporify.databinding.FragmentHomeBinding;
 import com.myapp.sporify.models.Album;
+import com.myapp.sporify.models.Artist;
+import com.myapp.sporify.models.Track;
 
 import java.util.ArrayList;
 import java.util.List;

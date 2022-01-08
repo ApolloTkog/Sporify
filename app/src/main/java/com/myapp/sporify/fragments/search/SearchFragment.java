@@ -64,8 +64,6 @@ public class SearchFragment extends Fragment {
 
 
         search = binding.search;
-        search.requestFocus();
-
         searchResults = binding.searchResults;
         progressBar = binding.progressCircular;
         emptyText = binding.emptyText;
@@ -123,7 +121,6 @@ public class SearchFragment extends Fragment {
                 }
                 showLoading(false);
             }
-
         };
 
         viewModel.getDataSearch().observe(this, observer);

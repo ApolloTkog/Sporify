@@ -1,4 +1,4 @@
-package com.myapp.sporify.adapters.artists;
+package com.myapp.sporify.adapters;
 
 import android.content.Context;
 import android.content.Intent;

@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.myapp.sporify.activities.artist.ArtistDetailsViewModel;
-import com.myapp.sporify.adapters.artists.ArtistTracksAdapter;
+import com.myapp.sporify.adapters.ArtistTracksAdapter;
 import com.myapp.sporify.databinding.TracksFragmentBinding;
 import com.myapp.sporify.models.Track;
 
