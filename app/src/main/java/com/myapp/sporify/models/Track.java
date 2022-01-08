@@ -1,8 +1,13 @@
 package com.myapp.sporify.models;
 
-public class Track {
+import com.myapp.sporify.interfaces.Item;
+
+import java.util.Objects;
+
+public class Track implements Item {
 
     private int rank;
+    private String mbid;
     private String name;
     private String artistName;
     private String artistMbid;
@@ -14,6 +19,7 @@ public class Track {
     private String summary = "", content = "";
 
     public Track(){}
+
 
 
     public Track(int rank, String name, String artistName, String imageURL) {
@@ -29,14 +35,22 @@ public class Track {
         this.duration = duration;
     }
 
-    public Track(int rank ,String name, String imageURL, String youtubeURL, String artistName){
-        this.rank = rank;
+    public Track(String artistMbid, String name, String youtubeURL, String imageURL) {
         this.name = name;
+        this.artistMbid = artistMbid;
         this.imageURL = imageURL;
         this.youtubeURL = youtubeURL;
     }
 
-    public Track(String name,String imageURL, String artistName, String artistMbid, String summary, String content){
+    public Track(int rank , String name, String imageURL, String youtubeURL, String artistName){
+        this.rank = rank;
+        this.name = name;
+        this.imageURL = imageURL;
+        this.youtubeURL = youtubeURL;
+        this.artistName = artistName;
+    }
+
+    public Track(String name, String imageURL, String artistName, String artistMbid, String summary, String content){
         this.name = name;
         this.artistName = artistName;
         this.imageURL = imageURL;
@@ -44,6 +58,12 @@ public class Track {
 
         this.summary = summary;
         this.content = content;
+    }
+
+    public Track(String artistMbid, String name, String artistName) {
+        this.name = name;
+        this.artistName = artistName;
+        this.artistMbid = artistMbid;
     }
 
     public int getRank() {
@@ -88,5 +108,26 @@ public class Track {
 
     public String getContent() {
         return content;
+    }
+
+    public String getMbid() {
+        return mbid;
+    }
+
+    public void setMbid(String mbid) {
+        this.mbid = mbid;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Track track = (Track) o;
+        return name.equals(track.name) && artistName.equals(track.artistName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, artistName);
     }
 }

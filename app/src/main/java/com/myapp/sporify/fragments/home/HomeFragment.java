@@ -27,6 +27,7 @@ public class HomeFragment extends Fragment {
 
     //    private HomeViewModel homeViewModel;
     public TopAlbumsViewModel topAlbumsViewModel;
+    private TopTracksViewModel topTracksViewModel;
     private FragmentHomeBinding binding;
 
 
@@ -34,6 +35,9 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         topAlbumsViewModel =
                 new ViewModelProvider(this).get(TopAlbumsViewModel.class);
+
+        topTracksViewModel =
+                new ViewModelProvider(this).get(TopTracksViewModel.class);
 
 
 
@@ -57,6 +61,19 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        final RecyclerView tracksList = binding.tracksList;
+        tracksList.setHasFixedSize(true);
+        tracksList.setLayoutManager(new LinearLayoutManager(requireContext()));
+        tracksList.setAdapter(new TopTracksAdapter(requireContext(), new ArrayList<>()));
+
+
+        topTracksViewModel.getTopTracks(20).observe(getViewLifecycleOwner(), new Observer<List<Track>>() {
+            @Override
+            public void onChanged(List<Track> tracks) {
+//                Toast.makeText(requireContext(), "Hi!", Toast.LENGTH_SHORT).show();
+                tracksList.setAdapter(new TopTracksAdapter(requireContext(), tracks));
+            }
+        });
 
         return root;
     }
