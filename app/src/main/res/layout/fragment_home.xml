@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.home.HomeFragment"
-   >
+    android:fitsSystemWindows="true"
+    >
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -17,6 +18,30 @@
                     android:orientation="vertical">
 
                         <TextView
+                            android:text="Hey Thomas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/artist_list"
+                            android:layout_marginStart="15dp"
+                            android:textSize="20dp"
+                            android:layout_marginTop="10dp"
+                            android:maxLines="2" />
+
+                        <TextView
+                            android:text="Enjoy your favorite music!"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/artist_list"
+                            android:layout_marginStart="15dp"
+                            android:textSize="24dp"
+                            android:textStyle="bold"
+                            android:maxLines="2" />
+
+                        <TextView
                             android:id="@+id/artists_header"
                             android:text="Top Artists"
                             android:layout_width="wrap_content"
@@ -26,8 +51,7 @@
                             app:layout_constraintBottom_toTopOf="@id/artist_list"
                             android:layout_marginStart="15dp"
                             android:textSize="18dp"
-                            android:textStyle="bold"
-                            android:layout_marginTop="15dp"/>
+                            android:layout_marginTop="20dp"/>
 
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -39,7 +63,7 @@
                             app:layout_constraintTop_toBottomOf="@id/artists_header"
                             android:clipToPadding="false"
                             android:paddingEnd="@dimen/activity_horizontal_margin"
-                            android:visibility="gone"/>
+                            />
 
 
 
@@ -66,7 +90,6 @@
                             app:layout_constraintTop_toBottomOf="@id/divider"
                             android:layout_marginStart="15dp"
                             android:textSize="18dp"
-                            android:textStyle="bold"
                             android:layout_marginTop="@dimen/activity_vertical_margin"
                             />
 
@@ -108,7 +131,6 @@
                             app:layout_constraintTop_toBottomOf="@id/divider2"
                             android:layout_marginStart="15dp"
                             android:textSize="18dp"
-                            android:textStyle="bold"
                             android:layout_marginTop="@dimen/activity_vertical_margin"
                             />
 

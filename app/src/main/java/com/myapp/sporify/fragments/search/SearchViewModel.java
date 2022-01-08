@@ -146,7 +146,9 @@ public class SearchViewModel extends ViewModel {
 
         }, error -> {
 //            Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d("Request error: ", error.getMessage());
+            Log.d("Request error: ", error.toString());
+            searchData.postValue(artistList);
+            searchData.setValue(artistList);
         });
 
         requestQueue.add(jsonObjectRequest);

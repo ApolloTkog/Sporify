@@ -18,6 +18,8 @@ public class Searchable implements Serializable {
     private Type kind;
     private String extraId = "";
 
+    private String extraImageURL;
+
     public Searchable(){}
 
     public Searchable(String mbid, String name, String artistName, String imageURL, Type kind) {
@@ -58,5 +60,13 @@ public class Searchable implements Serializable {
 
     public void setExtraId(String extraId) {
         this.extraId = extraId;
+    }
+
+    public String getExtraImageURL() {
+        return extraImageURL;
+    }
+
+    public void setExtraImageURL(String extraImageURL) {
+        this.extraImageURL = extraImageURL;
     }
 }

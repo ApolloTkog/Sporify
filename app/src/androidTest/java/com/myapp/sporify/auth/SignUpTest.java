@@ -5,6 +5,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.myapp.sporify.LiveDataTestUtil;
 import com.myapp.sporify.activities.auth.signup.SignUpViewModel;
 import com.myapp.sporify.fragments.home.TopAlbumsViewModel;
 import com.myapp.sporify.models.Album;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class SignUpTest {
+
 
     private SignUpViewModel signUpViewModel;
 
@@ -36,14 +38,7 @@ public class SignUpTest {
     public void should_fill_username() throws InterruptedException {
 
         signUpViewModel.init("","","","");
-        signUpViewModel.getSignUpResponse().observeForever(new Observer<String>() {
-            @Override
-            public void onChanged(String response) {
-                signUpResponse = response;
-            }
-        });
-
-        Thread.sleep(2000);
+        signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
         Assert.assertEquals("Username field cannot be empty!", signUpResponse);
     }
@@ -52,14 +47,8 @@ public class SignUpTest {
     public void should_fill_valid_username() throws InterruptedException {
 
         signUpViewModel.init("use","","","");
-        signUpViewModel.getSignUpResponse().observeForever(new Observer<String>() {
-            @Override
-            public void onChanged(String response) {
-                signUpResponse = response;
-            }
-        });
+        signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
-        Thread.sleep(2000);
 
         Assert.assertEquals("Username size must be greater than 3 chars!", signUpResponse);
     }
@@ -68,14 +57,8 @@ public class SignUpTest {
     public void should_fill_email() throws InterruptedException {
 
         signUpViewModel.init("user","","","");
-        signUpViewModel.getSignUpResponse().observeForever(new Observer<String>() {
-            @Override
-            public void onChanged(String response) {
-                signUpResponse = response;
-            }
-        });
+        signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
-        Thread.sleep(2000);
 
         Assert.assertEquals("Email field cannot be empty!", signUpResponse);
     }
@@ -84,14 +67,8 @@ public class SignUpTest {
     public void should_fill_valid_email() throws InterruptedException {
 
         signUpViewModel.init("user","email@example","","");
-        signUpViewModel.getSignUpResponse().observeForever(new Observer<String>() {
-            @Override
-            public void onChanged(String response) {
-                signUpResponse = response;
-            }
-        });
+        signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
-        Thread.sleep(2000);
 
         Assert.assertEquals("You must enter a valid email format!", signUpResponse);
     }
@@ -100,14 +77,8 @@ public class SignUpTest {
     public void should_fill_password() throws InterruptedException {
 
         signUpViewModel.init("user","email@example.com","","");
-        signUpViewModel.getSignUpResponse().observeForever(new Observer<String>() {
-            @Override
-            public void onChanged(String response) {
-                signUpResponse = response;
-            }
-        });
+        signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
-        Thread.sleep(2000);
 
         Assert.assertEquals("Password field cannot be empty!", signUpResponse);
     }
@@ -116,14 +87,8 @@ public class SignUpTest {
     public void should_fill_valid_password() throws InterruptedException {
 
         signUpViewModel.init("user","email@example.com","12345","");
-        signUpViewModel.getSignUpResponse().observeForever(new Observer<String>() {
-            @Override
-            public void onChanged(String response) {
-                signUpResponse = response;
-            }
-        });
+        signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
-        Thread.sleep(2000);
 
         Assert.assertEquals("Password size must 6 chars or greater!", signUpResponse);
     }
@@ -132,17 +97,9 @@ public class SignUpTest {
     public void should_fill_confirm_password() throws InterruptedException {
 
         signUpViewModel.init("user","email@example.com","123456","12345");
-        signUpViewModel.getSignUpResponse().observeForever(new Observer<String>() {
-            @Override
-            public void onChanged(String response) {
-                signUpResponse = response;
-            }
-        });
-
-        Thread.sleep(2000);
+        signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
         Assert.assertEquals("Passwords doesn't match!", signUpResponse);
     }
 
 }
-
