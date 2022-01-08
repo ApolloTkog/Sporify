@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,10 +32,16 @@ public class TrackDetails extends AppCompatActivity {
     TextView trackName, artistName, trackContent, trackSummary;
     ImageView trackImage, artistImage;
     private TrackDetailsViewModel trackDetailsViewModel;
+    private FavoriteTrackViewModel favoriteTrackViewModel;
 
     private Track trackInfo;
 
-    //Test Comment!
+    private ImageButton addFavorite;
+
+    private Searchable searchable;
+
+    private String token;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +49,11 @@ public class TrackDetails extends AppCompatActivity {
         setContentView(R.layout.activity_track_details);
 
         trackDetailsViewModel = new ViewModelProvider(this).get(TrackDetailsViewModel.class);
+        favoriteTrackViewModel = new ViewModelProvider(this).get(FavoriteTrackViewModel.class);
+
+        // Getting user token  from shared prefs
+        SharedPreferences sharedPref = this.getSharedPreferences("user", Context.MODE_PRIVATE);
+        token = sharedPref.getString("token", "token");
 
 
         trackName = findViewById(R.id.track_name);
@@ -49,8 +64,10 @@ public class TrackDetails extends AppCompatActivity {
         trackContent = findViewById(R.id.track_content);
         trackSummary = findViewById(R.id.track_summary);
 
+        addFavorite = findViewById(R.id.add_favorite);
+
         Intent intent = getIntent();
-        Searchable searchable = new Searchable();
+        searchable = new Searchable();
 
         if(intent.getSerializableExtra("item") != null){
             searchable = (Searchable) intent.getSerializableExtra("item");
@@ -90,5 +107,34 @@ public class TrackDetails extends AppCompatActivity {
 
         trackDetailsViewModel.getTrackInfo(searchable.getMbid()).observe(this, observer);
 
+
+        addFavorite();
     }
+
+    private void addFavorite(){
+        // listener when add favorite is tapped
+        addFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Observer<String> observer1 = new Observer<String>() {
+                    @Override
+                    public void onChanged(String response) {
+                        if(response == null)
+                            return;
+
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                        favoriteTrackViewModel.getFavoriteTracksResponse().removeObservers(TrackDetails.this);
+                    }
+                };
+
+                favoriteTrackViewModel.init(searchable.getMbid(), token, trackInfo);
+
+                favoriteTrackViewModel.getFavoriteTracksResponse().observe(TrackDetails.this, observer1);
+            }
+        });
+    }
+
+
+
 }

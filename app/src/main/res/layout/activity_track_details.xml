@@ -15,26 +15,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-           >
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/track_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/album_gradient">
+                android:background="@drawable/album_gradient"
+                android:fitsSystemWindows="true">
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
                     android:src="@drawable/ic_baseline_arrow_back_24"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="5dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/track_card"
@@ -84,7 +84,6 @@
                         android:layout_marginStart="7dp"
                         android:background="@null"
                         app:tint="@android:color/holo_red_light"
-                        android:visibility="gone"
                         />
 
                 </LinearLayout>
@@ -94,11 +93,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginVertical="2dp"
+                    android:layout_marginVertical="5dp"
                     app:cardElevation="2dp"
                     app:cardCornerRadius="20dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/album_info"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     >
 
                     <ImageView
@@ -144,7 +144,7 @@
                 app:layout_constraintTop_toBottomOf="@id/track_summary_header"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="16dp"
-              />
+                />
 
 
 
