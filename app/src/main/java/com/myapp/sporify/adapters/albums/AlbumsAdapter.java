@@ -26,6 +26,7 @@ import java.util.List;
 /**
  * Albums adapter for showing albums in recyclerview
  */
+
 public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumHolder> {
 
     private Context context;
