@@ -56,10 +56,13 @@ public class TopTracksViewModel extends ViewModel {
 
                 trackList = TrackMapper.getTopTracksFromJson(response);
 
+                tracks.setValue(trackList);
                 tracks.postValue(trackList);
 
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
+                tracks.setValue(trackList);
+                tracks.postValue(trackList);
             }
         }, error -> {
             Log.d("Request error: ", error.getMessage());
