@@ -27,7 +27,7 @@ import com.myapp.sporify.adapters.LibraryAdapter;
 import com.myapp.sporify.databinding.FragmentLibraryBinding;
 import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Artist;
-import com.myapp.sporify.models.Playlist;
+//import com.myapp.sporify.models.Playlist;
 import com.myapp.sporify.models.Track;
 import com.myapp.sporify.utils.Type;
 
@@ -45,7 +45,6 @@ public class LibraryFragment extends Fragment {
     private List<Album> albums;
     private List<Artist> artists;
     private List<Track> tracks;
-    private List<Playlist> playlistList;
 
     private LinearLayout albumFilter, artistFilter, trackFilter, playlistFilter;
     private TextView albumText, artistText, trackText, playlistText;
@@ -55,12 +54,6 @@ public class LibraryFragment extends Fragment {
 
     private String token;
 
-    private ImageButton addPlaylist;
-    private EditText playlistName;
-
-    private LibraryAdapter<Playlist> playlistLibraryAdapter;
-
-    Observer<List<Playlist>> playlistObserver;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -84,9 +77,7 @@ public class LibraryFragment extends Fragment {
         albumText = binding.albumText;
         artistText = binding.artistText;
         trackText = binding.trackText;
-        playlistText = binding.playlistText;
 
-        addPlaylist = binding.addPlaylist;
 
         setUpFilters();
 
@@ -95,28 +86,22 @@ public class LibraryFragment extends Fragment {
         albums = new ArrayList<>();
         artists = new ArrayList<>();
         tracks = new ArrayList<>();
-        playlistList = new ArrayList<>();
 
         albumFavorites.setAdapter(new LibraryAdapter<>(requireContext(), albums, Type.ALBUM));
         artistFavorites.setAdapter(new LibraryAdapter<>(requireContext(), artists, Type.ARTIST));
         trackFavorites.setAdapter(new LibraryAdapter<>(requireContext(), tracks, Type.TRACK));
-
-        playlistLibraryAdapter = new LibraryAdapter<>(requireContext(), playlistList, Type.PLAYLIST);
-        playlistLibraryAdapter.setToken(token);
-        playlistLibraryAdapter.setLifecycleOwner(getViewLifecycleOwner());
-        playlists.setAdapter(playlistLibraryAdapter);
 
         // playlist adapter
 
         Observer<List<Album>> albumObserver = new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albumList) {
-                if(albumList.size() <= 0){
+                if (albumList.size() <= 0) {
                     Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show();
                 }
 
                 albums = new ArrayList<>(albumList);
-                albumFavorites.setAdapter(new LibraryAdapter<>(requireContext(), albums,Type.ALBUM));
+                albumFavorites.setAdapter(new LibraryAdapter<>(requireContext(), albums, Type.ALBUM));
             }
         };
 
@@ -127,12 +112,12 @@ public class LibraryFragment extends Fragment {
         Observer<List<Artist>> artistObserver = new Observer<List<Artist>>() {
             @Override
             public void onChanged(List<Artist> artistList) {
-                if(artistList.size() <= 0){
+                if (artistList.size() <= 0) {
                     Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show();
                 }
 
                 artists = new ArrayList<>(artistList);
-                artistFavorites.setAdapter(new LibraryAdapter<>(requireContext(), artists,Type.ARTIST));
+                artistFavorites.setAdapter(new LibraryAdapter<>(requireContext(), artists, Type.ARTIST));
             }
         };
 
@@ -141,223 +126,151 @@ public class LibraryFragment extends Fragment {
         Observer<List<Track>> trackObserver = new Observer<List<Track>>() {
             @Override
             public void onChanged(List<Track> trackList) {
-                if(trackList.size() <= 0){
+                if (trackList.size() <= 0) {
                     Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show();
                 }
 
                 tracks = new ArrayList<>(trackList);
-                trackFavorites.setAdapter(new LibraryAdapter<>(requireContext(), tracks,Type.TRACK));
+                trackFavorites.setAdapter(new LibraryAdapter<>(requireContext(), tracks, Type.TRACK));
             }
         };
 
         libraryViewModel.getFavoriteTracks().observe(getViewLifecycleOwner(), trackObserver);
 
-        playlistObserver = new Observer<List<Playlist>>() {
-            @Override
-            public void onChanged(List<Playlist> playlistsData) {
-                if(playlistsData.size() <= 0){
-                    Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show();
-                }
 
-                playlistList = new ArrayList<>(playlistsData);
+        //addPlaylist.setOnClickListener(view -> {
+        // createPlaylistDialog();
+        //});
 
-                playlistLibraryAdapter.setItems(playlistList);
-                playlistLibraryAdapter.notifyDataSetChanged();
-//                playlists.setAdapter(new LibraryAdapter<>(requireContext(), playlistList, Type.PLAYLIST));
-//                playlists.setAdapter(playlistLibraryAdapter);
-
-                libraryViewModel.getPlaylists().removeObservers(getViewLifecycleOwner());
-            }
-        };
-
-        libraryViewModel.getPlaylists().observe(getViewLifecycleOwner(), playlistObserver);
+        // return root;
+        // }
 
 
-        addPlaylist.setOnClickListener(view -> {
-            createPlaylistDialog();
-        });
+        private void setUpFilters() {
+            filterSelected = Type.ALBUM;
+            albumText.setTextColor(Color.WHITE);
 
-        return root;
-    }
+            albumFilter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    filterSelected = Type.ALBUM;
+                    albumFilter.setBackgroundResource(R.drawable.filter_selected_item);
+                    artistFilter.setBackgroundResource(R.drawable.filter_item);
+                    trackFilter.setBackgroundResource(R.drawable.filter_item);
+                    playlistFilter.setBackgroundResource(R.drawable.filter_item);
 
+                    albumText.setTextColor(Color.WHITE);
+                    artistText.setTextColor(Color.GRAY);
+                    trackText.setTextColor(Color.GRAY);
+                    playlistText.setTextColor(Color.GRAY);
 
-    private void setUpFilters(){
-        filterSelected = Type.ALBUM;
-        albumText.setTextColor(Color.WHITE);
-
-        albumFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filterSelected = Type.ALBUM;
-                albumFilter.setBackgroundResource(R.drawable.filter_selected_item);
-                artistFilter.setBackgroundResource(R.drawable.filter_item);
-                trackFilter.setBackgroundResource(R.drawable.filter_item);
-                playlistFilter.setBackgroundResource(R.drawable.filter_item);
-
-                albumText.setTextColor(Color.WHITE);
-                artistText.setTextColor(Color.GRAY);
-                trackText.setTextColor(Color.GRAY);
-                playlistText.setTextColor(Color.GRAY);
-
-                libraryViewModel.init(token);
-                // hide recyclers
-                artistFavorites.setVisibility(View.GONE);
-                trackFavorites.setVisibility(View.GONE);
-                playlists.setVisibility(View.GONE);
+                    libraryViewModel.init(token);
+                    // hide recyclers
+                    artistFavorites.setVisibility(View.GONE);
+                    trackFavorites.setVisibility(View.GONE);
+                    playlists.setVisibility(View.GONE);
 
 
-                // show
-                albumFavorites.setVisibility(View.VISIBLE);
-            }
-        });
-
-        artistFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filterSelected = Type.ARTIST;
-                albumFilter.setBackgroundResource(R.drawable.filter_item);
-                artistFilter.setBackgroundResource(R.drawable.filter_selected_item);
-                trackFilter.setBackgroundResource(R.drawable.filter_item);
-                playlistFilter.setBackgroundResource(R.drawable.filter_item);
-
-                artistText.setTextColor(Color.WHITE);
-                albumText.setTextColor(Color.GRAY);
-                trackText.setTextColor(Color.GRAY);
-                playlistText.setTextColor(Color.GRAY);
-
-                // hide recyclers
-                albumFavorites.setVisibility(View.GONE);
-                trackFavorites.setVisibility(View.GONE);
-                playlists.setVisibility(View.GONE);
-
-
-                // show
-                artistFavorites.setVisibility(View.VISIBLE);
-            }
-        });
-
-        trackFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filterSelected = Type.TRACK;
-                albumFilter.setBackgroundResource(R.drawable.filter_item);
-                artistFilter.setBackgroundResource(R.drawable.filter_item);
-                trackFilter.setBackgroundResource(R.drawable.filter_selected_item);
-                playlistFilter.setBackgroundResource(R.drawable.filter_item);
-
-                artistText.setTextColor(Color.GRAY);
-                albumText.setTextColor(Color.GRAY);
-                trackText.setTextColor(Color.WHITE);
-                playlistText.setTextColor(Color.GRAY);
-
-                // hide recyclers
-                albumFavorites.setVisibility(View.GONE);
-                artistFavorites.setVisibility(View.GONE);
-                playlists.setVisibility(View.GONE);
-
-                // show
-                trackFavorites.setVisibility(View.VISIBLE);
-            }
-        });
-
-        playlistFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                filterSelected = Type.TRACK;
-                albumFilter.setBackgroundResource(R.drawable.filter_item);
-                artistFilter.setBackgroundResource(R.drawable.filter_item);
-                trackFilter.setBackgroundResource(R.drawable.filter_item);
-                playlistFilter.setBackgroundResource(R.drawable.filter_selected_item);
-
-                artistText.setTextColor(Color.GRAY);
-                albumText.setTextColor(Color.GRAY);
-                trackText.setTextColor(Color.GRAY);
-                playlistText.setTextColor(Color.WHITE);
-
-                // hide recyclers
-                albumFavorites.setVisibility(View.GONE);
-                artistFavorites.setVisibility(View.GONE);
-                trackFavorites.setVisibility(View.GONE);
-
-                // show
-                playlists.setVisibility(View.VISIBLE);
-
-            }
-        });
-
-    }
-
-    private void setupRecyclers(){
-        albumFavorites = binding.albumFavorites;
-        artistFavorites =  binding.artistFavorites;
-        trackFavorites = binding.trackFavorites;
-        playlists = binding.playlists;
-
-        albumFavorites.setLayoutManager(new LinearLayoutManager(requireContext()));
-        albumFavorites.setHasFixedSize(true);
-
-        artistFavorites.setLayoutManager(new LinearLayoutManager(requireContext()));
-        artistFavorites.setHasFixedSize(true);
-
-        trackFavorites.setLayoutManager(new LinearLayoutManager(requireContext()));
-        trackFavorites.setHasFixedSize(true);
-
-        playlists.setLayoutManager(new LinearLayoutManager(requireContext()));
-        playlists.setHasFixedSize(true);
-    }
-
-    // create dialog when the user taps "+" to add a new playlists
-    private void createPlaylistDialog() {
-        View v = LayoutInflater.from(requireContext()).inflate(R.layout.playlist_dialog, null);
-        EditText playlistName = v.findViewById(R.id.playlist_name);
-        Button createPlaylist = v.findViewById(R.id.create_playlist);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-
-        // playlist_dialog.xml file as main view
-        builder.setView(v);
-
-        AtomicBoolean showed = new AtomicBoolean(false);
-        AlertDialog alert = builder.create();
-
-        // when user taps create button
-        createPlaylist.setOnClickListener(mV -> {
-
-            String playlistText = playlistName.getText().toString();
-
-            // create playlist with the text that user enters
-            libraryViewModel.create(token, playlistText);
-            libraryViewModel.getPlaylistCreateResponse().observe(getViewLifecycleOwner(), s -> {
-                if(s != null){
-                    if(!showed.get()){
-                        Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show();
-                        showed.set(true);
-                    }
-
-                    // re fetch playlists
-                    libraryViewModel.getPlaylists().observe(getViewLifecycleOwner(), playlistObserver);
+                    // show
+                    albumFavorites.setVisibility(View.VISIBLE);
                 }
             });
 
-            alert.dismiss();
-        });
+            artistFilter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    filterSelected = Type.ARTIST;
+                    albumFilter.setBackgroundResource(R.drawable.filter_item);
+                    artistFilter.setBackgroundResource(R.drawable.filter_selected_item);
+                    trackFilter.setBackgroundResource(R.drawable.filter_item);
+                    playlistFilter.setBackgroundResource(R.drawable.filter_item);
 
-        alert.show();
-    }
+                    artistText.setTextColor(Color.WHITE);
+                    albumText.setTextColor(Color.GRAY);
+                    trackText.setTextColor(Color.GRAY);
+                    playlistText.setTextColor(Color.GRAY);
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+                    // hide recyclers
+                    albumFavorites.setVisibility(View.GONE);
+                    trackFavorites.setVisibility(View.GONE);
+                    playlists.setVisibility(View.GONE);
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(token != null){
-            libraryViewModel.init(token);
-            libraryViewModel.getPlaylists().observe(getViewLifecycleOwner(), playlistObserver);
+
+                    // show
+                    artistFavorites.setVisibility(View.VISIBLE);
+                }
+            });
+
+            trackFilter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    filterSelected = Type.TRACK;
+                    albumFilter.setBackgroundResource(R.drawable.filter_item);
+                    artistFilter.setBackgroundResource(R.drawable.filter_item);
+                    trackFilter.setBackgroundResource(R.drawable.filter_selected_item);
+                    playlistFilter.setBackgroundResource(R.drawable.filter_item);
+
+                    artistText.setTextColor(Color.GRAY);
+                    albumText.setTextColor(Color.GRAY);
+                    trackText.setTextColor(Color.WHITE);
+                    playlistText.setTextColor(Color.GRAY);
+
+                    // hide recyclers
+                    albumFavorites.setVisibility(View.GONE);
+                    artistFavorites.setVisibility(View.GONE);
+                    playlists.setVisibility(View.GONE);
+
+                    // show
+                    trackFavorites.setVisibility(View.VISIBLE);
+                }
+            });
+
+            playlistFilter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                filterSelected = Type.TRACK;
+                    albumFilter.setBackgroundResource(R.drawable.filter_item);
+                    artistFilter.setBackgroundResource(R.drawable.filter_item);
+                    trackFilter.setBackgroundResource(R.drawable.filter_item);
+                    playlistFilter.setBackgroundResource(R.drawable.filter_selected_item);
+
+                    artistText.setTextColor(Color.GRAY);
+                    albumText.setTextColor(Color.GRAY);
+                    trackText.setTextColor(Color.GRAY);
+                    playlistText.setTextColor(Color.WHITE);
+
+                    // hide recyclers
+                    albumFavorites.setVisibility(View.GONE);
+                    artistFavorites.setVisibility(View.GONE);
+                    trackFavorites.setVisibility(View.GONE);
+
+                    // show
+                    playlists.setVisibility(View.VISIBLE);
+
+                }
+            });
 
         }
+
+        private void setupRecyclers() {
+            albumFavorites = binding.albumFavorites;
+            artistFavorites = binding.artistFavorites;
+            trackFavorites = binding.trackFavorites;
+
+            albumFavorites.setLayoutManager(new LinearLayoutManager(requireContext()));
+            albumFavorites.setHasFixedSize(true);
+
+            artistFavorites.setLayoutManager(new LinearLayoutManager(requireContext()));
+            artistFavorites.setHasFixedSize(true);
+
+            trackFavorites.setLayoutManager(new LinearLayoutManager(requireContext()));
+            trackFavorites.setHasFixedSize(true);
+
+            playlists.setLayoutManager(new LinearLayoutManager(requireContext()));
+            playlists.setHasFixedSize(true);
+        }
+
+        // create dialog when the user taps "+" to add a new playlists
+
     }
 }
