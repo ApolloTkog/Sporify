@@ -47,7 +47,7 @@ public class FavoriteAlbumViewModel extends ViewModel {
     public LiveData<String> addFavoriteAlbum(String mbid,String accessToken, Album album){
         final MutableLiveData<String> responseData = new MutableLiveData<>();
 
-        String postUrl = "http://192.168.1.2:8081/api/user/album";
+        String postUrl = "http://192.168.2.5:8081/api/user/album";
         JSONObject postData = new JSONObject();
         try {
             postData.put("name", album.getName());
