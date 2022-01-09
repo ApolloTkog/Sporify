@@ -40,6 +40,12 @@ public class ArtistDetailsViewModel extends ViewModel {
     private List<Album> albums;
 
 
+    private MutableLiveData<List<Track>> tracksData;
+
+
+
+    String id;
+
     private RequestQueue requestQueue;
 
 
@@ -48,17 +54,16 @@ public class ArtistDetailsViewModel extends ViewModel {
         albums= new ArrayList<>();
         tracks= new ArrayList<>();
         requestQueue = VolleySingleton.getmInstance(MyApplication.getAppContext()).getRequestQueue();
-
     }
 
     public void init(String id){
         tracks.clear();
         albums.clear();
+        this.id = id;
 
         artistLiveData = getArtistInfo(id);
         tracksLiveData = getTracks(id);
         albumsLiveData = getAlbums(id);
-
     }
 
     public LiveData<Artist> getArtist() {
@@ -66,6 +71,10 @@ public class ArtistDetailsViewModel extends ViewModel {
     }
 
     public LiveData<List<Track>> getArtistTracks(){
+        if (tracksLiveData == null) {
+            tracksLiveData = new MutableLiveData<>();
+            getTracks(id);
+        }
         return tracksLiveData;
     }
 
@@ -84,18 +93,13 @@ public class ArtistDetailsViewModel extends ViewModel {
 
                 artist = ArtistMapper.getArtistFromJson(response);
 
-                artistData.postValue(artist);
-                artistData.setValue(artist);
-
-
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
 //                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
             finally {
-                artistData.postValue(artist);
                 artistData.setValue(artist);
+                artistData.postValue(artist);
             }
 
         }, error -> {
@@ -107,7 +111,7 @@ public class ArtistDetailsViewModel extends ViewModel {
         return artistData;
     }
 
-    private LiveData<List<Track>> getTracks(String id){
+    public LiveData<List<Track>> getTracks(String id){
         final MutableLiveData<List<Track>> artistTracks = new MutableLiveData<>();
 
         String url =
@@ -118,24 +122,24 @@ public class ArtistDetailsViewModel extends ViewModel {
 
                 tracks = ArtistMapper.getArtistTracksFromJson(response);
 
-                artistTracks.postValue(tracks);
-                artistTracks.setValue(tracks);
-
 
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
 //                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
+            finally {
+                artistTracks.setValue(tracks);
+                artistTracks.postValue(tracks);
+            }
 
         }, error -> {
-            Log.d("Request error: ", error.getMessage());
+            Log.d("Request error: ", error.toString());
         });
 
         requestQueue.add(jsonObjectRequest);
 
         return artistTracks;
     }
-
 
     private LiveData<List<Album>> getAlbums(String id){
         final MutableLiveData<List<Album>> albumsData = new MutableLiveData<>();
@@ -150,11 +154,14 @@ public class ArtistDetailsViewModel extends ViewModel {
 
                 albums = ArtistMapper.getArtistAlbumsFromJson(response);
 
-                albumsData.postValue(albums);
-
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
                 // Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            finally {
+
+                albumsData.setValue(albums);
+                albumsData.postValue(albums);
             }
         }, error -> {
             // Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -165,5 +172,9 @@ public class ArtistDetailsViewModel extends ViewModel {
 
         return albumsData;
     }
+
+
+}
+
 
 }
