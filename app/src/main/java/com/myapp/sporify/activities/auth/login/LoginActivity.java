@@ -54,15 +54,22 @@ public class LoginActivity extends AppCompatActivity {
         Observer<String> observer = new Observer<String>() {
             @Override
             public void onChanged(String token) {
-                if(token == null ){
-                    Toast.makeText(getApplicationContext(), "Bad credentials", Toast.LENGTH_SHORT).show();
+                if(token.equals("Bad credentials!") ){
+                    Toast.makeText(getApplicationContext(), "Bad credentials!", Toast.LENGTH_SHORT).show();
+                    loginViewModel.getLoginResponse().removeObservers(LoginActivity.this);
                     return;
                 }
 
+                if(token.equals("Timeout error")){
+                    Toast.makeText(getApplicationContext(), "Server is down!", Toast.LENGTH_SHORT).show();
+                    loginViewModel.getLoginResponse().removeObservers(LoginActivity.this);
+                    return;
+                }
 
-//                Toast.makeText(getApplicationContext(), "token: " + token, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+
+
                 sharedPref.edit().putString("token", token).apply();
-
                 finish();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
 

@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.myapp.sporify.LiveDataTestUtil;
 import com.myapp.sporify.fragments.search.SearchViewModel;
 import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.utils.Type;
@@ -31,7 +32,7 @@ public class SearchAlbums {
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Before
-    public void setUP(){
+    public void setUp(){
         searchViewModel = new SearchViewModel();
     }
 
@@ -41,23 +42,15 @@ public class SearchAlbums {
         String queryToBeFound = "Nevermind";
 
         searchViewModel.init(queryToBeFound, Type.ALBUM);
-        searchViewModel.getDataSearch().observeForever(new Observer<List<Searchable>>() {
-            @Override
-            public void onChanged(List<Searchable> searchables) {
-                // if we don't have results return;
-                if(searchables.size() <= 0){
-                    return;
-                }
-                // if our query exists in results
-                for(Searchable x: searchables){
-                    if(x.getName().equals(queryToBeFound))
-                        searchable = x;
-                }
-            }
-        });
+        List<Searchable> searchables = LiveDataTestUtil.getOrAwaitValue(searchViewModel.getDataSearch());
+
+        for(Searchable x: searchables){
+            if(x.getName().equals(queryToBeFound))
+                searchable = x;
+        }
 
         // wait 1s for items to be fetched
-        Thread.sleep(1000);
+        // Thread.sleep(1000);
 
         Assert.assertEquals(queryToBeFound, searchable.getName());
 
@@ -78,29 +71,14 @@ public class SearchAlbums {
         String userQuery = "night at the";
 
         searchViewModel.init(userQuery, Type.ALBUM);
-        searchViewModel.getDataSearch().observeForever(new Observer<List<Searchable>>() {
-            @Override
-            public void onChanged(List<Searchable> searchables) {
-                if(searchables.size() <= 0){
-                    return;
-                }
+        List<Searchable> searchables = LiveDataTestUtil.getOrAwaitValue(searchViewModel.getDataSearch());
 
-                // if album that user wants to search is in the list
-                for(Searchable x: searchables){
-                    if(x.getName().equals(albumIWantToSearch))
-                        searchable = x;
-                }
+        // if album that user wants to search is in the list
+        for(Searchable x: searchables){
+            if(x.getName().equals(albumIWantToSearch))
+                searchable = x;
+        }
 
-
-                // we can place assert here if we want to avoid null exception
-                // Assert.assertEquals(albumIWantToSearch, searchable.getName());
-
-
-            }
-        });
-
-        // wait 1s for results to be fetched
-        Thread.sleep(1000);
 
         Assert.assertEquals(albumIWantToSearch, searchable.getName());
 
@@ -116,29 +94,14 @@ public class SearchAlbums {
         String userQuery = "a might at opera";
 
         searchViewModel.init(userQuery, Type.ALBUM);
-        searchViewModel.getDataSearch().observeForever(new Observer<List<Searchable>>() {
-            @Override
-            public void onChanged(List<Searchable> searchables) {
-                if(searchables.size() <= 0){
-                    return;
-                }
-
-                // if album that user wants to search is in the list
-                for(Searchable x: searchables){
-                    if(x.getName().equals(albumIWantToSearch))
-                        searchable = x;
-                }
+        List<Searchable> searchables = LiveDataTestUtil.getOrAwaitValue(searchViewModel.getDataSearch());
 
 
-                // we can place assert here if we want to avoid null exception
-                // Assert.assertEquals(albumIWantToSearch, searchable.getName());
-
-
-            }
-        });
-
-        // wait 1s for results to be fetched
-        Thread.sleep(1000);
+        // if album that user wants to search is in the list
+        for(Searchable x: searchables){
+            if(x.getName().equals(albumIWantToSearch))
+                searchable = x;
+        }
 
         Assert.assertNotEquals(albumIWantToSearch, searchable.getName());
 
@@ -150,22 +113,16 @@ public class SearchAlbums {
         String queryToBeFound = "Nothing to be found";
 
         searchViewModel.init(queryToBeFound, Type.ALBUM);
-        searchViewModel.getDataSearch().observeForever(new Observer<List<Searchable>>() {
-            @Override
-            public void onChanged(List<Searchable> searchables) {
-                if(searchables.size() <= 0){
-                    return;
-                }
-                for(Searchable x: searchables){
-                    if(x.getName().equals(queryToBeFound))
-                        searchable = x;
-                }
-            }
-        });
+        List<Searchable> searchables = LiveDataTestUtil.getOrAwaitValue(searchViewModel.getDataSearch());
 
-        Thread.sleep(1000);
+
+        for(Searchable x: searchables){
+            if(x.getName().equals(queryToBeFound))
+                searchable = x;
+        }
 
         Assert.assertNotEquals(queryToBeFound, searchable.getName());
     }
 
 }
+

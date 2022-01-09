@@ -13,16 +13,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
-import com.myapp.sporify.activities.album.AlbumDetails;
-import com.myapp.sporify.activities.album.AlbumDetailsViewModel;
 import com.myapp.sporify.activities.artist.tabs.FragmentAdapter;
-import com.myapp.sporify.adapters.ArtistTracksAdapter;
-import com.myapp.sporify.adapters.TracksAdapter;
-import com.myapp.sporify.models.Album;
+import com.myapp.sporify.adapters.artist.ArtistTracksAdapter;
 import com.myapp.sporify.models.Artist;
 import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.models.Track;
