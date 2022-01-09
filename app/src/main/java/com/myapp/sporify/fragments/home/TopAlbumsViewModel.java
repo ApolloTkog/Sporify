@@ -34,7 +34,6 @@ public class TopAlbumsViewModel extends ViewModel {
         requestQueue = VolleySingleton.getmInstance(MyApplication.getAppContext()).getRequestQueue();
     }
 
-
     public LiveData<List<Album>> getTopAlbums(int limit){
         if (albums == null) {
             albums = new MutableLiveData<>();
@@ -42,7 +41,6 @@ public class TopAlbumsViewModel extends ViewModel {
         }
         return albums;
     }
-
 
     private void fetchTopAlbums(int limit) {
 
@@ -54,6 +52,7 @@ public class TopAlbumsViewModel extends ViewModel {
 
                 albumList = AlbumMapper.getTopAlbumsFromJson(response);
 
+                albums.setValue(albumList);
                 albums.postValue(albumList);
 
             } catch (JSONException e) {

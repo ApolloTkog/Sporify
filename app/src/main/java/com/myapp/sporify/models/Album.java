@@ -1,10 +1,12 @@
 package com.myapp.sporify.models;
 
+import com.myapp.sporify.interfaces.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Album {
+public class Album implements Item {
 
     private int rank = 1;
     private String mbid = "";
@@ -58,8 +60,18 @@ public class Album {
         return name;
     }
 
+    @Override
+    public String getTitle() {
+        return name;
+    }
+
     public String getImageURL() {
         return imageURL;
+    }
+
+    @Override
+    public String getDescription() {
+        return artistName;
     }
 
     public String getArtistName() {
@@ -88,10 +100,43 @@ public class Album {
 
     public int getRank() {
         return rank;
+
+        //Pou einai defined???!!!! Edw to kane define!!!! Androiiiiiiidddd!!!! Ti 8es apo 'mena?!! Na to kanw private?! Den 8a leitourgei meta to album!
     }
 
     public long getPlayCount() {
         return playCount;
+
+        //Anebainoun opws einai auta. Ama breite kamia dior8ish peite mou. 8a ta ksanacheckarw pio meta.
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Album album = (Album) o;
+        return   name.equals(album.name) && artistName.equals(album.artistName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mbid, name, artistName);
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public long getPlayCount() {
+        return playCount;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
     @Override
