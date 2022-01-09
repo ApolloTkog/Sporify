@@ -1,6 +1,5 @@
 package com.myapp.sporify.mappers;
 
-
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.myapp.sporify.mappers.mocks.MockJsonData;
@@ -23,7 +22,7 @@ public class TrackMapperTest {
         JSONObject responseToJson = new JSONObject(responseString);
 
         Track parsedTrack = TrackMapper.getTrackFromJson(responseToJson);
-        Track actualTrack = new Track("f14638e1-fb36-358c-aba2-39b084864b13","Queen", 355000);
+        Track actualTrack = new Track("f14638e1-fb36-358c-aba2-39b084864b13","Bohemian Rhapsody", "Queen");
 
         Assert.assertEquals(parsedTrack, actualTrack);
     }
@@ -60,18 +59,20 @@ public class TrackMapperTest {
         }
     }
 
+    Track parsedTrack;
+
     @Test
     public void should_fail_to_convert_it_to_track() throws JSONException {
         String responseString = MockJsonData.trackInfoFail;
         JSONObject responseToJson = new JSONObject(responseString);
-
         try{
-            Track parsedTrack = TrackMapper.getTrackFromJson(responseToJson);
+            parsedTrack = TrackMapper.getTrackFromJson(responseToJson);
             Assert.fail("Should have thrown JSON parse exception");
         }
         catch (JSONException e){
             // success
             Assert.assertEquals("No value for track", e.getMessage());
+            Assert.assertNull(parsedTrack);
         }
 
     }
