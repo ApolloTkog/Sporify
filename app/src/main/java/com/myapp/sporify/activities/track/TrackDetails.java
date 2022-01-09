@@ -22,21 +22,27 @@ import com.myapp.sporify.R;
 import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.models.Track;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TrackDetails extends AppCompatActivity {
 
     TextView trackName, artistName, trackContent, trackSummary;
     ImageView trackImage, artistImage;
+
     private TrackDetailsViewModel trackDetailsViewModel;
     private FavoriteTrackViewModel favoriteTrackViewModel;
+    private LibraryViewModel libraryViewModel;
 
     private Track trackInfo;
 
-    private ImageButton addFavorite;
+    private ImageButton addFavorite, playlistBtn;
 
     private Searchable searchable;
 
     private String token;
 
+    private List<Playlist> playlists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,8 @@ public class TrackDetails extends AppCompatActivity {
 
         trackDetailsViewModel = new ViewModelProvider(this).get(TrackDetailsViewModel.class);
         favoriteTrackViewModel = new ViewModelProvider(this).get(FavoriteTrackViewModel.class);
+        libraryViewModel = new ViewModelProvider(this).get(LibraryViewModel.class);
+
 
         // Getting user token  from shared prefs
         SharedPreferences sharedPref = this.getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -60,14 +68,63 @@ public class TrackDetails extends AppCompatActivity {
         trackSummary = findViewById(R.id.track_summary);
 
         addFavorite = findViewById(R.id.add_favorite);
+        playlistBtn = findViewById(R.id.playlist_button);
 
         Intent intent = getIntent();
         searchable = new Searchable();
+        playlists = new ArrayList<>();
 
         if(intent.getSerializableExtra("item") != null){
             searchable = (Searchable) intent.getSerializableExtra("item");
             Log.d("SEARCHABLE", searchable.getMbid());
         }
+
+        // show track details
+        showTrackInfo();
+
+        // favorite button listener
+        addFavorite();
+
+        // fetch playlists
+        getPlaylists();
+
+        // manage playlist dialog
+        playlistBtn.setOnClickListener(view -> {
+            PlaylistDialog playlistDialog = new PlaylistDialog(searchable.getMbid(), token, trackInfo,playlists);
+
+            if(!playlistDialog.isAdded()){
+                playlistDialog.show(getSupportFragmentManager(), PlaylistDialog.TAG);
+            }
+        });
+
+
+    }
+
+    private void addFavorite(){
+        // listener when add favorite is tapped
+        addFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Observer<String> observer1 = new Observer<String>() {
+                    @Override
+                    public void onChanged(String response) {
+                        if(response == null)
+                            return;
+
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                        favoriteTrackViewModel.getFavoriteTracksResponse().removeObservers(TrackDetails.this);
+                    }
+                };
+
+                favoriteTrackViewModel.init(searchable.getMbid(), token, trackInfo);
+
+                favoriteTrackViewModel.getFavoriteTracksResponse().observe(TrackDetails.this, observer1);
+            }
+        });
+    }
+
+    private void showTrackInfo(){
 
         trackInfo = new Track();
 
@@ -102,34 +159,21 @@ public class TrackDetails extends AppCompatActivity {
 
         trackDetailsViewModel.getTrackInfo(searchable.getMbid()).observe(this, observer);
 
-
-        addFavorite();
     }
 
-    private void addFavorite(){
-        // listener when add favorite is tapped
-        addFavorite.setOnClickListener(new View.OnClickListener() {
+    private void getPlaylists(){
+        libraryViewModel.init(token);
+        Observer<List<Playlist>> playlistObserver = new Observer<List<Playlist>>() {
             @Override
-            public void onClick(View view) {
-                Observer<String> observer1 = new Observer<String>() {
-                    @Override
-                    public void onChanged(String response) {
-                        if(response == null)
-                            return;
+            public void onChanged(List<Playlist> playlistsData) {
+                if(playlistsData.size() <= 0){
+                    Toast.makeText(getApplicationContext(), "Empty", Toast.LENGTH_SHORT).show();
+                }
 
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-
-                        favoriteTrackViewModel.getFavoriteTracksResponse().removeObservers(TrackDetails.this);
-                    }
-                };
-
-                favoriteTrackViewModel.init(searchable.getMbid(), token, trackInfo);
-
-                favoriteTrackViewModel.getFavoriteTracksResponse().observe(TrackDetails.this, observer1);
+                playlists = new ArrayList<>(playlistsData);
             }
-        });
+        };
+
+        libraryViewModel.getPlaylists().observe(this, playlistObserver);
     }
-
-
-
 }

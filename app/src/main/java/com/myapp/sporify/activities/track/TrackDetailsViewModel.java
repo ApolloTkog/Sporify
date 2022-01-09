@@ -73,7 +73,6 @@ public class TrackDetailsViewModel extends ViewModel {
                 "http://ws.audioscrobbler.com/2.0/?method=track.getinfo&mbid=" + mbid+ "&api_key=8fc89f699e4ff45a21b968623a93ed52&format=json";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
-            JSONObject jsonObject = new JSONObject();
 
             try {
 
@@ -87,10 +86,14 @@ public class TrackDetailsViewModel extends ViewModel {
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
                 try {
-                    reFetchTrackInfo(jsonObject, callBack);
+                    reFetchTrackInfo(response, callBack);
                 } catch (JSONException jsonException) {
                     jsonException.printStackTrace();
                 }
+            }
+            finally {
+                trackLiveData.setValue(track);
+                trackLiveData.postValue(track);
             }
 
         }, error -> {
@@ -105,10 +108,12 @@ public class TrackDetailsViewModel extends ViewModel {
     }
 
     private void reFetchTrackInfo(JSONObject jsonObject, VolleyCallBackAlt callBack) throws JSONException {
-        String name = jsonObject.getString("name");
-        String image = jsonObject.getJSONObject("album").getJSONArray("image").getJSONObject(3).getString("#text");
-        String artistName = jsonObject.getJSONObject("artist").getString("name");
-        String artistMbid = jsonObject.getJSONObject("artist").getString("mbid");
+        JSONObject trackObject = jsonObject.getJSONObject("track");
+
+        String name = trackObject.getString("name");
+        String image = trackObject.getJSONObject("album").getJSONArray("image").getJSONObject(3).getString("#text");
+        String artistName = trackObject.getJSONObject("artist").getString("name");
+        String artistMbid = trackObject.getJSONObject("artist").getString("mbid");
 
         track = new Track(name, image, artistName, artistMbid, "No summary for this track", "No more content for this track");
 
