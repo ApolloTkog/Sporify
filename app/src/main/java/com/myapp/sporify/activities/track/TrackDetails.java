@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
+import com.myapp.sporify.fragments.library.LibraryViewModel;
 import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.models.Track;
 
