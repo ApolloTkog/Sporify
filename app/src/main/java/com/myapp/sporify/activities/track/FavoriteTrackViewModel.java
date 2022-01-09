@@ -1,4 +1,4 @@
-package com.example.sporify.activities.track;
+package com.myapp.sporify.activities.track;
 
 import android.util.Log;
 
@@ -12,10 +12,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.sporify.models.Artist;
-import com.example.sporify.models.Track;
-import com.example.sporify.utils.MyApplication;
-import com.example.sporify.utils.VolleySingleton;
+import com.myapp.sporify.models.Artist;
+import com.myapp.sporify.models.Track;
+import com.myapp.sporify.utils.MyApplication;
+import com.myapp.sporify.utils.VolleySingleton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
