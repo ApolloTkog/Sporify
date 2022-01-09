@@ -108,6 +108,7 @@ public class Album implements Item {
         return playCount;
 
         //Anebainoun opws einai auta. Ama breite kamia dior8ish peite mou. 8a ta ksanacheckarw pio meta.
+        //ksexasa to close # opote grafw auto...
     }
 
     @Override
