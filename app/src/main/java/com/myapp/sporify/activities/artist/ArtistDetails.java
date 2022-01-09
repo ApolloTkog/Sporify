@@ -31,13 +31,21 @@ public class ArtistDetails extends AppCompatActivity {
     private TextView artistName, artistGenre, artistBio, seeMore;
     private ImageView artistImage;
     private RecyclerView artistTracks;
+    private ImageButton addFavorite;
 
     private ArtistDetailsViewModel artistDetailsViewModel;
+    private FavoriteArtistViewModel favoriteArtistViewModel;
 
     private List<Track> trackList;
     private ArtistTracksAdapter adapter;
 
     private boolean bioHidden = false;
+
+
+    private String token;
+
+    private Artist artistInfo;
+    private Searchable searchable;
 
     // TAB BAR
     TabLayout tabLayout;
@@ -49,6 +57,11 @@ public class ArtistDetails extends AppCompatActivity {
         setContentView(R.layout.activity_artist_details);
 
         artistDetailsViewModel = new ViewModelProvider(this).get(ArtistDetailsViewModel.class);
+        favoriteArtistViewModel = new ViewModelProvider(this).get(FavoriteArtistViewModel.class);
+
+        // Getting user token  from shared prefs
+        SharedPreferences sharedPref = this.getSharedPreferences("user", Context.MODE_PRIVATE);
+        token = sharedPref.getString("token", "token");
 
         artistName = findViewById(R.id.artist_name);
         artistImage = findViewById(R.id.artist_image);
@@ -56,17 +69,19 @@ public class ArtistDetails extends AppCompatActivity {
         artistBio = findViewById(R.id.artist_bio);
         seeMore = findViewById(R.id.see_more);
         artistTracks = findViewById(R.id.artist_tracks);
+        addFavorite = findViewById(R.id.add_favorite);
 
         // tab bar views
-        //tabLayout = findViewById(R.id.tab_layout);
-        //pager2 = findViewById(R.id.view_pager2);
+        tabLayout = findViewById(R.id.tab_layout);
+        pager2 = findViewById(R.id.view_pager2);
 
         Intent intent = getIntent();
-        Searchable searchable = new Searchable();
-
+        searchable = new Searchable();
         if(intent.getSerializableExtra("item") != null){
             searchable = (Searchable) intent.getSerializableExtra("item");
         }
+
+        artistInfo = new Artist();
 
         artistDetailsViewModel.init(searchable.getMbid());
 
@@ -77,8 +92,28 @@ public class ArtistDetails extends AppCompatActivity {
         adapter = new ArtistTracksAdapter(this,trackList);
         artistTracks.setAdapter(adapter);
 
+        // get artist info
+        getArtist();
+        getArtistTracks();
+
+
+        // hide/show bio
+        manageBio();
+
+
+        //  setup tab bar layout
+        tabBarSetup(searchable.getMbid(), searchable.getExtraId());
+
+
+        // add favorite listener
+        addFavorite();
+    }
+
+    private void getArtist() {
+
         Observer<Artist> observer = artist -> {
             if(artist != null){
+                artistInfo = artist;
                 artistName.setText(artist.getName());
                 artistGenre.setText(artist.getGenre());
                 artistBio.setText(artist.getBiography());
@@ -95,7 +130,9 @@ public class ArtistDetails extends AppCompatActivity {
         };
 
         artistDetailsViewModel.getArtist().observe(this, observer);
+    }
 
+    private void getArtistTracks(){
         Observer<List<Track>> observer2 = tracks -> {
             if(tracks.size() > 0){
                 trackList = new ArrayList<>(tracks);
@@ -108,13 +145,30 @@ public class ArtistDetails extends AppCompatActivity {
         };
 
         artistDetailsViewModel.getArtistTracks().observe(this, observer2);
+    }
 
-        // hide/show bio
-        manageBio();
+    private void addFavorite(){
+        // listener when add favorite is tapped
+        addFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Observer<String> observer1 = new Observer<String>() {
+                    @Override
+                    public void onChanged(String response) {
+                        if(response == null)
+                            return;
 
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
 
-        //  setup tab bar layout
-        tabBarSetup(searchable.getMbid(), searchable.getExtraId());
+                        favoriteArtistViewModel.getFavoriteArtistsResponse().removeObservers(ArtistDetails.this);
+                    }
+                };
+
+                favoriteArtistViewModel.init(searchable.getMbid(),searchable.getImageURL(), token, artistInfo);
+
+                favoriteArtistViewModel.getFavoriteArtistsResponse().observe(ArtistDetails.this, observer1);
+            }
+        });
     }
 
     private void manageBio(){
@@ -172,4 +226,4 @@ public class ArtistDetails extends AppCompatActivity {
         });
     }
 
-}
+}}
