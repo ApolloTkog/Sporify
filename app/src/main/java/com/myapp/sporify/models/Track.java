@@ -8,7 +8,7 @@ public class Track implements Item {
 
     private int rank;
     private String mbid;
-    private String name;
+    private String name = "No info";
     private String artistName;
     private String artistMbid;
     private String artistImageURL = "";
@@ -16,11 +16,9 @@ public class Track implements Item {
     private String youtubeURL;
     private int duration;
 
-    private String summary = "", content = "";
+    private String summary = "No summary for this track", content = "No content for this track";
 
     public Track(){}
-
-
 
     public Track(int rank, String name, String artistName, String imageURL) {
         this.rank = rank;
@@ -78,8 +76,18 @@ public class Track implements Item {
         return artistName;
     }
 
+    @Override
+    public String getTitle() {
+        return name;
+    }
+
     public String getImageURL() {
         return imageURL;
+    }
+
+    @Override
+    public String getDescription() {
+        return artistName;
     }
 
     public String getYoutubeURL() {
@@ -116,6 +124,14 @@ public class Track implements Item {
 
     public void setMbid(String mbid) {
         this.mbid = mbid;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
     @Override

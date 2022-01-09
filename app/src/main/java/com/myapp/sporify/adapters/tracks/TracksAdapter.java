@@ -1,4 +1,5 @@
-package com.myapp.sporify.adapters;
+package com.myapp.sporify.adapters.tracks;
+
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,10 +1,12 @@
-package com.myapp.sporify.adapters;
+package com.myapp.sporify.adapters.tracks;
+
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,25 +37,9 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.TopT
     @Override
     public void onBindViewHolder(@NonNull TopTrackHolder holder, int position) {
         Track track = tracks.get(position);
-//        holder.mbid.setText(artist.getMbid());
         holder.rank.setText("#" + track.getRank());
         holder.name.setText(track.getName());
         holder.artistName.setText(track.getArtistName());
-
-//        // if not empty then load image from URL
-//        // else load a placeholder image
-//        if(!track.getImageURL().isEmpty()){
-//            Glide.with(context)
-//                    .load(track.getImageURL())
-//                    .fitCenter()
-//                    .into(holder.image);
-//        }
-//        else{
-//            Glide.with(context)
-//                    .load(R.drawable.artist_placeholder)
-//                    .fitCenter()
-//                    .into(holder.image);
-//        }
 
 
         if(track.getRank() == 1){
@@ -72,12 +58,14 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.TopT
 
     public static class TopTrackHolder extends RecyclerView.ViewHolder{
 
+        LinearLayout trackItem;
         TextView mbid, rank, name, artistName, imageURL;
         ImageView image;
 
         public TopTrackHolder(@NonNull View itemView) {
             super(itemView);
 
+            trackItem = itemView.findViewById(R.id.track_item);
             rank = itemView.findViewById(R.id.rank);
             mbid = itemView.findViewById(R.id.mbid);
             name = itemView.findViewById(R.id.name);

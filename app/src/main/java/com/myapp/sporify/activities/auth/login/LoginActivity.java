@@ -8,20 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.myapp.sporify.MainActivity;
 import com.myapp.sporify.R;
-import com.myapp.sporify.activities.album.AlbumDetailsViewModel;
-import com.myapp.sporify.activities.artist.ArtistDetails;
-import com.myapp.sporify.adapters.TracksAdapter;
-import com.myapp.sporify.models.Album;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
