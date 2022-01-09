@@ -59,6 +59,8 @@ public class TopArtistsViewModel extends ViewModel {
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
                 // Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                artists.setValue(artistList);
+                artists.postValue(artistList);
             }
         }, error -> {
             // Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -70,23 +72,22 @@ public class TopArtistsViewModel extends ViewModel {
 
     private void fetchArtistImage() {
 
-        for(int i = 0; i <= artistList.size() - 1; i++){
+        for(int i = 0; i < artistList.size(); i++){
             String url =
                     "http://webservice.fanart.tv/v3/music/"+ artistList.get(i).getMbid() +"?api_key=1e325be5bfa7db0c79aa464a0a924a46";
 
             int finalI = i;
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
                 try {
-                    JSONArray artistThumbs = response.getJSONArray("artistthumb");
-                    String imageURL = artistThumbs.getJSONObject(0).getString("url");
+
+                    String imageURL = ArtistMapper.getArtistImage(response);
 
                     artistList.get(finalI).setImageURL(imageURL);
 
                     if(finalI >= artistList.size() - 1){
-                        //artists.postValue(artistList);
                         artists.setValue(artistList);
+                        artists.postValue(artistList);
                     }
-
 
                 } catch (JSONException e) {
                     Log.d("Parsing error: ", e.getMessage());
@@ -95,6 +96,10 @@ public class TopArtistsViewModel extends ViewModel {
             }, error -> {
 //                Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.d("Request error: ", "Error getting artist's image");
+                if(finalI >= artistList.size() - 1){
+                    artists.setValue(artistList);
+                    artists.postValue(artistList);
+                }
             });
 
             requestQueue.add(jsonObjectRequest);

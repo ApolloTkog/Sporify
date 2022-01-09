@@ -24,7 +24,8 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     //    private HomeViewModel homeViewModel;
-    public TopAlbumsViewModel topAlbumsViewModel;
+    private TopAlbumsViewModel topAlbumsViewModel;
+    private TopArtistsViewModel topArtistsViewModel;
     private TopTracksViewModel topTracksViewModel;
     private FragmentHomeBinding binding;
 
@@ -34,6 +35,9 @@ public class HomeFragment extends Fragment {
         topAlbumsViewModel =
                 new ViewModelProvider(this).get(TopAlbumsViewModel.class);
 
+        topArtistsViewModel =
+                new ViewModelProvider(this).get(TopArtistsViewModel.class);
+
         topTracksViewModel =
                 new ViewModelProvider(this).get(TopTracksViewModel.class);
 
@@ -42,6 +46,22 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        final RecyclerView artistsList = binding.artistList;
+        artistsList.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        artistsList.setLayoutManager(layoutManager);
+        artistsList.setAdapter(new ArtistsAdapter(requireContext(), new ArrayList<>()));
+
+        topArtistsViewModel.getTopArtists(20).observe(getViewLifecycleOwner(), new Observer<List<Artist>>() {
+            @Override
+            public void onChanged(List<Artist> artists) {
+                if (artists.size() > 0){
+                    artistsList.setVisibility(View.VISIBLE);
+                    artistsList.setAdapter(new ArtistsAdapter(requireContext(), artists));
+                }
+            }
+        });
 
         final RecyclerView albumsList = binding.albumsList;
         albumsList.setHasFixedSize(true);

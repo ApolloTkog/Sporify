@@ -24,9 +24,9 @@ public class TopArtistsTest {
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
-
     @Before
     public void setUp(){
+        artistList = new ArrayList<>();
         topArtistsViewModel = new TopArtistsViewModel();
     }
 
@@ -37,21 +37,23 @@ public class TopArtistsTest {
 
         int topNumber = 20;
 
-        topArtistsViewModel.getTopArtists(topNumber).observeForever(new Observer<List<Artist>>() {
-            @Override
-            public void onChanged(List<Artist> topArtists) {
-                // if we don't have results return;
-                if(topArtists.size() <= 0)
-                    return;
+//        topArtistsViewModel.getTopArtists(topNumber).observeForever(new Observer<List<Artist>>() {
+//            @Override
+//            public void onChanged(List<Artist> topArtists) {
+//                // if we don't have results return;
+//                if(topArtists.size() <= 0)
+//                    return;
+//
+//                artistList = topArtists;
+//            }
+//        });
 
-                artistList = topArtists;
-            }
-        });
+        artistList = LiveDataTestUtil.getOrAwaitValue(topArtistsViewModel.getTopArtists(topNumber));
 
         // wait 5s for items to be fetched
-        Thread.sleep(5000);
+        // Thread.sleep(5000);
 
-        Assert.assertEquals(topNumber, artistList.size());
+        assertEquals(topNumber, artistList.size());
     }
 
     @Test
@@ -61,21 +63,24 @@ public class TopArtistsTest {
 
         int topNumber = 50;
 
-        topArtistsViewModel.getTopArtists(topNumber).observeForever(new Observer<List<Artist>>() {
-            @Override
-            public void onChanged(List<Artist> topArtists) {
-                // if we don't have results return;
-                if(topArtists.size() <= 0)
-                    return;
+//        topArtistsViewModel.getTopArtists(topNumber).observeForever(new Observer<List<Artist>>() {
+//            @Override
+//            public void onChanged(List<Artist> topArtists) {
+//                // if we don't have results return;
+//                if(topArtists.size() <= 0)
+//                    return;
+//
+//                artistList = topArtists;
+//            }
+//        });
 
-                artistList = topArtists;
-            }
-        });
+        artistList = LiveDataTestUtil.getOrAwaitValue(topArtistsViewModel.getTopArtists(topNumber));
+
 
         // wait 5s for items to be fetched
-        Thread.sleep(5000);
+        // Thread.sleep(5000);
 
-        Assert.assertEquals(topNumber, artistList.size());
+        assertEquals(topNumber, artistList.size());
     }
 
     @Test
@@ -83,23 +88,26 @@ public class TopArtistsTest {
         // query that is expected to be found
         artistList = new ArrayList<>();
 
-        int topNumber = 20;
+        int topNumber = 100;
 
-        topArtistsViewModel.getTopArtists(topNumber).observeForever(new Observer<List<Artist>>() {
-            @Override
-            public void onChanged(List<Artist> topArtists) {
-                // if we don't have results return;
-                if(topArtists.size() <= 0)
-                    return;
+//        topArtistsViewModel.getTopArtists(topNumber).observeForever(new Observer<List<Artist>>() {
+//            @Override
+//            public void onChanged(List<Artist> topArtists) {
+//                // if we don't have results return;
+//                if(topArtists.size() <= 0)
+//                    return;
+//
+//                artistList = topArtists;
+//            }
+//        });
 
-                artistList = topArtists;
-            }
-        });
+        artistList = LiveDataTestUtil.getOrAwaitValue(topArtistsViewModel.getTopArtists(topNumber));
+
 
         // wait 5s for items to be fetched
-        Thread.sleep(5000);
+        // Thread.sleep(5000);
 
-        Assert.assertEquals(topNumber, artistList.size());
+        assertEquals(topNumber, artistList.size());
     }
 
     @Test
@@ -109,16 +117,84 @@ public class TopArtistsTest {
 
         int topNumber = 0;
 
-        topArtistsViewModel.getTopArtists(topNumber).observeForever(new Observer<List<Artist>>() {
-            @Override
-            public void onChanged(List<Artist> topArtists) {
-                artistList = topArtists;
-            }
-        });
+//        topArtistsViewModel.getTopArtists(topNumber).observeForever(new Observer<List<Artist>>() {
+//            @Override
+//            public void onChanged(List<Artist> topArtists) {
+//                artistList = topArtists;
+//            }
+//        });
+
+        artistList = LiveDataTestUtil.getOrAwaitValue(topArtistsViewModel.getTopArtists(topNumber));
+
 
         // wait 5s for items to be fetched
-        Thread.sleep(5000);
+        // Thread.sleep(5000);
 
-        Assert.assertEquals(topNumber, artistList.size());
+        assertEquals(topNumber, artistList.size());
+    }
+
+    /* MOCK TESTS */
+
+    @Test
+    public void mock_should_return_top_20() throws Exception {
+        int topNumber = 20;
+        List<Artist> spyArtistList = Mockito.spy(new ArrayList<Artist>());
+
+        artistList = ArtistMapper.getTopArtistsFromJson(MockDataReader.getNetworkResponse("artists/artistsTop20.json"));
+
+        spyArtistList.addAll(artistList);
+        Mockito.verify(spyArtistList).addAll(artistList);
+
+        assertEquals(topNumber, spyArtistList.size());
+
+        Mockito.doReturn(topNumber * 2).when(spyArtistList).size();
+        assertEquals(topNumber * 2, spyArtistList.size());
+    }
+
+    @Test
+    public void mock_should_return_top_50() throws Exception {
+        int topNumber = 50;
+        List<Artist> spyArtistList = Mockito.spy(new ArrayList<Artist>());
+
+        artistList = ArtistMapper.getTopArtistsFromJson(MockDataReader.getNetworkResponse("artists/artistsTop50.json"));
+
+        spyArtistList.addAll(artistList);
+        Mockito.verify(spyArtistList).addAll(artistList);
+
+        assertEquals(topNumber, spyArtistList.size());
+
+        Mockito.doReturn(topNumber * 2).when(spyArtistList).size();
+        assertEquals(topNumber * 2, spyArtistList.size());
+    }
+
+    @Test
+    public void mock_should_return_top_100() throws Exception {
+        int topNumber = 100;
+        List<Artist> spyArtistList = Mockito.spy(new ArrayList<Artist>());
+
+        artistList = ArtistMapper.getTopArtistsFromJson(MockDataReader.getNetworkResponse("artists/artistsTop100.json"));
+
+        spyArtistList.addAll(artistList);
+        Mockito.verify(spyArtistList).addAll(artistList);
+
+        assertEquals(topNumber, spyArtistList.size());
+
+        Mockito.doReturn(topNumber * 2).when(spyArtistList).size();
+        assertEquals(topNumber * 2, spyArtistList.size());
+    }
+
+    @Test
+    public void mock_should_return_0() {
+        try{
+            artistList = Mockito.spy(ArtistMapper.getTopArtistsFromJson(MockDataReader.getNetworkResponse("artists/artistsTop0.json")));
+            Assert.fail("Should have thrown JSON parse exception");
+        }
+        catch (JSONException e){
+            // success
+            Assert.assertEquals("No value for artists", e.getMessage());
+            Assert.assertEquals(0, artistList.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
