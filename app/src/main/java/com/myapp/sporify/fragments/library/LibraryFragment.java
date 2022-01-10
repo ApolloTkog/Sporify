@@ -27,7 +27,6 @@ import com.myapp.sporify.adapters.LibraryAdapter;
 import com.myapp.sporify.databinding.FragmentLibraryBinding;
 import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Artist;
-//import com.myapp.sporify.models.Playlist;
 import com.myapp.sporify.models.Track;
 import com.myapp.sporify.utils.Type;
 
