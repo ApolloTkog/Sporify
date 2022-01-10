@@ -14,12 +14,12 @@
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.myapp.sporify.fragments.search.SearchFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_library"
         android:name="com.myapp.sporify.fragments.library.LibraryFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_library"
         tools:layout="@layout/fragment_library" />
 </navigation>

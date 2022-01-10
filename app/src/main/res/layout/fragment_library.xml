@@ -130,24 +130,6 @@
                     />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/playlist_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="25dp"
-                android:paddingVertical="8dp"
-                android:background="@drawable/filter_item"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
-
-                <TextView
-                    android:id="@+id/playlist_text"
-                    android:text="Playlists"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"/>
-            </LinearLayout>
-
         </LinearLayout>
 
 

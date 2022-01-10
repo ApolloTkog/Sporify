@@ -175,6 +175,3 @@ public class ArtistDetailsViewModel extends ViewModel {
 
 
 }
-
-
-}

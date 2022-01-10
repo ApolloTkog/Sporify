@@ -9,12 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="darker_gray">#aaa</color>
-    <color name="gold">#FFD700</color>
-    <color name="light_gray">#C5C5C5</color>
-
-
-
     <!--colors for modern ui-->
     <color name="whiteTextColor">#fff</color>
     <color name="primaryTextColor">#2661FA</color>
