@@ -1,19 +1,22 @@
 package com.myapp.sporify.details;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.Observer;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.myapp.sporify.activities.album.AlbumDetailsViewModel;
+import com.myapp.sporify.LiveDataTestUtil;
+import com.myapp.sporify.MockDataReader;
 import com.myapp.sporify.activities.track.TrackDetailsViewModel;
-import com.myapp.sporify.models.Album;
+import com.myapp.sporify.mappers.TrackMapper;
 import com.myapp.sporify.models.Track;
 
+import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.Spy;
 
 import java.util.List;
 
@@ -25,7 +28,6 @@ public class TrackDetailsTest {
     private List<Track> trackList;
 
     public Track trackInfo;
-
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
@@ -40,17 +42,7 @@ public class TrackDetailsTest {
         // query that is expected to be found
         String trackToBeFound = "ecfa6746-7bc4-4088-ace6-d209477bd63f";
 
-        trackDetailsViewModel.getTrackInfo(trackToBeFound).observeForever(new Observer<Track>() {
-            @Override
-            public void onChanged(Track track) {
-                // if we don't have results return;
-                // if our query exists in results
-                trackInfo = track;
-            }
-        });
-
-        // wait 1s for items to be fetched
-        Thread.sleep(5000);
+        trackInfo = LiveDataTestUtil.getOrAwaitValue(trackDetailsViewModel.getTrackInfo(trackToBeFound));
 
         Assert.assertNotEquals(null, trackInfo);
     }
@@ -60,19 +52,46 @@ public class TrackDetailsTest {
         // query that is expected to be found
         String trackToBeNotFound = "";
 
-        trackDetailsViewModel.getTrackInfo(trackToBeNotFound).observeForever(new Observer<Track>() {
-            @Override
-            public void onChanged(Track track) {
-                // if we don't have results return;
-                // if our query exists in results
-                trackInfo = track;
-            }
-        });
+        trackInfo = LiveDataTestUtil.getOrAwaitValue(trackDetailsViewModel.getTrackInfo(trackToBeNotFound));
 
-        // wait 1s for items to be fetched
-        Thread.sleep(5000);
+        Assert.assertNull(trackInfo.getMbid());
+        Assert.assertEquals("No info" ,trackInfo.getName());
+        Assert.assertNull(trackInfo.getArtistName());
 
-        Assert.assertNull(trackInfo);
+    }
+
+    @Spy
+    Track trackMock;
+
+    @Test
+    public void mock_should_get_album_info() throws Exception {
+        Track albumInfo = Mockito.spy(TrackMapper.getTrackFromJson(MockDataReader.getNetworkResponse("tracks/trackPassTest.json")));
+        trackMock = Mockito.spy(Track.class);
+
+        trackMock.setName("D.D.");
+        Mockito.verify(trackMock).setName("D.D.");
+
+        trackMock.setArtistName("The Weeknd");
+        Mockito.verify(trackMock).setArtistName("The Weeknd");
+
+        Assert.assertEquals(trackMock.getArtistName(), albumInfo.getArtistName());
+        Assert.assertEquals(trackMock.getName(), albumInfo.getName());
+    }
+
+    @Test
+    public void mock_should_fail_get_album_info() {
+        try{
+            trackInfo = Mockito.spy(TrackMapper.getTrackFromJson(MockDataReader.getNetworkResponse("tracks/trackFailTest.json")));
+            trackMock = Mockito.spy(Track.class);
+            Assert.fail("Should have thrown JSON parse exception");
+        }
+        catch (JSONException e){
+            // success
+            Assert.assertEquals("No value for track", e.getMessage());
+            Assert.assertNull(trackInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -100,11 +100,6 @@ public class AlbumDetailsViewModel extends ViewModel {
             } catch (JSONException e) {
                 Log.d("Parsing error: ", e.getMessage());
             }
-            finally {
-                // post && set the album's values
-                albumLiveData.setValue(null);
-                albumLiveData.postValue(null);
-            }
 
         }, error -> {
 //            Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();

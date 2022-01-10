@@ -41,7 +41,6 @@ public class ArtistMapperTest {
 
     }
 
-    //  not implemented
     @Test
     public void should_not_convert_it_to_artists() throws JSONException {
         String responseString = MockJsonData.topArtistsEmpty;
@@ -72,7 +71,6 @@ public class ArtistMapperTest {
         }
 
     }
-
 
     @Test
     public void should_get_artists_tracks() throws JSONException {
