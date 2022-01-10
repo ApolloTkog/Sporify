@@ -133,7 +133,7 @@ public class TopAlbumsTest {
         int topNumber = 60;
         List<Album> spyAlbumList = Mockito.spy(new ArrayList<Album>());
 
-        albumList = AlbumMapper.getTopAlbumsFromJson(MockDataReader.getNetworkResponse("albums/albumsTop100.json"));
+        albumList = AlbumMapper.getTopAlbumsFromJson(MockDataReader.getNetworkResponse("albums/albumsTop60.json"));
 
         spyAlbumList.addAll(albumList);
         Mockito.verify(spyAlbumList).addAll(albumList);

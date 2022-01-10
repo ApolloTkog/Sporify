@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,7 +19,7 @@ import com.myapp.sporify.R;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;
-    private Button signIn;
+    private Button signIn, skip;
 
     private LoginViewModel loginViewModel;
 
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.et_username);
         password = findViewById(R.id.et_password);
         signIn = findViewById(R.id.sign_in);
+        skip = findViewById(R.id.skip);
 
         login();
     }
@@ -80,5 +82,18 @@ public class LoginActivity extends AppCompatActivity {
             loginViewModel.getLoginResponse().observe(this, observer);
         });
 
+        skip.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                skipLogin();
+            }
+        });
+
     }
+
+    public void skipLogin(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }

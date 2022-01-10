@@ -111,6 +111,8 @@ public class Album implements Item {
         //ksexasa to close # opote grafw auto...
     }
 
+
+    // sto object den fainetai na den fainete na dexetai to optimization... fml. den prolabainw na to allaksw twra.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
