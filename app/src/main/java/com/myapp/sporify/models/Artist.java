@@ -1,6 +1,9 @@
 package com.myapp.sporify.models;
 
+import com.myapp.sporify.interfaces.Item;
+
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Artist implements Serializable, Item {
 

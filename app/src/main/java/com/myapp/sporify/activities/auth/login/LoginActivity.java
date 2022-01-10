@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                 skipLogin();
             }
         });
-
+//kodikas gia na klisei to test
     }
 
     public void skipLogin(){
