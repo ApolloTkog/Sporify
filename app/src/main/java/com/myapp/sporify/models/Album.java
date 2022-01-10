@@ -100,34 +100,6 @@ public class Album implements Item {
 
     public int getRank() {
         return rank;
-
-        //Pou einai defined???!!!! Edw to kane define!!!! Androiiiiiiidddd!!!! Ti 8es apo 'mena?!! Na to kanw private?! Den 8a leitourgei meta to album!
-    }
-
-    public long getPlayCount() {
-        return playCount;
-
-        //Anebainoun opws einai auta. Ama breite kamia dior8ish peite mou. 8a ta ksanacheckarw pio meta.
-        //ksexasa to close # opote grafw auto...
-    }
-
-
-    // sto object den fainetai na den fainete na dexetai to optimization... fml. den prolabainw na to allaksw twra.
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Album album = (Album) o;
-        return   name.equals(album.name) && artistName.equals(album.artistName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(mbid, name, artistName);
-    }
-
-    public int getRank() {
-        return rank;
     }
 
     public long getPlayCount() {
