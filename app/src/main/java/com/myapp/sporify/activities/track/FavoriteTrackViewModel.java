@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.myapp.sporify.models.Artist;
 import com.myapp.sporify.models.Track;
+import com.myapp.sporify.utils.Const;
 import com.myapp.sporify.utils.MyApplication;
 import com.myapp.sporify.utils.VolleySingleton;
 
@@ -47,7 +48,7 @@ public class FavoriteTrackViewModel  extends ViewModel {
     public LiveData<String> toggleFavoriteTrack(String mbid,String accessToken, Track track){
         final MutableLiveData<String> responseData = new MutableLiveData<>();
 
-        String postUrl = "http://192.168.2.5:8081/api/user/track";
+        String postUrl = Const.DB_URL + "/api/user/track";
         JSONObject postData = new JSONObject();
         try {
             postData.put("name", track.getName());

@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.myapp.sporify.mappers.AlbumMapper;
 import com.myapp.sporify.models.Album;
+import com.myapp.sporify.utils.Const;
 import com.myapp.sporify.utils.MyApplication;
 import com.myapp.sporify.utils.VolleySingleton;
 
@@ -47,7 +48,7 @@ public class FavoriteAlbumViewModel extends ViewModel {
     public LiveData<String> addFavoriteAlbum(String mbid,String accessToken, Album album){
         final MutableLiveData<String> responseData = new MutableLiveData<>();
 
-        String postUrl = "http://192.168.2.5:8081/api/user/album";
+        String postUrl = Const.DB_URL + "/api/user/album";
         JSONObject postData = new JSONObject();
         try {
             postData.put("name", album.getName());

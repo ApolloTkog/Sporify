@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Artist;
+import com.myapp.sporify.utils.Const;
 import com.myapp.sporify.utils.MyApplication;
 import com.myapp.sporify.utils.VolleySingleton;
 
@@ -22,6 +23,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class FavoriteArtistViewModel extends ViewModel {
@@ -48,12 +50,14 @@ public class FavoriteArtistViewModel extends ViewModel {
     public LiveData<String> toggleFavoriteArtist(String mbid, String imageURL,String accessToken, Artist artist){
         final MutableLiveData<String> responseData = new MutableLiveData<>();
 
-        String postUrl = "http://192.168.2.5:8081/api/user/artist";
+        String postUrl = Const.DB_URL + "/api/user/artist";
         JSONObject postData = new JSONObject();
         try {
             postData.put("name", artist.getName());
             postData.put("imageURL", imageURL);
             postData.put("musicBrainzId", artist.getMbid());
+            postData.put("mood", artist.getMood().toLowerCase(Locale.ROOT));
+
 
         } catch (JSONException e) {
             e.printStackTrace();
