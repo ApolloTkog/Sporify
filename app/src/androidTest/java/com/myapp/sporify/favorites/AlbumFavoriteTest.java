@@ -40,7 +40,7 @@ public class AlbumFavoriteTest {
         favoriteAlbumViewModel = new FavoriteAlbumViewModel();
         loginViewModel = new LoginViewModel();
 
-        loginViewModel.init("admin", "12345678");
+        loginViewModel.init("username", "12345678");
         loginResponse = LiveDataTestUtil.getOrAwaitValue(loginViewModel.getLoginResponse());
     }
 
@@ -60,9 +60,11 @@ public class AlbumFavoriteTest {
 
         libraryViewModel.init(loginResponse);
 
+        // get favorite albums and assert that is not null
         favoriteAlbums = LiveDataTestUtil.getOrAwaitValue(libraryViewModel.getFavoriteAlbums());
         Assert.assertNotNull(favoriteAlbums);
 
+        // create mock album
         int randomMbid = new Random().nextInt();
         Album mockAlbum = Mockito.spy(Album.class);
 
@@ -72,6 +74,7 @@ public class AlbumFavoriteTest {
         mockAlbum.setArtistName("test artist");
         Mockito.verify(mockAlbum).setArtistName("test artist");
 
+        // check if this mock album exists inside favorite collection
         boolean exists = false;
         for(Album x: favoriteAlbums){
             if(x.getName().equals(mockAlbum.getName()) && x.getArtistName().equals(mockAlbum.getArtistName())){
@@ -80,9 +83,11 @@ public class AlbumFavoriteTest {
             }
         }
 
+        // add this mock album to favorites
         String response =
                 LiveDataTestUtil.getOrAwaitValue(favoriteAlbumViewModel.addFavoriteAlbum(String.valueOf(randomMbid), loginResponse, mockAlbum));
 
+        // check if api manages correct to add or delete it
         if(!exists)
             Assert.assertEquals("Successfully added!", response);
         else
