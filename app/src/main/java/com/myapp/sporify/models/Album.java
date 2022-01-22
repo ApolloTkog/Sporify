@@ -51,7 +51,6 @@ public class Album implements Item {
         this.artistName = artistName;
     }
 
-
     public String getMbid() {
         return mbid;
     }
@@ -127,4 +126,3 @@ public class Album implements Item {
         return Objects.hash(mbid, name, artistName);
     }
 }
-

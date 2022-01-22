@@ -52,7 +52,7 @@ public class TopAlbumsTest {
 
         int topNumber = 20;
 
-        albumList = LiveDataTestUtil.getOrAwaitValue(topAlbumsViewModel.getTopAlbums(topNumber));
+        albumList = LiveDataTestUtil.getOrAwaitValue(topAlbumsViewModel.getTopAlbumsSingle(topNumber, "rock"));
 
         Assert.assertEquals(topNumber, albumList.size());
     }
@@ -64,41 +64,41 @@ public class TopAlbumsTest {
 
         int topNumber = 50;
 
-        albumList = LiveDataTestUtil.getOrAwaitValue(topAlbumsViewModel.getTopAlbums(topNumber));
+        albumList = LiveDataTestUtil.getOrAwaitValue(topAlbumsViewModel.getTopAlbumsSingle(topNumber, "rock"));
 
         Assert.assertEquals(topNumber, albumList.size());
     }
 
+    //Used to be 100. The api can only give up to 60 though.
+
     @Test
     public void should_return_top_60() throws InterruptedException {
-        // query that is expected to be found
         albumList = new ArrayList<>();
 
         int topNumber = 60;
 
-        albumList = LiveDataTestUtil.getOrAwaitValue(topAlbumsViewModel.getTopAlbums(topNumber));
+        albumList = LiveDataTestUtil.getOrAwaitValue(topAlbumsViewModel.getTopAlbumsSingle(topNumber, "rock"));
 
         Assert.assertEquals(topNumber, albumList.size());
     }
 
     @Test
     public void should_not_return_0() throws InterruptedException {
-        // query that is expected to be found
         albumList = new ArrayList<>();
 
         int topNumber = 0;
 
-        albumList = LiveDataTestUtil.getOrAwaitValue(topAlbumsViewModel.getTopAlbums(topNumber));
+        albumList = LiveDataTestUtil.getOrAwaitValue(topAlbumsViewModel.getTopAlbumsSingle(topNumber, "rock"));
 
-        // returns all albums if limit equals to 0
         Assert.assertNotEquals(topNumber, albumList.size());
     }
 
-    /* MOCK TESTS */
+    // MOCK TESTS
 
     @Test
     public void mock_should_return_top_20() throws Exception {
         int topNumber = 20;
+
         List<Album> spyAlbumList = Mockito.spy(new ArrayList<Album>());
 
         albumList = AlbumMapper.getTopAlbumsFromJson(MockDataReader.getNetworkResponse("albums/albumsTop20.json"));
@@ -107,6 +107,7 @@ public class TopAlbumsTest {
         Mockito.verify(spyAlbumList).addAll(albumList);
 
         assertEquals(topNumber, spyAlbumList.size());
+
 
         Mockito.doReturn(topNumber * 2).when(spyAlbumList).size();
         assertEquals(topNumber * 2, spyAlbumList.size());
@@ -133,7 +134,7 @@ public class TopAlbumsTest {
         int topNumber = 60;
         List<Album> spyAlbumList = Mockito.spy(new ArrayList<Album>());
 
-        albumList = AlbumMapper.getTopAlbumsFromJson(MockDataReader.getNetworkResponse("albums/albumsTop60.json"));
+        albumList = AlbumMapper.getTopAlbumsFromJson(MockDataReader.getNetworkResponse("albums/albumsTop100.json"));
 
         spyAlbumList.addAll(albumList);
         Mockito.verify(spyAlbumList).addAll(albumList);
