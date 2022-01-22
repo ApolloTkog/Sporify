@@ -1,5 +1,6 @@
 package com.myapp.sporify.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -17,12 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
+import com.myapp.sporify.activities.album.AlbumDetails;
+import com.myapp.sporify.activities.track.TrackDetails;
 import com.myapp.sporify.fragments.library.LibraryViewModel;
 import com.myapp.sporify.fragments.library.PlaylistTracks;
 import com.myapp.sporify.interfaces.Item;
 import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Artist;
 import com.myapp.sporify.models.Playlist;
+import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.models.Track;
 import com.myapp.sporify.utils.Type;
 
@@ -62,7 +66,7 @@ public class LibraryAdapter<T> extends RecyclerView.Adapter<LibraryAdapter.Favor
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FavoriteHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FavoriteHolder holder, @SuppressLint("RecyclerView") int position) {
         Item item = null;
 
 
@@ -98,6 +102,8 @@ public class LibraryAdapter<T> extends RecyclerView.Adapter<LibraryAdapter.Favor
                     .fitCenter()
                     .into(holder.image);
         }
+
+
 
         // if type is playlist
         if(type == Type.PLAYLIST){
@@ -141,6 +147,52 @@ public class LibraryAdapter<T> extends RecyclerView.Adapter<LibraryAdapter.Favor
                 return true;
             });
         }
+        else{
+            holder.item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openDetails(position);
+                }
+            });
+        }
+
+
+
+    }
+
+    private void openDetails(int position) {
+        // getting the kind of searched result
+        // could be Album/Artist/Track
+
+
+
+        Searchable searchable = new Searchable();
+        Intent intent = new Intent();
+
+        Item item = null;
+
+        // if kind is album/artist/track open the corresponding activity
+        switch (type){
+            case ALBUM:
+                item = (Album) items.get(position);
+                searchable.setMbid(item.getMbid());
+                intent.putExtra("item", searchable);
+                intent.setClass(context, AlbumDetails.class);
+                context.startActivity(intent);
+                break;
+            case ARTIST:
+//                intent.setClass(context, ArtistDetails.class);
+//                context.startActivity(intent);
+                break;
+            case TRACK:
+                item = (Track) items.get(position);
+                searchable.setMbid(item.getMbid());
+                intent.putExtra("item", searchable);
+                intent.setClass(context, TrackDetails.class);
+                context.startActivity(intent);
+                break;
+        }
+
     }
 
     @Override

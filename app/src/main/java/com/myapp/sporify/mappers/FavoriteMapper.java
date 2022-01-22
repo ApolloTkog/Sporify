@@ -47,8 +47,11 @@ public class FavoriteMapper {
             String mbid = trackObject.getString("musicBrainzId");
             String name = trackObject.getString("name");
             String imageURL = trackObject.getString("imageURL");
+            String mood = trackObject.getString("mood");
 
             Artist artist = new Artist(mbid, name, imageURL);
+            artist.setMood(mood);
+
             Log.d("Favorites", artist.getName());
 
             artistList.add(artist);

@@ -59,4 +59,8 @@ public class Searchable implements Serializable {
     public void setExtraId(String extraId) {
         this.extraId = extraId;
     }
+
+    public void setMbid(String mbid) {
+        this.mbid = mbid;
+    }
 }

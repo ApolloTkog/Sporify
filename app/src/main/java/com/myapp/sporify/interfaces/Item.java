@@ -4,4 +4,6 @@ public interface Item {
     String getTitle();
     String getImageURL();
     String getDescription();
+
+    String getMbid();
 }
