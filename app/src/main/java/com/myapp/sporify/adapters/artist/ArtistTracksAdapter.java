@@ -11,10 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
+import com.myapp.sporify.models.Playlist;
 import com.myapp.sporify.models.Track;
 
 import java.util.List;
@@ -26,10 +29,17 @@ public class ArtistTracksAdapter extends RecyclerView.Adapter<ArtistTracksAdapte
 
     private Context context;
     private List<Track> tracks;
+    private List<Playlist> playlists;
 
-    public ArtistTracksAdapter(Context context, List<Track> tracks){
+    private  String token;
+
+    private FragmentManager fragmentManager;
+
+    public ArtistTracksAdapter(Context context, List<Track> tracks, String token, List<Playlist> playlists){
         this.context = context;
         this.tracks = tracks;
+        this.token = token;
+        this.playlists = playlists;
     }
 
     @NonNull
@@ -75,12 +85,25 @@ public class ArtistTracksAdapter extends RecyclerView.Adapter<ArtistTracksAdapte
             }
         });
 
+        // long click listener when you tap long on track item
+        holder.track_item.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+                new PlaylistDialog("", token, track, playlists).show(manager, "TAG");
 
+                return true;
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return tracks.size();
+    }
+
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
     }
 
     public static class ArtistTrackHolder extends RecyclerView.ViewHolder{

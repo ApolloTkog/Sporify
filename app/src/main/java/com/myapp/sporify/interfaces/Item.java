@@ -6,4 +6,5 @@ public interface Item {
     String getDescription();
 
     String getMbid();
+    String getName();
 }

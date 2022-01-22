@@ -15,33 +15,41 @@ import android.widget.Toast;
 
 import com.myapp.sporify.MainActivity;
 import com.myapp.sporify.R;
+import com.myapp.sporify.activities.auth.signup.SignUpActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;
-    private Button signIn, skip;
+    private Button signIn, signUp;
 
     private LoginViewModel loginViewModel;
 
     private SharedPreferences sharedPref;
+
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Getting favorites albums list from shared prefs
         sharedPref = this.getSharedPreferences("user", Context.MODE_PRIVATE);
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-
         username = findViewById(R.id.et_username);
         password = findViewById(R.id.et_password);
         signIn = findViewById(R.id.sign_in);
-        skip = findViewById(R.id.skip);
+        signUp = findViewById(R.id.sign_up);
 
         login();
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            }
+        });
     }
 
     private void login(){
@@ -81,19 +89,5 @@ public class LoginActivity extends AppCompatActivity {
 
             loginViewModel.getLoginResponse().observe(this, observer);
         });
-
-        skip.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                skipLogin();
-            }
-        });
-//kodikas gia na klisei to test 4
     }
-
-    public void skipLogin(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
 }

@@ -15,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.myapp.sporify.utils.Const;
 import com.myapp.sporify.utils.MyApplication;
 import com.myapp.sporify.utils.VolleySingleton;
 
@@ -48,7 +49,7 @@ public class SignUpViewModel extends ViewModel {
     public LiveData<String> attemptSignUp(String username,String email, String password, String confirmPassword){
         final MutableLiveData<String> signUpData = new MutableLiveData<>();
 
-        String postUrl = "http://192.168.2.5:8081/api/auth/signup";
+        String postUrl = Const.DB_URL + "/api/auth/signup";
         JSONObject postData = new JSONObject();
         try {
             postData.put("username", username);
