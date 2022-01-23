@@ -31,17 +31,9 @@ public class LoginTest {
 
     @Test
     public void should_not_login() throws InterruptedException {
+
         loginViewModel.init("","");
-//        loginViewModel.getLoginResponse().observeForever(new Observer<String>() {
-//            @Override
-//            public void onChanged(String response) {
-//                loginResponse = response;
-//            }
-//        });
-
         loginResponse = LiveDataTestUtil.getOrAwaitValue(loginViewModel.getLoginResponse());
-
-//        Thread.sleep(2000);
 
         Assert.assertEquals("Bad credentials!", loginResponse);
     }
@@ -50,17 +42,15 @@ public class LoginTest {
     public void should_not_login_random_credentials() throws InterruptedException {
 
         loginViewModel.init("user","12345");
-
         loginResponse = LiveDataTestUtil.getOrAwaitValue(loginViewModel.getLoginResponse());
-
 
         Assert.assertEquals("Bad credentials!", loginResponse);
     }
 
     @Test
     public void should_login() throws InterruptedException {
-        loginViewModel.init("username","12345678");
 
+        loginViewModel.init("username","12345678");
         loginResponse = LiveDataTestUtil.getOrAwaitValue(loginViewModel.getLoginResponse());
 
         Assert.assertNotEquals("Bad credentials!", loginResponse);

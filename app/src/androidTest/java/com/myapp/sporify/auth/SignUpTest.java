@@ -49,7 +49,6 @@ public class SignUpTest {
         signUpViewModel.init("use","","","");
         signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
-
         Assert.assertEquals("Username size must be greater than 3 chars!", signUpResponse);
     }
 
@@ -58,7 +57,6 @@ public class SignUpTest {
 
         signUpViewModel.init("user","","","");
         signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
-
 
         Assert.assertEquals("Email field cannot be empty!", signUpResponse);
     }
@@ -69,7 +67,6 @@ public class SignUpTest {
         signUpViewModel.init("user","email@example","","");
         signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
-
         Assert.assertEquals("You must enter a valid email format!", signUpResponse);
     }
 
@@ -79,7 +76,6 @@ public class SignUpTest {
         signUpViewModel.init("user","email@example.com","","");
         signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
 
-
         Assert.assertEquals("Password field cannot be empty!", signUpResponse);
     }
 
@@ -88,7 +84,6 @@ public class SignUpTest {
 
         signUpViewModel.init("user","email@example.com","12345","");
         signUpResponse = LiveDataTestUtil.getOrAwaitValue(signUpViewModel.getSignUpResponse());
-
 
         Assert.assertEquals("Password size must 6 chars or greater!", signUpResponse);
     }

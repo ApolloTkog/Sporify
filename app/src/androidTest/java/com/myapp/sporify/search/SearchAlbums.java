@@ -49,9 +49,6 @@ public class SearchAlbums {
                 searchable = x;
         }
 
-        // wait 1s for items to be fetched
-        // Thread.sleep(1000);
-
         Assert.assertEquals(queryToBeFound, searchable.getName());
 
     }
