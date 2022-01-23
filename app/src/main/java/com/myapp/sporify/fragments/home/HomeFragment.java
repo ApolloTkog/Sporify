@@ -30,6 +30,7 @@ public class HomeFragment extends Fragment {
     private TopArtistsViewModel topArtistsViewModel;
     private TopTracksViewModel topTracksViewModel;
     private FragmentHomeBinding binding;
+    private String token;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -73,7 +74,7 @@ public class HomeFragment extends Fragment {
         albumsList.setAdapter(new AlbumsAdapter(requireContext(), new ArrayList<>()));
 
 
-        topAlbumsViewModel.getTopAlbums(20).observe(getViewLifecycleOwner(), new Observer<List<Album>>() {
+        topAlbumsViewModel.getTopAlbums(token,20).observe(getViewLifecycleOwner(), new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albums) {
 //                Toast.makeText(requireContext(), "Hi!", Toast.LENGTH_SHORT).show();
