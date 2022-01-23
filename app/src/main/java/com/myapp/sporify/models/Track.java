@@ -2,10 +2,12 @@ package com.myapp.sporify.models;
 
 import com.myapp.sporify.interfaces.Item;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Track implements Item {
+public class Track implements Item, Serializable {
 
+    private String id;
     private int rank;
     private String mbid;
     private String name = "No info";
@@ -132,6 +134,18 @@ public class Track implements Item {
 
     public void setArtistName(String artistName) {
         this.artistName = artistName;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setYoutubeURL(String youtubeURL) {
+        this.youtubeURL = youtubeURL;
     }
 
     @Override
