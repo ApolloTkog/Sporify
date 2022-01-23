@@ -14,6 +14,7 @@ public class Artist implements Serializable, Item {
     private String imageURL;
     private String biography;
     private String genre;
+    private String mood = "";
 
     public Artist(){}
 
@@ -89,6 +90,15 @@ public class Artist implements Serializable, Item {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getMood() {
+        return mood;
+    }
+
+    public void setMood(String mood) {
+        this.mood = mood;
+    }
+
 
     @Override
     public boolean equals(Object o) {

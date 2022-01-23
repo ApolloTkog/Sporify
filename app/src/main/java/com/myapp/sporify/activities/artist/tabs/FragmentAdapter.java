@@ -10,12 +10,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class FragmentAdapter extends FragmentStateAdapter {
 
-    private String mbid, extraId;
+    private String mbid, extraId, artist;
 
-    public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String mbid, String extraId) {
+    public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String mbid, String extraId, String artist) {
         super(fragmentManager, lifecycle);
         this.mbid = mbid;
         this.extraId = extraId;
+        this.artist = artist;
     }
 
     @NonNull
@@ -24,9 +25,10 @@ public class FragmentAdapter extends FragmentStateAdapter {
         Bundle tracksBundle = new Bundle();
         Bundle albumsBundle = new Bundle();
 
-
+        tracksBundle.putString("artist",artist);
         tracksBundle.putString("mbid", mbid);
         albumsBundle.putString("mbid", extraId);
+
 
         AlbumsFragment albumsFragment = new AlbumsFragment();
         albumsFragment.setArguments(albumsBundle);

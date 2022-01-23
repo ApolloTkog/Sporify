@@ -31,9 +31,11 @@ public class ArtistMapper {
                 String image = jsonObject.getString("strArtistFanart2").equals("null") ? "" : jsonObject.getString("strArtistFanart2");
                 String biography = jsonObject.getString("strBiographyEN");
                 String genre = jsonObject.getString("strGenre");
+                String mood = jsonObject.getString("strMood");
 
 
                 artist = new Artist(mbid, name, image, genre, biography);
+                artist.setMood(mood);
 
             }
         }
@@ -59,7 +61,7 @@ public class ArtistMapper {
                 String image = jsonObject.getString("strTrackThumb").equals("null") ? "" : jsonObject.getString("strTrackThumb");
                 String youtubeURL = jsonObject.getString("strMusicVid");
 
-                Track track = new Track(i + 1, name,image, youtubeURL, "");
+                Track track = new Track(i + 1, name, image, youtubeURL, "");
 
                 tracks.add(track);
 

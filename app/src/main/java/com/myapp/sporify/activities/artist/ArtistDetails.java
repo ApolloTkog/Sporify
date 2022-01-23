@@ -22,7 +22,9 @@ import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
 import com.myapp.sporify.activities.artist.tabs.FragmentAdapter;
 import com.myapp.sporify.adapters.artist.ArtistTracksAdapter;
+import com.myapp.sporify.fragments.library.LibraryViewModel;
 import com.myapp.sporify.models.Artist;
+import com.myapp.sporify.models.Playlist;
 import com.myapp.sporify.models.Searchable;
 import com.myapp.sporify.models.Track;
 import com.google.android.material.tabs.TabLayout;
@@ -34,14 +36,14 @@ public class ArtistDetails extends AppCompatActivity {
 
     private TextView artistName, artistGenre, artistBio, seeMore;
     private ImageView artistImage;
-    private RecyclerView artistTracks;
     private ImageButton addFavorite;
 
     private ArtistDetailsViewModel artistDetailsViewModel;
     private FavoriteArtistViewModel favoriteArtistViewModel;
+    private LibraryViewModel libraryViewModel;
 
     private List<Track> trackList;
-    private ArtistTracksAdapter adapter;
+    private List<Playlist> playlists;
 
     private boolean bioHidden = false;
 
@@ -55,6 +57,8 @@ public class ArtistDetails extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 pager2;
     FragmentAdapter fragmentAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,7 @@ public class ArtistDetails extends AppCompatActivity {
 
         artistDetailsViewModel = new ViewModelProvider(this).get(ArtistDetailsViewModel.class);
         favoriteArtistViewModel = new ViewModelProvider(this).get(FavoriteArtistViewModel.class);
+        libraryViewModel = new ViewModelProvider(this).get(LibraryViewModel.class);
 
         // Getting user token  from shared prefs
         SharedPreferences sharedPref = this.getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -72,7 +77,6 @@ public class ArtistDetails extends AppCompatActivity {
         artistGenre = findViewById(R.id.artist_genre);
         artistBio = findViewById(R.id.artist_bio);
         seeMore = findViewById(R.id.see_more);
-        artistTracks = findViewById(R.id.artist_tracks);
         addFavorite = findViewById(R.id.add_favorite);
 
         // tab bar views
@@ -90,23 +94,18 @@ public class ArtistDetails extends AppCompatActivity {
         artistDetailsViewModel.init(searchable.getMbid());
 
         trackList = new ArrayList<>();
-
-        artistTracks.setLayoutManager(new LinearLayoutManager(this));
-        artistTracks.setHasFixedSize(true);
-        adapter = new ArtistTracksAdapter(this,trackList);
-        artistTracks.setAdapter(adapter);
+        playlists = new ArrayList<>();
 
         // get artist info
         getArtist();
         getArtistTracks();
-
 
         // hide/show bio
         manageBio();
 
 
         //  setup tab bar layout
-        tabBarSetup(searchable.getMbid(), searchable.getExtraId());
+        tabBarSetup(searchable.getMbid(), searchable.getExtraId(), searchable.getName());
 
 
         // add favorite listener
@@ -140,8 +139,6 @@ public class ArtistDetails extends AppCompatActivity {
         Observer<List<Track>> observer2 = tracks -> {
             if(tracks.size() > 0){
                 trackList = new ArrayList<>(tracks);
-                artistTracks.setAdapter(new ArtistTracksAdapter(getApplicationContext(), trackList));
-                adapter.notifyItemInserted(trackList.size() -1);
             }
 
             artistDetailsViewModel.getArtistTracks().removeObservers(ArtistDetails.this);
@@ -196,9 +193,9 @@ public class ArtistDetails extends AppCompatActivity {
 
     }
 
-    private void tabBarSetup(String mbid, String extraId){
+    private void tabBarSetup(String mbid, String extraId, String artist){
         FragmentManager fm = getSupportFragmentManager();
-        fragmentAdapter = new FragmentAdapter(fm, getLifecycle(), mbid, extraId);
+        fragmentAdapter = new FragmentAdapter(fm, getLifecycle(), mbid, extraId, artist);
         pager2.setAdapter(fragmentAdapter);
 
         tabLayout.addTab(tabLayout.newTab().setText("Tracks"));
