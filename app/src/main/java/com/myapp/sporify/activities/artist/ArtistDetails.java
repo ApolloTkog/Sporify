@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
@@ -21,7 +19,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
 import com.myapp.sporify.activities.artist.tabs.FragmentAdapter;
-import com.myapp.sporify.adapters.artist.ArtistTracksAdapter;
 import com.myapp.sporify.fragments.library.LibraryViewModel;
 import com.myapp.sporify.models.Artist;
 import com.myapp.sporify.models.Playlist;

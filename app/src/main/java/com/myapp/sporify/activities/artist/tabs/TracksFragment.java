@@ -1,7 +1,5 @@
 package com.myapp.sporify.activities.artist.tabs;
 
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -21,8 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.myapp.sporify.activities.artist.ArtistDetailsViewModel;
-import com.myapp.sporify.activities.track.PlaylistDialog;
-import com.myapp.sporify.adapters.artists.ArtistTracksAdapter;
+import com.myapp.sporify.adapters.artist.ArtistTracksAdapter;
 import com.myapp.sporify.databinding.TracksFragmentBinding;
 import com.myapp.sporify.fragments.library.LibraryViewModel;
 import com.myapp.sporify.models.Playlist;

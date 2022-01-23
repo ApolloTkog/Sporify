@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
+import com.myapp.sporify.activities.track.PlaylistDialog;
 import com.myapp.sporify.models.Playlist;
 import com.myapp.sporify.models.Track;
 

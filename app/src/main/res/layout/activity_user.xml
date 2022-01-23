@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.user.User"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="30dp">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        />
+
+    <ImageButton
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        />
+
+
+
+   <androidx.cardview.widget.CardView
+       android:id="@+id/user_image"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       android:layout_marginTop="15dp"
+       app:cardCornerRadius="8dp"
+       app:cardElevation="4dp"
+       >
+
+       <ImageView
+           android:src="@drawable/artist_placeholder"
+
+           android:layout_width="150dp"
+           android:layout_height="150dp"/>
+   </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/username"
+        android:text="username_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/user_image"
+        app:layout_constraintLeft_toLeftOf="@id/user_image"
+        app:layout_constraintRight_toRightOf="@id/user_image"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:id="@+id/genre_text"
+        android:text="Favorite genre"
+        app:layout_constraintTop_toBottomOf="@id/username"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"/>
+
+    <Spinner
+        android:id="@+id/genre_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/genre_text"
+        />
+
+    <TextView
+        android:id="@+id/mood_text"
+        android:text="Current mood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/genre_spinner"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        />
+
+    <Spinner
+        android:id="@+id/mood_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mood_text"/>
+
+    <Button
+        android:id="@+id/update_btn"
+        android:text="update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mood_spinner"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,6 @@ import com.myapp.sporify.LiveDataTestUtil;
 import com.myapp.sporify.activities.album.FavoriteAlbumViewModel;
 import com.myapp.sporify.activities.auth.login.LoginViewModel;
 import com.myapp.sporify.fragments.library.LibraryViewModel;
-import com.myapp.sporify.fragments.search.SearchViewModel;
 import com.myapp.sporify.models.Album;
 
 import org.junit.Assert;
@@ -19,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

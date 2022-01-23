@@ -4,7 +4,6 @@ package com.myapp.sporify.adapters.tracks;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sporify.R;
-import com.myapp.sporify.adapters.LibraryAdapter;
 import com.myapp.sporify.fragments.library.LibraryViewModel;
 import com.myapp.sporify.models.Track;
-import com.myapp.sporify.utils.Helper;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
