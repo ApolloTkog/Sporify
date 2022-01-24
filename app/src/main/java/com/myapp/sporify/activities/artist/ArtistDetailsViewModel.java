@@ -103,7 +103,7 @@ public class ArtistDetailsViewModel extends ViewModel {
             }
 
         }, error -> {
-            Log.d("Request error: ", error.getMessage());
+            Log.d("Request error: ", error.toString());
         });
 
         requestQueue.add(jsonObjectRequest);
@@ -164,8 +164,8 @@ public class ArtistDetailsViewModel extends ViewModel {
                 albumsData.postValue(albums);
             }
         }, error -> {
-            // Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d("Request error: ", error.getMessage());
+            // Toast.makeText(getApplication(), error.toString(), Toast.LENGTH_SHORT).show();
+            Log.d("Request error: ", error.toString());
         });
 
         requestQueue.add(jsonObjectRequest);

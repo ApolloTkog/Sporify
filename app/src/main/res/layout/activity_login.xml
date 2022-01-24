@@ -7,7 +7,7 @@
     android:background="@color/colorBackground"
     android:orientation="vertical"
     android:fillViewport="true"
-    android:fitsSystemWindows="true"
+    android:paddingTop="24dp"
     tools:context=".activities.auth.login.LoginActivity">
 
     <RelativeLayout
@@ -24,12 +24,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_width="wrap_content"
+                android:src="@mipmap/sporifylogo"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp"
-                android:scaleType="centerInside" />
+                android:layout_marginBottom="32dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -174,17 +174,6 @@
                 android:paddingHorizontal="20dp"
                 android:text="@string/text_signin_signup"
                 android:textColor="@color/darker_gray" />
-
-            <Button
-                android:id="@+id/skip"
-                style="@style/textButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingHorizontal="20dp"
-                android:text="skip"
-                android:textColor="@color/darker_gray" />
-
         </LinearLayout>
 
     </RelativeLayout>

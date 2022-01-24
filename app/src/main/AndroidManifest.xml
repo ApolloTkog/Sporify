@@ -15,6 +15,22 @@
         android:theme="@style/Theme.Sporify"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".fragments.library.MoodFinder"
+            android:exported="false" />
+        <activity
+            android:name=".activities.user.User"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.library.PlaylistTracks"
+            android:exported="false" />
+        <activity
+            android:name=".activities.auth.signup.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
             android:name=".activities.track.TrackDetails"
             android:exported="false" />
         <activity
@@ -24,24 +40,15 @@
             android:name=".activities.album.AlbumDetails"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.auth.login.LoginActivity"
             android:exported="true"
             android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
-<activity android:name=".activities.splash.SplashActivity"
-    android:exported="true"
-    android:theme="@style/Theme.Sporify.NoActionBar">
-
-    <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
-
-</activity>
-
     </application>
 
 </manifest>

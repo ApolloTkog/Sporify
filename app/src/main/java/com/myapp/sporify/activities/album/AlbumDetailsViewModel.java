@@ -102,8 +102,8 @@ public class AlbumDetailsViewModel extends ViewModel {
             }
 
         }, error -> {
-//            Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
-//            Log.d("Request error: ", error.getMessage());
+//            Toast.makeText(getApplication(), error.toString(), Toast.LENGTH_SHORT).show();
+//            Log.d("Request error: ", error.toString());
             // on request error post the empty album object to show default values
             albumLiveData.setValue(null);
             albumLiveData.postValue(null);

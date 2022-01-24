@@ -65,7 +65,7 @@ public class TopTracksViewModel extends ViewModel {
                 tracks.postValue(trackList);
             }
         }, error -> {
-            Log.d("Request error: ", error.getMessage());
+            Log.d("Request error: ", error.toString());
         });
 
         requestQueue.add(jsonObjectRequest);

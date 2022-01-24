@@ -1,9 +1,12 @@
 package com.myapp.sporify.fragments.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.myapp.sporify.activities.user.UserViewModel;
 import com.myapp.sporify.adapters.albums.AlbumsAdapter;
 import com.myapp.sporify.adapters.artist.ArtistsAdapter;
 import com.myapp.sporify.adapters.tracks.TopTracksAdapter;
@@ -19,6 +23,7 @@ import com.myapp.sporify.databinding.FragmentHomeBinding;
 import com.myapp.sporify.models.Album;
 import com.myapp.sporify.models.Artist;
 import com.myapp.sporify.models.Track;
+import com.myapp.sporify.models.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +35,12 @@ public class HomeFragment extends Fragment {
     private TopArtistsViewModel topArtistsViewModel;
     private TopTracksViewModel topTracksViewModel;
     private FragmentHomeBinding binding;
-    private String token;
+
+    UserViewModel userViewModel;
+
+    String token;
+
+    private TextView username, albumsHeader;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,10 +54,22 @@ public class HomeFragment extends Fragment {
         topTracksViewModel =
                 new ViewModelProvider(this).get(TopTracksViewModel.class);
 
+        userViewModel =
+                new ViewModelProvider(this).get(UserViewModel.class);
+
+        // Getting user token  from shared prefs
+        SharedPreferences sharedPref = requireContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        token = sharedPref.getString("token", "token");
 
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+
+        username = binding.usernameText;
+        albumsHeader = binding.albumsHeader;
+
+        fetchUserData();
 
         final RecyclerView artistsList = binding.artistList;
         artistsList.setHasFixedSize(true);
@@ -55,6 +77,7 @@ public class HomeFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         artistsList.setLayoutManager(layoutManager);
         artistsList.setAdapter(new ArtistsAdapter(requireContext(), new ArrayList<>()));
+
 
         topArtistsViewModel.getTopArtists(20).observe(getViewLifecycleOwner(), new Observer<List<Artist>>() {
             @Override
@@ -74,13 +97,14 @@ public class HomeFragment extends Fragment {
         albumsList.setAdapter(new AlbumsAdapter(requireContext(), new ArrayList<>()));
 
 
-        topAlbumsViewModel.getTopAlbums(token,20).observe(getViewLifecycleOwner(), new Observer<List<Album>>() {
+        topAlbumsViewModel.getTopAlbums(token, 20).observe(getViewLifecycleOwner(), new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albums) {
 //                Toast.makeText(requireContext(), "Hi!", Toast.LENGTH_SHORT).show();
                 albumsList.setAdapter(new AlbumsAdapter(requireContext(), albums));
             }
         });
+
 
         final RecyclerView tracksList = binding.tracksList;
         tracksList.setHasFixedSize(true);
@@ -96,7 +120,25 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
         return root;
+    }
+
+    public void fetchUserData(){
+        userViewModel.init(token);
+
+        Observer<UserModel> getUserData = user -> {
+            if(user == null)
+                return;
+
+            username.setText("Hey " + user.getUsername());
+            albumsHeader.setText("Top " + user.getGenre() + " Albums");
+
+
+            userViewModel.getUserData().removeObservers(getViewLifecycleOwner());
+        };
+
+        userViewModel.getUserData().observe(getViewLifecycleOwner(), getUserData);
     }
 
     @Override

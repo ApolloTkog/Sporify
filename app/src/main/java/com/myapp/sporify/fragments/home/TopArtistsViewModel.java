@@ -63,8 +63,8 @@ public class TopArtistsViewModel extends ViewModel {
                 artists.postValue(artistList);
             }
         }, error -> {
-            // Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d("Request error: ", error.getMessage());
+            // Toast.makeText(getApplication(), error.toString(), Toast.LENGTH_SHORT).show();
+            Log.d("Request error: ", error.toString());
         });
 
         requestQueue.add(jsonObjectRequest);
@@ -94,7 +94,7 @@ public class TopArtistsViewModel extends ViewModel {
                     // Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }, error -> {
-//                Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplication(), error.toString(), Toast.LENGTH_SHORT).show();
                 Log.d("Request error: ", "Error getting artist's image");
                 if(finalI >= artistList.size() - 1){
                     artists.setValue(artistList);

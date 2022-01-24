@@ -93,7 +93,7 @@ public class LoginViewModel  extends ViewModel {
                 if(error.networkResponse != null){
                     message = parseVolleyError(error);
                 }
-//                Log.d("Login: ", error.getMessage());
+//                Log.d("Login: ", error.toString());
                 loginData.postValue(message);
                 loginData.setValue(message);
             }

@@ -139,8 +139,8 @@ public class LibraryViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error.getMessage());
-                Log.d("VOLLEY ERROR: ", error.getMessage());
+                System.out.println(error.toString());
+                Log.d("VOLLEY ERROR: ", error.toString());
 //                String message = parseVolleyError(error);
 //                responseData.postValue(message);
 //                responseData.setValue(message);
@@ -180,7 +180,7 @@ public class LibraryViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                System.out.println(error.getMessage());
+//                System.out.println(error.toString());
                 Log.d("VOLLEY ERROR: ", error.toString());
 //                String message = parseVolleyError(error);
 //                responseData.postValue(message);
@@ -221,8 +221,8 @@ public class LibraryViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error.getMessage());
-                Log.d("VOLLEY ERROR: ", error.getMessage());
+                System.out.println(error.toString());
+                Log.d("VOLLEY ERROR: ", error.toString());
 //                String message = parseVolleyError(error);
 //                responseData.postValue(message);
 //                responseData.setValue(message);
@@ -274,7 +274,7 @@ public class LibraryViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                System.out.println(error.getMessage());
+//                System.out.println(error.toString());
                 String message = parseVolleyError(error);
                 responseData.postValue(message);
                 responseData.setValue(message);
@@ -317,7 +317,7 @@ public class LibraryViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                System.out.println(error.getMessage());
+//                System.out.println(error.toString());
                 String message = parseVolleyError(error);
                 responseData.postValue(message);
                 responseData.setValue(message);
@@ -357,8 +357,8 @@ public class LibraryViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error.getMessage());
-                Log.d("VOLLEY ERROR: ", error.getMessage());
+                System.out.println(error.toString());
+                Log.d("VOLLEY ERROR: ", error.toString());
 //                String message = parseVolleyError(error);
 //                responseData.postValue(message);
 //                responseData.setValue(message);
@@ -416,7 +416,7 @@ public class LibraryViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                System.out.println(error.getMessage());
+//                System.out.println(error.toString());
                 String message = parseVolleyError(error);
                 responseData.postValue(message);
                 responseData.setValue(message);
@@ -466,7 +466,7 @@ public class LibraryViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                System.out.println(error.getMessage());
+//                System.out.println(error.toString());
                 String message = parseVolleyError(error);
                 responseData.postValue(message);
                 responseData.setValue(message);

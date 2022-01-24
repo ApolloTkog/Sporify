@@ -142,7 +142,7 @@ public class TrackDetailsViewModel extends ViewModel {
 //                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }, error -> {
-//                Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplication(), error.toString(), Toast.LENGTH_SHORT).show();
             Log.d("Request error: ", "Error getting artist's image");
         });
 
