@@ -78,7 +78,7 @@ public class FavoriteAlbumViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error.getMessage());
+//                System.out.println(error.getMessage());
                 String message = parseVolleyError(error);
                 responseData.postValue(message);
                 responseData.setValue(message);

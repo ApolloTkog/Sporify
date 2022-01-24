@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.library.PlaylistTracks"
-    android:fitsSystemWindows="true">
+    android:paddingTop="24dp">
 
 
     <ImageButton
@@ -19,7 +19,6 @@
         android:layout_marginTop="10dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         app:tint="@color/white"
-        android:fitsSystemWindows="true"
         />
 
     <TextView
