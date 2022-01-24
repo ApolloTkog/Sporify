@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.library.MoodFinder"
-    android:paddingTop="34dp">
+    android:paddingTop="24dp">
 
     <ImageButton
         android:id="@+id/back_button"

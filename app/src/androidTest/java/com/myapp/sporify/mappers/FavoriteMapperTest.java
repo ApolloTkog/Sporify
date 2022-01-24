@@ -59,8 +59,8 @@ public class FavoriteMapperTest {
         try{
             List<Artist> parsedAlbums = FavoriteMapper.getFavoriteArtistsFromJson(responseToJson);
 
-            // response has four artists
-            Assert.assertEquals(4, parsedAlbums.size());
+            // response has three artists
+            Assert.assertEquals(3, parsedAlbums.size());
         }
         catch (JSONException e){
             Assert.fail("Should not fail");

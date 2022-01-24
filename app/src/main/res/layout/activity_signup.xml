@@ -7,7 +7,7 @@
     android:background="@color/colorBackground"
     android:orientation="vertical"
     android:fillViewport="true"
-    android:fitsSystemWindows="true"
+    android:paddingTop="24dp"
     tools:context=".activities.auth.login.LoginActivity">
 
     <RelativeLayout
