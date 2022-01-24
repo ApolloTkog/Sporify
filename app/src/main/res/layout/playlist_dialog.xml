@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingVertical="16dp">
+
+   <TextView
+       android:id="@+id/title"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Create your playlist"
+       android:textSize="18sp"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginHorizontal="16dp"/>
+
+   <EditText
+       android:id="@+id/playlist_name"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="e.g Best classic rock of 70s"
+       app:layout_constraintTop_toBottomOf="@id/title"
+       android:layout_marginHorizontal="16dp"
+       android:textSize="16sp"
+       android:layout_marginTop="10dp"
+       android:backgroundTint="@color/purple_500"
+       />
+
+   <Button
+       android:id="@+id/create_playlist"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="CREATE"
+       app:layout_constraintTop_toBottomOf="@id/playlist_name"
+       android:layout_marginHorizontal="16dp"
+       android:layout_marginTop="10dp"
+       app:layout_constraintRight_toRightOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

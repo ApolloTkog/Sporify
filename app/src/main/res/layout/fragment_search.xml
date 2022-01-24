@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.search.SearchFragment"
-    android:fitsSystemWindows="true"
+    android:paddingTop="24dp"
     >
 
     <androidx.appcompat.widget.SearchView

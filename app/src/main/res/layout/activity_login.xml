@@ -24,12 +24,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:src="@mipmap/sporifylogo"
-                android:layout_height="wrap_content"
+                android:layout_width="238dp"
+                android:layout_height="147dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp" />
+                android:layout_marginBottom="32dp"
+                android:src="@drawable/ic_sporifylogo" />
 
             <TextView
                 android:layout_width="wrap_content"

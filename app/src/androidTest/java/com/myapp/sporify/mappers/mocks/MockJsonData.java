@@ -51,4 +51,11 @@ public class MockJsonData {
     public static final String trackFavoritesPass = "[{\"id\":\"61c75ef1846be24f19156b00\",\"name\":\"Bohemian Rhapsody\",\"artist\":\"Queen\",\"imageURL\":\"https://lastfm.freetls.fastly.net/i/u/300x300/1aec5cac8403fbda275b8200b77c8318.png\",\"musicBrainzId\":null,\"userId\":{\"id\":\"61be1ff9b079902212f30465\",\"username\":\"username\",\"email\":\"user@example.com\"}}]";
     public static final String trackFavoritesEmpty = "[]";
 
+
+
+    /* PLAYLISTS */
+    public static final String playlistPass = "[ { \"id\": \"61d8a70482329a59e0c5e1ef\", \"name\": \"Best rock of 90s\", \"userId\": { \"id\": \"61be1ff9b079902212f30465\", \"username\": \"username\", \"email\": \"user@example.com\", \"genre\": \"alternative\", \"mood\": \"happy\" }, \"tracks\": [] }, { \"id\": \"61d8b09512a16765492a2909\", \"name\": \"Best of 80s\", \"userId\": { \"id\": \"61be1ff9b079902212f30465\", \"username\": \"username\", \"email\": \"user@example.com\", \"genre\": \"alternative\", \"mood\": \"happy\" }, \"tracks\": [ { \"id\": \"61da5419746dc53b7d8aed1e\", \"name\": \"The Reason\", \"artist\": \"Hoobastank\", \"imageURL\": \"https://lastfm.freetls.fastly.net/i/u/300x300/160acca07685b8d2480298645f377e06.png\", \"musicBrainzId\": \"a2ffbb56-cd7b-4d85-bf93-1d53dfa56308\", \"youtubeUrl\": null, \"userId\": { \"id\": \"61be1ff9b079902212f30465\", \"username\": \"username\", \"email\": \"user@example.com\", \"genre\": \"alternative\", \"mood\": \"happy\" } } ] } ]";
+    public static final String playlistEmpty = "[]";
+
+
 }

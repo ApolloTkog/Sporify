@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.library.LibraryFragment"
-    android:fitsSystemWindows="true">
+    android:paddingTop="24dp">
 
     <LinearLayout
         android:id="@+id/user_info"
@@ -19,6 +19,7 @@
         >
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/user_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:cardCornerRadius="20dp"
@@ -46,6 +47,19 @@
 
 
         <ImageButton
+            android:id="@+id/find_by_mood"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_mood"
+            android:textColor="@color/white"
+            android:layout_marginStart="7dp"
+            app:tint="@android:color/darker_gray"
+            android:layout_marginEnd="6dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="gone"
+            />
+
+        <ImageButton
             android:id="@+id/add_playlist"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -53,7 +67,7 @@
             android:textColor="@color/white"
             android:layout_marginStart="7dp"
             app:tint="@android:color/darker_gray"
-            android:layout_weight="0.2"
+            android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             />
 
@@ -128,6 +142,24 @@
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/playlist_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="8dp"
+                android:background="@drawable/filter_item"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
+
+                <TextView
+                    android:id="@+id/playlist_text"
+                    android:text="Playlists"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"/>
             </LinearLayout>
 
         </LinearLayout>
