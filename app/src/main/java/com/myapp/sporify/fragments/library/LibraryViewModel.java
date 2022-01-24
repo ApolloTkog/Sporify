@@ -46,8 +46,6 @@ public class LibraryViewModel extends ViewModel {
     private LiveData<String> playlistDeleteResponse;
     private LiveData<String> playlistTrackDeleteResponse;
 
-
-
     private List<Album> albumList;
     private List<Artist> artistList;
     private List<Track> trackList;
@@ -119,6 +117,10 @@ public class LibraryViewModel extends ViewModel {
         return playlistTrackDeleteResponse;
     }
 
+    public LiveData<String> getPlaylistTrackResponse() {
+        return playlistTrackResponse;
+    }
+
     public LiveData<List<Album>> getFavoriteAlbums(String accessToken){
         final MutableLiveData<List<Album>> responseData = new MutableLiveData<>();
 
@@ -168,7 +170,7 @@ public class LibraryViewModel extends ViewModel {
             @Override
             public void onResponse(JSONArray response) {
                 try{
-                   artistList = FavoriteMapper.getFavoriteArtistsFromJson(response);
+                    artistList = FavoriteMapper.getFavoriteArtistsFromJson(response);
                 }
                 catch (JSONException e){
                     Log.d("Parsing error: ", e.getMessage());
@@ -209,7 +211,7 @@ public class LibraryViewModel extends ViewModel {
             @Override
             public void onResponse(JSONArray response) {
                 try{
-                   trackList = FavoriteMapper.getFavoriteTracksFromJson(response);
+                    trackList = FavoriteMapper.getFavoriteTracksFromJson(response);
                 }
                 catch (JSONException e){
                     Log.d("Parsing error: ", e.getMessage());
@@ -378,10 +380,6 @@ public class LibraryViewModel extends ViewModel {
         return responseData;
     }
 
-    public LiveData<String> getPlaylistTrackResponse() {
-        return playlistTrackResponse;
-    }
-
     public LiveData<String> addTrackToPlaylist(String playlistId, String mbid, String accessToken, Track track){
         final MutableLiveData<String> responseData = new MutableLiveData<>();
 
@@ -485,7 +483,6 @@ public class LibraryViewModel extends ViewModel {
 
         return responseData;
     }
-
 
     public String parseVolleyError(VolleyError error) {
         try {
