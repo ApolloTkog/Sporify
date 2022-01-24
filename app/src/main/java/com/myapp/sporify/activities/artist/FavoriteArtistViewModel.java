@@ -81,7 +81,11 @@ public class FavoriteArtistViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+<<<<<<< HEAD
                 System.out.println(error.toString());
+=======
+//                System.out.println(error.getMessage());
+>>>>>>> playlist
                 String message = parseVolleyError(error);
                 responseData.postValue(message);
                 responseData.setValue(message);
